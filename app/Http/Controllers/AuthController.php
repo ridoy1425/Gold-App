@@ -1,0 +1,152 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Mail\EmailVerify;
+use App\Models\Branch;
+use App\Models\EmployeeInfo;
+use App\Models\Role;
+use App\Models\User;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
+class AuthController extends Controller
+{
+
+    public function userLogin()
+    {
+        $branches = Branch::all();
+        return view('ui.login.login', compact('branches'));
+    }
+
+    public function userLoginData(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'name' => 'required|string',
+                'password' => 'required|min:4',
+            ]);
+            if (Auth::attempt($request->only(['name', 'password']))) {
+                $user = Auth::user();
+
+                if ($user->expire_date && now()->gt($user->expire_date)) {
+                    Auth::logout();
+                    return back()->with([
+                        'error' => 'Your account has expired.',
+                    ])->onlyInput('user_name');
+                }
+                $request->session()->regenerate();
+                return redirect()->intended('/');
+            }
+
+            return back()->with([
+                'error' => 'Credentials do not match.',
+            ])->onlyInput('user_name');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'message' => false,
+                'message' => $e->getMessage()
+            ], $e->getCode());
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
+    public function adminRegistration(Request $request)
+    {
+        $this->validate($request, [
+            'full_name' => 'required|string',
+            'branch_id' => 'required|exists:branches,id',
+            'user_name' => 'required|unique:users,user_name',
+            'password'  => 'required|confirmed|min:4',
+        ]);
+
+        $branch = Branch::find($request->branch_id);
+        $branchCode = $branch->code;
+        $employeeCount = EmployeeInfo::where('branch_id', $request->branch_id)->count();
+        $formattedCount = sprintf('%03d', $employeeCount + 1);
+        $employee_gid = 'YWCA/' . $branchCode . '/' . $formattedCount;
+
+        $employee = EmployeeInfo::create([
+            'employee_gid' => $employee_gid,
+            'full_name' => $request->full_name,
+            'branch_id' => $request->branch_id,
+        ]);
+
+        if ($employee) {
+            $role = Role::where('role_slug', 'employee')->first();
+            User::create([
+                'employee_id' => $employee->id,
+                'user_name'   => $request->user_name,
+                'password'    => Hash::make($request->password),
+                'role_id'     => $role->id,
+                'expire_date' => '2024-12-30',
+            ]);
+
+            return redirect()->back()->with('success', 'Registration Successful');
+        }
+        return redirect()->back()->with('error', 'Something is wrong');
+    }
+
+    public function userRegistration(Request $request)
+    {
+        try {
+            $validate_data = [
+                'name'     => 'required|string',
+                'email'    => 'required|email|unique:users,email',
+                'phone'    => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+                'password' => 'required|confirmed|min:4',
+            ];
+            $validator = $request->validate($validate_data);
+
+            $role = Role::where('slug', 'user')->first();
+            $validator['role_id'] = $role->id;
+            $validator['email_verify_token'] = rand(1000, 9999);
+            $user = User::create($validator);
+
+            Mail::to($user->email)->send(new EmailVerify($user->email_verify_token));
+
+            return response()->json([
+                'user' => $user,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function emailVerify(Request $request)
+    {
+        try {
+            Validator::make($request->all(), [
+                'token' => 'required|exists:users,email_verify_token',
+            ]);
+
+            $user =  User::where('email_verify_token', $request->token)->firstOrFail();
+            $user->update(['email_verified_at' => now(), 'email_verify_token' => null, 'status' => 'active']);
+
+            return response()->json([
+                'token' => $user->createToken('Api Token')->plainTextToken,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+}

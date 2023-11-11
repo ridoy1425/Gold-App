@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(../images/bg-image.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.login_page {
+    height: 420px;
+    width: 360px;
+    background: rgb(33, 31, 31, .8);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /* overflow: auto; */
+
+}
+
+.login_page .forgotPass p {
+    color: #FFB204;
+    line-height: 0;
+}
+
+.forgotPass p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.login_page .signUp p {
+    transition: 0.5s;
+}
+
+.signUp p:hover {
+    color: #FFB204;
+    cursor: pointer;
+}
+
+.login_title {
+    line-height: 0;
+}
+
+.login_form {
+    margin: 0 20px;
+    margin-top: 20px;
+}
+
+.nav_bar .nav .nav-item .active {
+    color: #fff;
+    border-bottom: 5px solid #FFB204;
+}
+
+.nav_bar .nav .nav-item .nav-link {
+    color: #fff;
+    /*background-color:*/
+}
+
+/* .tab-content{
+    margin-top:20px;
+} */
+
+/* model.................... ................*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 120px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    display: flex;
+}
+
+.close {
+    color: #aaaaaa;
+    font-size: 28px;
+    float: right;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.select2 {
+    width: 100% !important;
+    font-size: 14px !important;
+}
+
+.select2-selection__rendered {
+    line-height: 20px !important;
+    padding-top: 5px !important;
+    padding-left: 5px !important;
+    color: #1d1b1b !important;
+
+}
+
+.select2-container .select2-selection--single {
+    height: 30px !important;
+}
+
+.select2-selection__arrow {
+    height: 30px !important;
+}
