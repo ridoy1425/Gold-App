@@ -88,17 +88,7 @@
                         <input type="text" class="form-control form-control-sm" id="full_name" name="full_name"
                             required>
                     </div>
-                    <div class="mb-1">
-                        <label for="branch_id" class=" col-form-label col-form-label-sm">Branch Name</label>
-                        <select class="form-select selectTo" id="branch_id" name="branch_id" required>
-                            <option selected value="">Choose...</option>
-                            @foreach ($branches as $branch)
-                                <option value="{{ $branch->id }}">
-                                    {{ $branch->name }}({{ $branch->code }})
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                   
                     <div class="mb-1">
                         <label for="name" class="col-form-label col-form-label-sm">Login User
                             Name (Nickname)</label>

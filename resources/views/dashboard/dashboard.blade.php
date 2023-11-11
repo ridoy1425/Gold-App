@@ -187,7 +187,7 @@
             </div><!--/. container-fluid -->
         </section>
         <!-- /.content -->
-        @include('employees.employee-search-modal')
+        {{-- @include('employees.employee-search-modal') --}}
     </div>
 @endsection
 

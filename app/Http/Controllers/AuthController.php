@@ -20,8 +20,7 @@ class AuthController extends Controller
 
     public function adminLogin()
     {
-        $branches = Branch::all();
-        return view('ui.login.login', compact('branches'));
+        return view('ui.login.login');
     }
 
     public function adminLoginData(Request $request)
@@ -75,31 +74,16 @@ class AuthController extends Controller
             'password'  => 'required|confirmed|min:4',
         ]);
 
-        $branch = Branch::find($request->branch_id);
-        $branchCode = $branch->code;
-        $employeeCount = EmployeeInfo::where('branch_id', $request->branch_id)->count();
-        $formattedCount = sprintf('%03d', $employeeCount + 1);
-        $employee_gid = 'YWCA/' . $branchCode . '/' . $formattedCount;
-
-        $employee = EmployeeInfo::create([
-            'employee_gid' => $employee_gid,
-            'full_name' => $request->full_name,
-            'branch_id' => $request->branch_id,
+        $role = Role::where('role_slug', 'employee')->first();
+        User::create([
+            'name'   => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'password'    => Hash::make($request->password),
+            'role_id'     => $role->id,
         ]);
 
-        if ($employee) {
-            $role = Role::where('role_slug', 'employee')->first();
-            User::create([
-                'employee_id' => $employee->id,
-                'user_name'   => $request->user_name,
-                'password'    => Hash::make($request->password),
-                'role_id'     => $role->id,
-                'expire_date' => '2024-12-30',
-            ]);
-
-            return redirect()->back()->with('success', 'Registration Successful');
-        }
-        return redirect()->back()->with('error', 'Something is wrong');
+        return redirect()->back()->with('success', 'Registration Successful');
     }
 
     public function userRegistration(Request $request)
