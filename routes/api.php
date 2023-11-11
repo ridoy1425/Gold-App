@@ -17,7 +17,7 @@ use App\Http\Controllers\AuthController;
 */
 
 // authentication 
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'userLogin']);
 Route::post('registration', [AuthController::class, 'userRegistration']);
 Route::get('email-verify', [AuthController::class, 'emailVerify']);
 Route::post('user-info', [AuthController::class, 'userInfo']);

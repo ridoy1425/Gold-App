@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
-    public function userLogin()
+    public function adminLogin()
     {
         $branches = Branch::all();
         return view('ui.login.login', compact('branches'));
     }
 
-    public function userLoginData(Request $request)
+    public function adminLoginData(Request $request)
     {
         try {
             $this->validate($request, [
@@ -143,6 +143,32 @@ class AuthController extends Controller
             return response()->json([
                 'token' => $user->createToken('Api Token')->plainTextToken,
             ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function userLogin(Request $request)
+    {
+        try {
+            $validate_data = [
+                'email' => 'required|email',
+                'password' => 'required|min:4',
+            ];
+            $request->validate($validate_data);
+
+            if (Auth::attempt($request->only(['email', 'password']))) {
+                $user = User::where('id', Auth::id())->where('status', 'active')->first();
+                if (!$user)
+                    return response()->json(['message' => 'User is not active'], 404);
+
+                return response()->json([
+                    'token' => $user->createToken('Api Token')->plainTextToken,
+                ], 200);
+            }
+            abort(401, "Authentication doesn't match");
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
