@@ -342,3 +342,8 @@ table.dataTable tbody td {
     font-size: 16px;
     font-weight: 400;
 }
+
+.site-input-groups .box-input-label {
+    font-size: 16px;
+    font-weight: 500;
+}
