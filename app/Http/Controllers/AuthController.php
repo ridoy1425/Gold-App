@@ -106,7 +106,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'user' => $user,
-            ], 200);
+            ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),
@@ -126,7 +126,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'token' => $user->createToken('Api Token')->plainTextToken,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

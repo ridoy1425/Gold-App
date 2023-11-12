@@ -22,8 +22,16 @@ Route::post('registration', [AuthController::class, 'userRegistration']);
 Route::get('email-verify', [AuthController::class, 'emailVerify']);
 Route::post('user-info', [AuthController::class, 'userInfo']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->group(
+    function () {
+        //user
+        Route::prefix('user')->middleware("permission:user-list")->group(
+            function () {
+                Route::post('details', [UserController::class, 'storeUserDetails']);
+                Route::post('nominee', [UserController::class, 'storeNomineeInfo']);
+            }
+        );
+    }
+);
 
 Route::get('/auth/access-token', [LoginApiController::class, 'createToken']);

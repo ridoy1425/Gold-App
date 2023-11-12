@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\AppraisalCategory;
 use App\Models\Branch;
+use App\Models\KycInfo;
+use App\Models\NomineeInfo;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserDetail;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -81,5 +86,90 @@ class UserController extends Controller
     public function getKycEdit($id)
     {
         return view('kyc.edit');
+    }
+
+    public function storeUserDetails(Request $request)
+    {
+        try {
+            $request->validate([
+                'gender_id'         => 'sometimes|required|exists:payloads,id',
+                'dob'               => 'sometimes|required|date',
+                'occupation'        => 'sometimes|required|string',
+                'marital_status_id' => 'sometimes|required|exists:payloads,id',
+                'marital_status_id' => 'sometimes|required|exists:payloads,id',
+                'profile_image'     => 'sometimes|required|file',
+                'kyc_type_id'       => 'sometimes|required|exists:payloads,id',
+                'card_number'       => 'sometimes|required|numeric',
+                'front_image'       => 'sometimes|required|file',
+                'back_image'        => 'sometimes|required|file',
+            ]);
+
+            $user = Auth::user();
+
+            $userDetails = UserDetail::create([
+                'user_id' => $user->id,
+                'gender_id' => $request->gender_id,
+                'dob' => $request->dob,
+                'occupation' => $request->occupation,
+                'marital_status_id' => $request->marital_status_id,
+            ]);
+
+            if ($userDetails) {
+            }
+
+            $kycInfo = KycInfo::create([
+                'user_id' => $user->id,
+                'kyc_type_id' => $request->kyc_type_id,
+                'card_number' => $request->card_number,
+            ]);
+
+            if ($kycInfo) {
+            }
+
+            return response()->json([
+                'userInfo' => $userDetails,
+                'kycInfo' => $kycInfo,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+
+        return view('user.user-create', compact('branches', 'roles', 'categories'));
+    }
+
+    public function storeNomineeInfo(Request $request)
+    {
+        $request->validate([
+            'name'        => 'sometimes|required|string',
+            'phone'       => 'sometimes|required|numeric',
+            'dob'         => 'sometimes|required|date',
+            'relation_id' => 'sometimes|required|exists:payloads,id',
+            'kyc_type_id' => 'sometimes|required|exists:payloads,id',
+            'card_number' => 'sometimes|required|numeric',
+            'front_image' => 'sometimes|required|file',
+            'back_image'  => 'sometimes|required|file',
+        ]);
+
+        $user = Auth::user();
+
+        $nominee = NomineeInfo::updateOrCreate([
+            'user_id' => $user->id,
+        ], [
+            'name'        => $request->name,
+            'phone'       => $request->phone,
+            'dob'         => $request->dob,
+            'relation_id' => $request->relation_id,
+            'kyc_type_id' => $request->kyc_type_id,
+            'card_number' => $request->card_number,
+        ]);
+
+        if ($nominee) {
+        }
+
+        return response()->json([
+            'nominee' => $nominee,
+        ], 201);
     }
 }
