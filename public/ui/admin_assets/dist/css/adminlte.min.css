@@ -14252,8 +14252,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
     overflow-x: hidden;
     overflow-y: initial;
     padding-bottom: 0;
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0;
+    padding-right: 0;
     padding-top: 0;
     scrollbar-color: #a9a9a9 transparent;
     scrollbar-width: none;
@@ -16566,8 +16566,9 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 .sidebar-mini .main-sidebar .nav-link,
 .sidebar-mini-md .main-sidebar .nav-link,
 .sidebar-mini-xs .main-sidebar .nav-link {
-    width: calc(250px - .5rem * 2);
+    width: 100%;
     transition: width ease-in-out .3s;
+    border-radius: 0;
 }
 
 @media (prefers-reduced-motion:reduce) {

@@ -215,8 +215,8 @@ table.dataTable thead {
 
 .site-tab-bars .nav.nav-pills .nav-item .nav-link.active {
     border-bottom: none;
-    background: #5e3fc9;
-    color: #ffffff;
+    color: #343a40;
+    background: #DAB873;
 }
 
 .site-tab-bars ul li a i {
@@ -301,8 +301,8 @@ table.dataTable thead {
 }
 
 .edit__inner__container .primary-btn {
-    color: #ffffff;
-    background: #5e3fc9;
+    color: #343a40;
+    background: #DAB873;
 }
 
 .edit__inner__container button {
@@ -315,4 +315,30 @@ table.dataTable thead {
     width: 100%;
     margin-bottom: 30px;
     background: #ffffff;
+}
+
+.page-item.active .page-link {
+    background-color: #DAB873;
+    color: #343a40;
+    border-color: #DAB873;
+}
+
+.page-item:not(:first-child) .page-link {
+    margin-left: 0px;
+}
+
+.edit__inner__container .nav-pills .nav-link:not(.active):hover {
+    color: #343a40;
+}
+
+.sidebar .nav-item .nav-link p,
+.sidebar .nav-item .nav-link {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+    font-size: 16px;
+    font-weight: 400;
 }
