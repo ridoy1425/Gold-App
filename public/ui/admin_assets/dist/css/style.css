@@ -32,11 +32,11 @@ a {
 /* ........................Logout button css.......................... */
 .logout_btn {
     padding: 2px;
-    border: 1px dotted #FFB204;
+    border: 1px dotted #DAB873;
 }
 
 .logout_btn .dropdown-toggle {
-    color: #FFB204;
+    color: #DAB873;
 }
 
 /* ........................modal css.......................... */
@@ -92,14 +92,64 @@ table td {
     font-size: 1em;
 }
 
+table.dataTable>:not(:first-child),
+table.dataTable tbody {
+    border-top: 0;
+}
+
 table.dataTable tbody th,
 table.dataTable tbody td {
-    padding: 0px 10px;
+    padding: 15px 5px;
 }
 
 table.dataTable thead th,
 table.dataTable thead td {
-    padding: 0px 10px;
+    padding: 15px 5px;
+    text-transform: uppercase;
+    border: none;
+}
+
+table.dataTable thead th,
+table.dataTable thead td,
+table.dataTable tbody th,
+table.dataTable tbody td {
+    box-shadow: none;
+    border-bottom: 1px solid #DADADA;
+}
+
+table.dataTable {
+    border-collapse: collapse;
+    border-bottom: none;
+}
+
+table.dataTable thead tr,
+table.dataTable tbody tr {
+    border: none;
+    border-width: 0;
+}
+
+table.dataTable thead {
+    background-color: #F0E4CB;
+}
+
+.action_td {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.action_td a {
+    display: inline-block;
+}
+
+.action_td a:not(:last-child) {
+    margin-right: 8px;
+}
+
+.action__icon {
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -141,7 +191,128 @@ table.dataTable thead td {
     padding: 5px;
 }
 
-.important_field
-{
-    color:red;
+.important_field {
+    color: red;
+}
+
+
+/* Designation Label Information page */
+.site-tab-bars {
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0px 0px 2px rgba(94, 63, 201, 0.4);
+    background: #ffffff;
+    border-radius: 4px;
+}
+
+.site-tab-bars .nav.nav-pills {
+    box-shadow: none;
+}
+
+.site-tab-bars ul li {
+    display: inline-block;
+}
+
+.site-tab-bars .nav.nav-pills .nav-item .nav-link.active {
+    border-bottom: none;
+    background: #5e3fc9;
+    color: #ffffff;
+}
+
+.site-tab-bars ul li a i {
+    width: 16px;
+    position: relative;
+    margin-right: 5px;
+    top: -1px;
+}
+
+.site-card {
+    box-shadow: 0px 0px 2px rgba(94, 63, 201, 0.4);
+    margin-bottom: 30px;
+    background: #ffffff;
+    border-radius: 4px;
+}
+
+.site-card .site-card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eeeeee;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-card .site-card-header .title {
+    color: #101935;
+    margin-bottom: 0;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.site-card .site-card-body {
+    padding: 20px;
+}
+
+.site-input-groups {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #101935;
+    font-size: 14px;
+}
+
+.site-input-groups .box-input-label {
+    display: block;
+    color: rgba(16, 25, 53, 0.6);
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.edit__inner__container input {
+    outline: none;
+}
+
+.site-input-groups .box-input {
+    width: 100%;
+    height: 45px;
+    border: 2px solid #e5e8f2;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 0 15px;
+    transition: 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.site-input-groups .box-input:focus {
+    border: 2px solid rgba(94, 63, 201, 0.5);
+}
+
+.edit__inner__container .site-btn-sm {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 3px;
+    color: #151d30;
+    background: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.edit__inner__container .primary-btn {
+    color: #ffffff;
+    background: #5e3fc9;
+}
+
+.edit__inner__container button {
+    border: 0;
+    outline: none;
+    transition: 0.3s;
+}
+
+.site-datatable .data-table {
+    width: 100%;
+    margin-bottom: 30px;
+    background: #ffffff;
 }

@@ -11,7 +11,7 @@
 @endsection
 
 @section('main_content')
-    <div class="row page-content">
+    <div class="row page-content"> 
         <div class="container">
             {{-- message alert --}}
             <div class="alert_message mt-2">
@@ -41,35 +41,40 @@
                 <div class=" ml-auto mb-2 mt-2 mr-3">
                     <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Designation Label</th>
-                                <th scope="col">Designation Label</th>
-                                <th scope="col">Designation Label</th>
-                                <th scope="col">Designation Label</th>
-                                <th scope="col">Designation Label</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">USER NAME</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">PHONE</th>
+                                <th scope="col">E-MAIL</th>
+                                <th scope="col">BALANCE</th>
+                                <th scope="col">KYC</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($labels as $label)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>AR Ridoy</td>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $label->label }}</td>
-                                    <td>
-                                        <a href="{{ URL('designation/label/edit', $label->id) }}"><i
-                                                class="fas fa-edit"></i></a>
-                                        <a href="{{ URL('designation/label/edit', $label->id) }}"><i
-                                                class="fas fa-edit"></i></a>
-                                        <a style="color:red;" href="{{ URL('/designation/label/delete', $label->id) }}"><i
-                                                class="fas fa-trash"></i></a>
+                                    <td>{{ $label->label }}</td>
+                                    <td>{{ $label->label }}</td>
+                                    <td>{{ $label->label }}</td>
+                                    <td>{{ $label->label }}</td>
+                                    <td class="action_td">
+                                        <a href="{{ URL('designation/label/edit', $label->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit" class="action__icon">
+                                        </a>
+                                        <a href="{{ URL('designation/label/edit', $label->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}" alt="Message" class="action__icon">
+                                        </a>
+                                        <a href="{{ URL('/designation/label/delete', $label->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete" class="action__icon">
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

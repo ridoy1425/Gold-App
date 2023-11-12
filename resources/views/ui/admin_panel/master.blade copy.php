@@ -91,7 +91,7 @@
             <a href="index.html" class="brand-link">
                 <img src="{{ asset('ui/admin_assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">HRIS</span>
+                <span class="brand-text">HRIS</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">

@@ -23,7 +23,7 @@ body {
 }
 
 .login_page .forgotPass p {
-    color: #FFB204;
+    color: #DAB873;
     line-height: 0;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .signUp p:hover {
-    color: #FFB204;
+    color: #DAB873;
     cursor: pointer;
 }
 
@@ -52,7 +52,7 @@ body {
 
 .nav_bar .nav .nav-item .active {
     color: #fff;
-    border-bottom: 5px solid #FFB204;
+    border-bottom: 5px solid #DAB873;
 }
 
 .nav_bar .nav .nav-item .nav-link {
