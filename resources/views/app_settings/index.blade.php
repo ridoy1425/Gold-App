@@ -80,7 +80,7 @@
                                 <a href="" class="nav-link" id="pills-transactions-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-transactions" type="button" role="tab"
                                     aria-controls="pills-transactions" aria-selected="true">
-                                    <i class="fas fa-chromecast"></i>
+                                    <i class="fa-solid fa-money-bill-transfer"></i>
                                     Transactions</a>
                             </li>
                         </ul>
@@ -653,7 +653,7 @@
                     </div>
                 </div>
                 <div class="mb-5 ml-3">
-                    <button class="btn btn-warning" type="submit">Submit</button>
+                    <button class="btn primary-btn centered" type="submit">Submit</button>
                     <a class="btn btn-secondary ml-3" href="{{ url('designation/label') }}">Back</a>
                 </div>
             </div>
