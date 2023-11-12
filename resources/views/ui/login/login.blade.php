@@ -15,7 +15,7 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{{ asset('ui/login_assets/css/style.css') }}">
     <!-- Title and favicon -->
-    <title>Rent-login</title>
+    <title>Gold App-login</title>
     <link rel="icon" type="image/png" href="{{ asset('images/ywca.png') }}" />
 </head>
 

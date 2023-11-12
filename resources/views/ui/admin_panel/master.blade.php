@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>YWCA-@yield('title')</title>
+    <title>Gold App-@yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/ywca.png') }}">
     <!-- Google Font: Source Sans Pro -->
     {{-- <link rel="stylesheet"
