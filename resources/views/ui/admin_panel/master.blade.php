@@ -91,7 +91,7 @@
             <a href="index.html" class="brand-link">
                 <img src="{{ asset('ui/admin_assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text">HRIS</span>
+                <span class="brand-text">Gold App</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -102,310 +102,48 @@
                         <li class="nav-item ">
                             <a href="{{ route('dashboard') }}"
                                 class="nav-link {{ $route == 'dashboard' ? ' active' : '' }}">
-                                <i class="fas fa-calculator nav-icon"></i>
+                                <i class="fas fa-tachometer-alt nav-icon"></i>
                                 <p>
                                     Dashboard
-                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                         </li>
-                        @if (auth()->user()->hasPermission('designation-label') ||
-                                auth()->user()->hasPermission('designation-info') ||
-                                auth()->user()->hasPermission('branch-information') ||
-                                auth()->user()->hasPermission('designation-label'))
-                            <li
-                                class="nav-item {{ $route == 'leave-type-create' || $route == 'leave-type' || $route == 'designation-label' || $route == 'designation-info' || $route == 'branch-info' || $route == 'branch-create' || $route == 'desig-label-create' || $route == 'desig-label-edit' || $route == 'designation-create' || $route == 'designation-edit' || $route == 'branch-edit' || $route == 'leave-type-edit' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        General Settings
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @if (auth()->user()->hasPermission('designation-label'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('designation-label') }}"
-                                                class="nav-link {{ $route == 'designation-label' || $route == 'desig-label-create' || $route == 'desig-label-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Designation Label</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('designation-info'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('designation-info') }}"
-                                                class="nav-link {{ $route == 'designation-info' || $route == 'designation-create' || $route == 'designation-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Designation Info</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('branch-information'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('branch-info') }}"
-                                                class="nav-link {{ $route == 'branch-info' || $route == 'branch-create' || $route == 'branch-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Branch Information</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('leave-type'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('leave-type') }}"
-                                                class="nav-link {{ $route == 'leave-type' || $route == 'leave-type-create' || $route == 'leave-type-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Leave Type</p>
-                                            </a>
-                                        </li>
-                                    @endif
-
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('employee-information'))
-                            <li class="nav-item {{ $route == 'employee-info' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="fas fa-users nav-icon"></i>
-                                    <p>
-                                        Employees
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('employee-info') }}"
-                                            class="nav-link {{ $route == 'employee-info' ? ' active' : '' }}">
-                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                            <p>Employee Information</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('employee-basic-report'))
-                            <li
-                                class="nav-item {{ $route == 'employee-list' || $route == 'report-search' || $route == 'staff-summary-report' || $route == 'staff-summary-result' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
-                                    <p>
-                                        Employee Info Report
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @if (auth()->user()->hasPermission('employee-basic-report'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('employee-list') }}"
-                                                class="nav-link {{ $route == 'employee-list' || $route == 'report-search' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Employee Basic Report</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('staff-summary-report'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('staff-summary-report') }}"
-                                                class="nav-link {{ $route == 'staff-summary-report' || $route == 'staff-summary-result' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Staff Summary Report</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('leave-entry') ||
-                                auth()->user()->hasPermission('leave-approval') ||
-                                auth()->user()->hasPermission('leave-application-form'))
-                            <li
-                                class="nav-item {{ $route == 'leave-application-form' || $route == 'leave-entry-index' || $route == 'leave-entry' || $route == 'leave-approval' || $route == 'leave-entry-edit' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-list"></i>
-                                    <p>
-                                        Leave Information
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @if (auth()->user()->hasPermission('leave-entry'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('leave-entry-index') }}"
-                                                class="nav-link {{ $route == 'leave-entry-index' || $route == 'leave-entry' || $route == 'leave-entry-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Leave Entry</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('leave-approval'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('leave-approval') }}"
-                                                class="nav-link {{ $route == 'leave-approval' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Leave Approval</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('leave-application-form'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('leave-application-form') }}"
-                                                class="nav-link {{ $route == 'leave-application-form' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Leave Application Form</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('leave-register'))
-                            <li class="nav-item {{ $route == 'leave-register' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-inbox"></i>
-                                    <p>
-                                        Leave Report
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('leave-register') }}"
-                                            class="nav-link {{ $route == 'leave-register' ? ' active' : '' }}">
-                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                            <p>Leave Register</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('appraisal-category') ||
-                                auth()->user()->hasPermission('appraisal-evaluator') ||
-                                auth()->user()->hasPermission('duty-responsibilities') ||
-                                auth()->user()->hasPermission('attitude-behavior'))
-                            <li
-                                class="nav-item {{ $route == 'evaluation-edit' || $route == 'category-create' || $route == 'evaluator-create' || $route == 'duty-create' || $route == 'behavior-create' || $route == 'attitude-behavior' || $route == 'appraisal-category' || $route == 'appraisal-evaluator' || $route == 'duty-responsibilities' || $route == 'evaluation-form' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-dna"></i>
-                                    <p>
-                                        Appraisal
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @if (auth()->user()->hasPermission('appraisal-category'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('appraisal-category') }}"
-                                                class="nav-link {{ $route == 'appraisal-category' || $route == 'category-create' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Appraisal Category</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('appraisal-category'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('appraisal-evaluator') }}"
-                                                class="nav-link {{ $route == 'appraisal-evaluator' || $route == 'evaluator-create' ? 'active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Evaluator Information</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('duty-responsibilities'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('duty-responsibilities') }}"
-                                                class="nav-link {{ $route == 'duty-responsibilities' || $route == 'duty-create' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Duty & Responsibilities</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('attitude-behavior'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('attitude-behavior') }}"
-                                                class="nav-link {{ $route == 'attitude-behavior' || $route == 'behavior-create' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Attitude & Behavior</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('evaluation-form'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('evaluation-form') }}"
-                                                class="nav-link {{ $route == 'evaluation-form' || $route == 'evaluation-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Evaluation Form</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('evaluation-list') ||
-                                auth()->user()->hasPermission('appraisal-summary-report'))
-                            <li
-                                class="nav-item {{ $route == 'evaluation-list' || $route == 'appraisal-summary-report' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
-                                    <p>
-                                        Appraisal Report
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @if (auth()->user()->hasPermission('evaluation-list'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('evaluation-list') }}"
-                                                class="nav-link {{ $route == 'evaluation-list' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Evaluation List</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('appraisal-summary-report'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('appraisal-summary-report') }}"
-                                                class="nav-link {{ $route == 'appraisal-summary-report' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Appraisal Summary Report</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </li>
-                        @endif
-                        @if (auth()->user()->hasPermission('user-list') ||
-                                auth()->user()->hasPermission('role-list'))
-                            <li
-                                class="nav-item {{ $route == 'role-create' || $route == 'role-edit' || $route == 'user-create' || $route == 'user-edit' || $route == 'user-list' || $route == 'role-list' || $route == 'permission-list' ? 'menu-open' : '' }}">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>
-                                        User
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    @if (auth()->user()->hasPermission('user-list'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('user-list') }}"
-                                                class="nav-link {{ $route == 'user-list' || $route == 'user-create' || $route == 'user-edit' ? ' active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>User List</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (auth()->user()->hasPermission('role-list'))
-                                        <li class="nav-item">
-                                            <a href="{{ route('role-list') }}"
-                                                class="nav-link {{ $route == 'role-list' || $route == 'permission-list' || $route == 'role-create' || $route == 'role-edit' ? 'active' : '' }}">
-                                                <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                                <p>Role List</p>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </li>
-                        @endif
+                        <li class="nav-item ">
+                            <a href="{{ route('user-list') }}"
+                                class="nav-link {{ $route == 'user-list' || $route == 'user-edit' ? ' active' : '' }}">
+                                <i class="fas fa-users nav-icon"></i>
+                                <p>
+                                    Users List
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('kyc-list') }}"
+                                class="nav-link {{ $route == 'kyc-list' || $route == 'kyc-edit' ? ' active' : '' }}">
+                                <i class="fas fa-users nav-icon"></i>
+                                <p>
+                                    KYC
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('app-index') }}"
+                                class="nav-link {{ $route == 'app-index' ? ' active' : '' }}">
+                                <i class="fas fa-users nav-icon"></i>
+                                <p>
+                                    App Settings
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('dashboard') }}"
+                                class="nav-link {{ $route == 'users' ? ' active' : '' }}">
+                                <i class="fas fa-users nav-icon"></i>
+                                <p>
+                                    Deposit
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

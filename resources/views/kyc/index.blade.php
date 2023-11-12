@@ -11,7 +11,7 @@
 @endsection
 
 @section('main_content')
-    <div class="row page-content"> 
+    <div class="row page-content">
         <div class="container">
             {{-- message alert --}}
             <div class="alert_message mt-2">
@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($labels as $label)
+                            @foreach ($users as $label)
                                 <tr>
                                     <td>AR Ridoy</td>
                                     <td>{{ $loop->iteration }}</td>
@@ -66,14 +66,17 @@
                                     <td>{{ $label->label }}</td>
                                     <td>{{ $label->label }}</td>
                                     <td class="action_td">
-                                        <a href="{{ URL('designation/label/edit', $label->id) }}">
-                                            <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit" class="action__icon">
+                                        <a href="{{ URL('kyc/edit', $label->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
+                                                class="action__icon">
                                         </a>
-                                        <a href="{{ URL('designation/label/edit', $label->id) }}">
-                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}" alt="Message" class="action__icon">
+                                        <a href="{{ URL('kyc/edit', $label->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
+                                                alt="Message" class="action__icon">
                                         </a>
-                                        <a href="{{ URL('/designation/label/delete', $label->id) }}">
-                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete" class="action__icon">
+                                        <a href="{{ URL('kyc/delete', $label->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                alt="Delete" class="action__icon">
                                         </a>
                                     </td>
                                 </tr>

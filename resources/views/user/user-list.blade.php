@@ -1,12 +1,13 @@
 @extends('ui.admin_panel.master')
 
-@section('title', 'User List')
+@section('title', 'Designation Label')
 
 @section('style')
+
 @endsection
 
 @section('content_title')
-    <h4 class="mt-2">User List</h4>
+    <h4 class="mt-2">Designation Label</h4>
 @endsection
 
 @section('main_content')
@@ -37,35 +38,46 @@
 
             {{-- card-body start --}}
             <div class="card card-default">
-                <div class=" ml-auto mb-2 mt-2 mr-3">
-                    <a class="btn btn-warning" href="{{ url('user/create') }}">Add User</a>
-                </div>
-                <div class="card-body">
+                {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
+                    <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
+                </div> --}}
+                <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">user Name</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Branch</th>
-                                <th scope="col">Role Name</th>
-                                <th scope="col">Degisnation</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">USER NAME</th>
+                                <th scope="col">PHONE</th>
+                                <th scope="col">E-MAIL</th>
+                                <th scope="col">BALANCE</th>
+                                <th scope="col">KYC</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $user->user_name }}</td>
-                                    <td>{{ $user->employee->full_name ?? '' }}</td>
-                                    <td>{{ $user->employee->branch->name ?? '' }}({{ $user->employee->branch->code ?? '' }})</td>
-                                    <td>{{ $user->role->role_name ?? '' }}</td>
-                                    <td>{{ $user->employee->present_designation->designation ?? '' }}</td>
-                                    <td>
-                                        <a href="{{ URL('/user/edit', $user->id) }}"><i class="fas fa-edit"></i></a>
-                                        <a style="color:red;" href="{{ URL('/user/delete', $user->id) }}"><i
-                                                class="fas fa-trash"></i></a>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td class="action_td">
+                                        <a href="{{ URL('user/edit', $user->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
+                                                class="action__icon">
+                                        </a>
+                                        <a href="{{ URL('user/edit', $user->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
+                                                alt="Message" class="action__icon">
+                                        </a>
+                                        <a href="{{ URL('user/delete', $user->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                alt="Delete" class="action__icon">
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -81,7 +93,9 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#table_id').DataTable();
+            $('#table_id').DataTable({
+                rowHeight: 20,
+            });
         });
     </script>
 @endsection

@@ -19,8 +19,6 @@ class UserController extends Controller
 
     public function userCreate()
     {
-        $branches = Branch::all();
-        $categories = AppraisalCategory::all();
         $roles = Role::all();
         return view('user.user-create', compact('branches', 'roles', 'categories'));
     }
@@ -44,11 +42,7 @@ class UserController extends Controller
 
     public function userEdit($id)
     {
-        $branches = Branch::all();
-        $roles = Role::all();
-        $categories = AppraisalCategory::all();
-        $user = User::findOrFail($id);
-        return view('user.user-create', compact('branches', 'roles', 'user', 'categories'));
+        return view('user.user-create');
     }
 
     public function userUpdate(Request $request, $id)
@@ -76,5 +70,16 @@ class UserController extends Controller
     {
         User::destroy($id);
         return redirect('user/index')->with('error', 'Successfully Deleted');
+    }
+
+    public function getKycData()
+    {
+        $users = User::latest()->get();
+        return view('kyc.index', compact('users'));
+    }
+
+    public function getKycEdit($id)
+    {
+        return view('kyc.edit');
     }
 }

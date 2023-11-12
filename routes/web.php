@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppraisalController;
+use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchInfoController;
 use Illuminate\Support\Facades\Route;
@@ -202,6 +203,19 @@ Route::middleware(['auth'])->group(
                 Route::get('edit/{id}', [UserController::class, 'userEdit'])->name('user-edit');
                 Route::patch('update/{id}', [UserController::class, 'userUpdate']);
                 Route::get('delete/{id}', [UserController::class, 'userDelete']);
+            }
+        );
+        //kyc
+        Route::prefix('kyc')->middleware("permission:user-list")->group(
+            function () {
+                Route::get('index', [UserController::class, 'getKycData'])->name('kyc-list');
+                Route::get('edit/{id}', [UserController::class, 'getKycEdit'])->name('kyc-edit');
+            }
+        );
+        //app settings
+        Route::prefix('app')->middleware("permission:user-list")->group(
+            function () {
+                Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
             }
         );
         //role & permission

@@ -45,17 +45,16 @@
 
         <div class="login_form">
             <div class="login_title text-center">
-                <h3>YWCA Higher Secondary Girls' School</h3>
-                <p>Employee Login</p>
+                <h3>Employee Login</h3>
             </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="login_page">
                     <form action="{{ url('login') }}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="user_email" class="form-label">User Name</label>
-                            <input type="text" class="form-control" id="user_name" name="user_name"
-                                value="{{ old('user_name') }}" required>
+                            <label for="name" class="form-label">User Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ old('name') }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -89,21 +88,11 @@
                         <input type="text" class="form-control form-control-sm" id="full_name" name="full_name"
                             required>
                     </div>
+
                     <div class="mb-1">
-                        <label for="branch_id" class=" col-form-label col-form-label-sm">Branch Name</label>
-                        <select class="form-select selectTo" id="branch_id" name="branch_id" required>
-                            <option selected value="">Choose...</option>
-                            @foreach ($branches as $branch)
-                                <option value="{{ $branch->id }}">
-                                    {{ $branch->name }}({{ $branch->code }})
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-1">
-                        <label for="user_name" class="col-form-label col-form-label-sm">Login User
+                        <label for="name" class="col-form-label col-form-label-sm">Login User
                             Name (Nickname)</label>
-                        <input type="text" class="form-control form-control-sm" id="user_name" name="user_name"
+                        <input type="text" class="form-control form-control-sm" id="name" name="name"
                             required>
                     </div>
                     <div class="mb-1">
