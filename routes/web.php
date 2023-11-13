@@ -10,6 +10,7 @@ use App\Http\Controllers\DesignationInfoController;
 use App\Http\Controllers\DesignationLabelController;
 use App\Http\Controllers\EmployeeInfoController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -216,6 +217,13 @@ Route::middleware(['auth'])->group(
         Route::prefix('app')->middleware("permission:user-list")->group(
             function () {
                 Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
+            }
+        );
+
+        //payment
+        Route::prefix('payment')->middleware("permission:user-list")->group(
+            function () {
+                Route::get('index', [PaymentController::class, 'index'])->name('payment-index');
             }
         );
         //role & permission

@@ -56,17 +56,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($payments as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>pending</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->name }}</td>
+                                    <td>{{ $row->name }}</td>
                                     <td class="action_td">
-                                        <a href="{{ URL('user/edit', $user->id) }}">
+                                        <a href="{{ URL('user/edit', $row->id) }}">
                                             <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
                                                 class="action__icon">
                                         </a>
@@ -75,7 +75,7 @@
                                             <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                 alt="Message" class="action__icon">
                                         </a>
-                                        <a href="{{ URL('user/delete', $user->id) }}">
+                                        <a href="{{ URL('user/delete', $row->id) }}">
                                             <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
                                                 alt="Delete" class="action__icon">
                                         </a>

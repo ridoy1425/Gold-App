@@ -137,11 +137,11 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="{{ route('dashboard') }}"
-                                class="nav-link {{ $route == 'users' ? ' active' : '' }}">
+                            <a href="{{ route('payment-index') }}"
+                                class="nav-link {{ $route == 'payment-index' ? ' active' : '' }}">
                                 <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
                                 <p>
-                                    Deposit
+                                    Payment
                                 </p>
                             </a>
                         </li>
