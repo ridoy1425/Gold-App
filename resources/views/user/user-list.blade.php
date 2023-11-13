@@ -1,13 +1,13 @@
 @extends('ui.admin_panel.master')
 
-@section('title', 'Designation Label')
+@section('title', 'User List')
 
 @section('style')
 
 @endsection
 
 @section('content_title')
-    <h4 class="mt-2">Designation Label</h4>
+    <h4 class="mt-2">User List</h4>
 @endsection
 
 @section('main_content')
@@ -60,8 +60,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>pending</td>

@@ -25,32 +25,10 @@ class UserController extends Controller
         return view('user.user-list', compact('users'));
     }
 
-    public function userCreate()
-    {
-        $roles = Role::all();
-        return view('user.user-create', compact('branches', 'roles', 'categories'));
-    }
-
-    public function userStore(Request $request)
-    {
-        $validate_data = $this->validate($request, [
-            'employee_id' => 'required|exists:employee_infos,id',
-            'user_name'   => 'required|string',
-            'password'    => 'required|confirmed|min:4',
-            'expire_date' => 'required',
-            'role_id'     => 'required|exists:roles,id',
-        ]);
-
-        $validate_data['password'] = Hash::make($request->password);
-        $validate_data['expire_date'] = date('Y-m-d', strtotime($validate_data['expire_date']));
-        User::create($validate_data);
-
-        return redirect('user/index')->with('success', 'Successfully Added');
-    }
-
     public function userEdit($id)
     {
-        return view('user.user-create');
+        $user = User::findOrFail($id);
+        return view('user.user-create', compact('user'));
     }
 
     public function userUpdate(Request $request, $id)
@@ -94,7 +72,7 @@ class UserController extends Controller
     public function storeUserDetails(Request $request)
     {
         try {
-            $request->validate([
+            $this->validateWith([
                 'gender_id'         => 'sometimes|required|exists:payloads,id',
                 'dob'               => 'sometimes|required|date',
                 'occupation'        => 'sometimes|required|string',
@@ -107,9 +85,9 @@ class UserController extends Controller
             ]);
 
             $user = Auth::user();
-
-            $userDetails = UserDetail::create([
+            $userDetails = UserDetail::updateOrCreate([
                 'user_id' => $user->id,
+            ], [
                 'gender_id' => $request->gender_id,
                 'dob' => $request->dob,
                 'occupation' => $request->occupation,
@@ -125,8 +103,9 @@ class UserController extends Controller
             }
 
 
-            $kycInfo = KycInfo::create([
+            $kycInfo = KycInfo::updateOrCreate([
                 'user_id' => $user->id,
+            ], [
                 'kyc_type_id' => $request->kyc_type_id,
                 'card_number' => $request->card_number,
             ]);

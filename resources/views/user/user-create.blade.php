@@ -652,10 +652,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-5 ml-3">
-                    <button class="btn primary-btn centered" type="submit">Submit</button>
-                    <a class="btn btn-secondary ml-3" href="{{ url('designation/label') }}">Back</a>
-                </div>
             </div>
             {{-- card-body end --}}
             </form>
