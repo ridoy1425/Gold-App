@@ -51,173 +51,151 @@
                 @endif
                 @csrf
                 {{-- card-body start --}}
-                <div class="edit__inner__container col-xl-6 col-lg-9 col-md-12 col-sm-12">
+                <div class="edit__inner__container">
                     <div class="site-tab-bars">
                         <h3 class="mb-0 text-bold">App Settings</h3>
                     </div>
-                    <div class="">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="site-card">
-                                    <div class="site-card-header">
-                                        <h3 class="title">Today Gold Price</h3>
-                                    </div>
-                                    <div class="site-card-body">
-                                        <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
-                                            method="post">
-                                            <input type="hidden" name="_token"
-                                                value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                            TITLE/TEXT
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                            TODAY GOLD PRICE
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <button type="submit"
-                                                        class="btn primary-btn centered">Submit</button>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                            <div class="site-card">
+                                <div class="site-card-header">
+                                    <h3 class="title">Today Gold Price</h3>
+                                </div>
+                                <div class="site-card-body">
+                                    <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
+                                        method="post">
+                                        <input type="hidden" name="_token"
+                                            value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        TITLE/TEXT
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="site-card">
-                                    <div class="site-card-header">
-                                        <h3 class="title">Gold Price & Profit</h3>
-                                    </div>
-                                    <div class="site-card-body">
-                                        <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
-                                            method="post">
-                                            <input type="hidden" name="_token"
-                                                value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                            HEADER TEXT
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                            SUBHEADER 
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                        BUYING  PRICE 
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                        PROFIT Percentage (%)
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                        RETURN period (in DAYS)
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <button type="submit"
-                                                        class="btn primary-btn centered">Submit</button>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        TODAY GOLD PRICE
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                            <div class="col-xl-12">
+                                                <button type="submit" class="btn primary-btn centered">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="site-card">
-                                    <div class="site-card-header">
-                                        <h3 class="title">Account Details for Add Balance</h3>
-                                    </div>
-                                    <div class="site-card-body">
-                                        <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
-                                            method="post">
-                                            <input type="hidden" name="_token"
-                                                value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
+                            <div class="site-card">
+                                <div class="site-card-header">
+                                    <h3 class="title">Account Details for Add Balance</h3>
+                                </div>
+                                <div class="site-card-body">
+                                    <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
+                                        method="post">
+                                        <input type="hidden" name="_token"
+                                            value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
                                                         BANK NAME
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                        ACCOUNT NUMBER
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                        BANK CODE
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">
-                                                        ROUTING  NUMBER
-                                                        </label>
-                                                        <input type="text" name="" class="box-input"
-                                                            required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <button type="submit"
-                                                        class="btn primary-btn centered">Submit</button>
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        ACCOUNT NUMBER
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        BANK CODE
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        ROUTING NUMBER
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <button type="submit" class="btn primary-btn centered">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                            <div class="site-card">
+                                <div class="site-card-header">
+                                    <h3 class="title">Gold Price & Profit</h3>
+                                </div>
+                                <div class="site-card-body">
+                                    <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
+                                        method="post">
+                                        <input type="hidden" name="_token"
+                                            value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        HEADER TEXT
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        SUBHEADER
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        BUYING PRICE
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        PROFIT Percentage (%)
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="site-input-groups">
+                                                    <label for="" class="box-input-label">
+                                                        RETURN period (in DAYS)
+                                                    </label>
+                                                    <input type="text" name="" class="box-input" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <button type="submit" class="btn primary-btn centered">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
