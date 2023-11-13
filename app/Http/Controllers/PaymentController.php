@@ -11,4 +11,8 @@ class PaymentController extends Controller
         $payments = [];
         return view('payment.payment-list', compact('payments'));
     }
+
+    public function addPayment()
+    {
+    }
 }

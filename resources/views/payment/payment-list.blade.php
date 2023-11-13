@@ -1,13 +1,13 @@
 @extends('ui.admin_panel.master')
 
-@section('title', 'Designation Label')
+@section('title', 'Payment List')
 
 @section('style')
 
 @endsection
 
 @section('content_title')
-    <h4 class="mt-2">Designation Label</h4>
+    <h4 class="mt-2">Payment List</h4>
 @endsection
 
 @section('main_content')

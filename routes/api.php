@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginApiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,14 @@ Route::post('user-info', [AuthController::class, 'userInfo']);
 Route::middleware('auth:sanctum')->group(
     function () {
         //user
-        Route::prefix('user')->middleware("permission:user-list")->group(
+        Route::prefix('user')->group(
             function () {
                 Route::post('details', [UserController::class, 'storeUserDetails']);
                 Route::post('nominee', [UserController::class, 'storeNomineeInfo']);
             }
         );
+
+        Route::post('payment', [PaymentController::class, 'addPayment']);
     }
 );
 
