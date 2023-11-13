@@ -9,6 +9,7 @@ use App\Models\NomineeInfo;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Traits\AttachmentTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    use AttachmentTrait;
+
     public function getUserList()
     {
         $users = User::latest()->get();
@@ -96,12 +99,11 @@ class UserController extends Controller
                 'dob'               => 'sometimes|required|date',
                 'occupation'        => 'sometimes|required|string',
                 'marital_status_id' => 'sometimes|required|exists:payloads,id',
-                'marital_status_id' => 'sometimes|required|exists:payloads,id',
-                'profile_image'     => 'sometimes|required|file',
+                'profile_image'     => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
                 'kyc_type_id'       => 'sometimes|required|exists:payloads,id',
                 'card_number'       => 'sometimes|required|numeric',
-                'front_image'       => 'sometimes|required|file',
-                'back_image'        => 'sometimes|required|file',
+                'front_image'       => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+                'back_image'        => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
             ]);
 
             $user = Auth::user();
@@ -114,8 +116,14 @@ class UserController extends Controller
                 'marital_status_id' => $request->marital_status_id,
             ]);
 
-            if ($userDetails) {
+            if ($request->has('profile_image')) {
+                $data = [
+                    'id'    => $userDetails->id,
+                    'field' => 'profile_image'
+                ];
+                $this->imageHandle($data, $request->front_image);
             }
+
 
             $kycInfo = KycInfo::create([
                 'user_id' => $user->id,
@@ -123,7 +131,19 @@ class UserController extends Controller
                 'card_number' => $request->card_number,
             ]);
 
-            if ($kycInfo) {
+            if ($request->has('front_image')) {
+                $data = [
+                    'id'    => $kycInfo->id,
+                    'field' => 'front_image'
+                ];
+                $this->imageHandle($data, $request->front_image);
+            }
+            if ($request->has('back_image')) {
+                $data = [
+                    'id'    => $kycInfo->id,
+                    'field' => 'back_image'
+                ];
+                $this->imageHandle($data, $request->front_image);
             }
 
             return response()->json([
@@ -135,8 +155,6 @@ class UserController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-
-        return view('user.user-create', compact('branches', 'roles', 'categories'));
     }
 
     public function storeNomineeInfo(Request $request)
@@ -165,7 +183,19 @@ class UserController extends Controller
             'card_number' => $request->card_number,
         ]);
 
-        if ($nominee) {
+        if ($request->has('front_image')) {
+            $data = [
+                'id'    => $nominee->id,
+                'field' => 'front_image'
+            ];
+            $this->imageHandle($data, $request->front_image);
+        }
+        if ($request->has('back_image')) {
+            $data = [
+                'id'    => $nominee->id,
+                'field' => 'back_image'
+            ];
+            $this->imageHandle($data, $request->front_image);
         }
 
         return response()->json([
