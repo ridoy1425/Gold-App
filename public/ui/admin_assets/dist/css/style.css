@@ -342,6 +342,11 @@ table.dataTable thead {
     font-weight: 400;
 }
 
+.sidebar .nav-item .nav-link p {
+    font-size: 17px;
+    font-weight: 600;
+}
+
 table.dataTable tbody th,
 table.dataTable tbody td {
     font-size: 16px;
@@ -463,4 +468,20 @@ img {
 
 .content-wrapper {
     min-height: 100vh !important;
+}
+
+.success,
+.pending {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D3714A;
+    color: #fff;
+    border-radius: 30px;
+    width: max-content;
+    padding: 3px 15px;
+}
+
+.success {
+    background-color: #3DA98B;
 }

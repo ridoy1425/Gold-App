@@ -1,11 +1,12 @@
 body {
     margin: 0;
     padding: 0;
-    background: url(../images/bg-image.webp);
+    /* background: url(../images/bg-image.webp); */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    background-color: #666;
 }
 
 .login_page {

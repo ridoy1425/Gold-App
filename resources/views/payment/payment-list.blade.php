@@ -45,12 +45,11 @@
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">DATE</th>
                                 <th scope="col">USER NAME</th>
-                                <th scope="col">PHONE</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">E-MAIL</th>
-                                <th scope="col">BALANCE</th>
-                                <th scope="col">KYC</th>
+                                <th scope="col">AMOUNT</th>
                                 <th scope="col">STATUS</th>
                                 <th scope="col">ACTION</th>
                             </tr>
@@ -59,7 +58,6 @@
                             @foreach ($payments as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->name }}</td>

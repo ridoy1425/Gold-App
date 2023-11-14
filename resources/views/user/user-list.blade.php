@@ -64,7 +64,12 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>pending</td>
+
+                                    <!-- Add success class for success, and pending class for Pending -->
+
+                                    <!-- <td><span class="pending">Pending</span></td> -->
+                                    <td><span class="success">Success</span></td>
+                                    
                                     <td class="action_td">
                                         <a href="{{ URL('user/edit', $user->id) }}">
                                             <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
