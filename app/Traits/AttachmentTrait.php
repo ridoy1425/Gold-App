@@ -13,21 +13,20 @@ use Illuminate\Support\Str;
 
 trait AttachmentTrait
 {
-    public function imageHandle($data, $attachment = null)
+    public function imageHandle($data, $attachment = null, $field)
     {
         if (!$attachment) return false;
         try {
-            $userDetails = UserDetail::findOrFail($data['id']);
-
-            if ($userDetails->$data['filed'] && Storage::disk('public')->exists($userDetails->$data['filed'])) {
-                Storage::disk('public')->delete($userDetails->$data['filed']);
+            if ($data[$field] && Storage::disk('public')->exists($data[$field])) {
+                Storage::disk('public')->delete($data[$field]);
             }
 
-            $custom_path = 'profile_image' . '/' . $data['id'];
+            $custom_path = $field . '/' . $data['id'];
             $avatarName = time() . '_' . $attachment->getClientOriginalName();
             $stored_path = $attachment->storeAs($custom_path, $avatarName, 'public');
 
-            $userDetails->update([$data['filed'], $stored_path]);
+            $field = $field;
+            $data->update([$field => $stored_path]);
         } catch (Exception $ex) {
             throw $ex;
         }

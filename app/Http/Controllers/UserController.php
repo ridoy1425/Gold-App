@@ -60,8 +60,8 @@ class UserController extends Controller
 
     public function getKycData()
     {
-        $users = User::latest()->get();
-        return view('kyc.index', compact('users'));
+        $kycInfo = KycInfo::latest()->get();
+        return view('kyc.index', compact('kycInfo'));
     }
 
     public function getKycEdit($id)
@@ -71,69 +71,57 @@ class UserController extends Controller
 
     public function storeUserDetails(Request $request)
     {
-        try {
-            $this->validateWith([
-                'gender_id'         => 'sometimes|required|exists:payloads,id',
-                'dob'               => 'sometimes|required|date',
-                'occupation'        => 'sometimes|required|string',
-                'marital_status_id' => 'sometimes|required|exists:payloads,id',
-                'profile_image'     => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
-                'kyc_type_id'       => 'sometimes|required|exists:payloads,id',
-                'card_number'       => 'sometimes|required|numeric',
-                'front_image'       => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
-                'back_image'        => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
-            ]);
+        // try {
+        $this->validateWith([
+            'gender_id'         => 'sometimes|required|exists:payloads,id',
+            'dob'               => 'sometimes|required|date',
+            'occupation'        => 'sometimes|required|string',
+            'marital_status_id' => 'sometimes|required|exists:payloads,id',
+            'profile_image'     => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+            'kyc_type_id'       => 'sometimes|required|exists:payloads,id',
+            'card_number'       => 'sometimes|required|numeric',
+            'front_image'       => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+            'back_image'        => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+        ]);
 
-            $user = Auth::user();
-            $userDetails = UserDetail::updateOrCreate([
-                'user_id' => $user->id,
-            ], [
-                'gender_id' => $request->gender_id,
-                'dob' => $request->dob,
-                'occupation' => $request->occupation,
-                'marital_status_id' => $request->marital_status_id,
-            ]);
+        $user = Auth::user();
+        $userDetails = UserDetail::updateOrCreate([
+            'user_id' => $user->id,
+        ], [
+            'gender_id' => $request->gender_id,
+            'dob' => $request->dob,
+            'occupation' => $request->occupation,
+            'marital_status_id' => $request->marital_status_id,
+        ]);
 
-            if ($request->has('profile_image')) {
-                $data = [
-                    'id'    => $userDetails->id,
-                    'field' => 'profile_image'
-                ];
-                $this->imageHandle($data, $request->front_image);
-            }
-
-
-            $kycInfo = KycInfo::updateOrCreate([
-                'user_id' => $user->id,
-            ], [
-                'kyc_type_id' => $request->kyc_type_id,
-                'card_number' => $request->card_number,
-            ]);
-
-            if ($request->has('front_image')) {
-                $data = [
-                    'id'    => $kycInfo->id,
-                    'field' => 'front_image'
-                ];
-                $this->imageHandle($data, $request->front_image);
-            }
-            if ($request->has('back_image')) {
-                $data = [
-                    'id'    => $kycInfo->id,
-                    'field' => 'back_image'
-                ];
-                $this->imageHandle($data, $request->front_image);
-            }
-
-            return response()->json([
-                'userInfo' => $userDetails,
-                'kycInfo' => $kycInfo,
-            ], 201);
-        } catch (Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-            ], 500);
+        if ($request->has('profile_image')) {
+            $this->imageHandle($userDetails, $request->profile_image, 'profile_image');
         }
+
+
+        $kycInfo = KycInfo::updateOrCreate([
+            'user_id' => $user->id,
+        ], [
+            'kyc_type_id' => $request->kyc_type_id,
+            'card_number' => $request->card_number,
+        ]);
+
+        if ($request->has('front_image')) {
+            $this->imageHandle($kycInfo, $request->front_image, 'front_image');
+        }
+        if ($request->has('back_image')) {
+            $this->imageHandle($kycInfo, $request->back_image, 'back_image');
+        }
+
+        return response()->json([
+            'userInfo' => $userDetails,
+            'kycInfo' => $kycInfo,
+        ], 201);
+        // } catch (Exception $e) {
+        //     return response()->json([
+        //         'error' => $e->getMessage(),
+        //     ], 500);
+        // }
     }
 
     public function storeNomineeInfo(Request $request)

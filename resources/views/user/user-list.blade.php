@@ -45,7 +45,7 @@
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">SL</th>
                                 <th scope="col">USER NAME</th>
                                 <th scope="col">PHONE</th>
                                 <th scope="col">E-MAIL</th>
@@ -63,13 +63,18 @@
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->name }}</td>
-
-                                    <!-- Add success class for success, and pending class for Pending -->
-
-                                    <!-- <td><span class="pending">Pending</span></td> -->
-                                    <td><span class="success">Success</span></td>
-                                    
+                                    @if (optional($user->kyc)->status == 'pending')
+                                        <td><span class="pending">Pending</span></td>
+                                    @elseif(optional($user->kyc)->status == 'success')
+                                        <td><span class="success">Approved</span></td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                    @if ($user->status == 'pending')
+                                        <td><span class="pending">Pending</span></td>
+                                    @else
+                                        <td><span class="success">Active</span></td>
+                                    @endif
                                     <td class="action_td">
                                         <a href="{{ URL('user/edit', $user->id) }}">
                                             <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"

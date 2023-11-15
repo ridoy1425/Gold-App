@@ -24,9 +24,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function employee()
+    public function kyc()
     {
-        return $this->BelongsTo(EmployeeInfo::class, 'employee_id');
+        return $this->hasOne(KycInfo::class, 'user_id');
     }
 
     public function role()
