@@ -485,3 +485,76 @@ img {
 .success {
     background-color: #3DA98B;
 }
+
+.nid_img_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nid_img {
+    width: calc(50% - 5px);
+}
+
+.nid_img_container .nid_img:first-child {
+    margin-right: 10px;
+}
+
+.kyc_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.kyc_container .popup-body-text {
+    width: calc(50% - 15px);
+}
+
+.kyc_container .popup-body-text:first-child {
+    margin-right: 30px;
+}
+
+.kyc__modal .modal-dialog {
+    max-width: 750px;
+}
+
+.kyc__modal .popup-body .popup-body-text .action-btns {
+    text-align: right;
+    width: 100%;
+}
+.user_bank_info input {
+	width: 100%;
+	border: 2px solid #e5e8f2;
+	box-sizing: border-box;
+	border-radius: 4px;
+	padding: 10px 15px;
+	transition: 0.3s;
+	font-size: 14px;
+	font-weight: 500;
+	outline: none;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+    .kyc_container {
+        flex-direction: column;
+    }
+
+    .kyc__modal .modal-dialog {
+        max-width: 500px;
+    }
+
+    .kyc_container .popup-body-text {
+        width: 100%;
+    }
+
+    .kyc_container .popup-body-text:first-child {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .action_modal .modal-body {
+        padding: 0;
+    }
+}
