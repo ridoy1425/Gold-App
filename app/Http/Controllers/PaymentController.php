@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Traits\AttachmentTrait;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class PaymentController extends Controller
 
     public function index()
     {
-        $payments = [];
+        $payments = Payment::latest()->get();
         return view('payment.payment-list', compact('payments'));
     }
 
@@ -30,11 +31,7 @@ class PaymentController extends Controller
         ]);
 
         if ($request->has('receipt_image')) {
-            $data = [
-                'id'    => $payment->id,
-                'field' => 'receipt_image'
-            ];
-            $this->imageHandle($data, $request->receipt_image);
+            $this->imageHandle($payment, $request->receipt_image, 'receipt_image');
         }
 
         return response()->json([
@@ -51,12 +48,23 @@ class PaymentController extends Controller
 
         $payment = Payment::findOrFail($request->id);
         $payment->update([
-            'add_amount', $request->add_amount,
+            'add_amount' => $request->add_amount,
             'status' => 'success'
         ]);
 
-        return response()->json([
-            'payment' => $payment,
-        ], 201);
+        $balance = 0;
+        $wallet = Wallet::where('user_id', $payment->user_id)->first();
+        if ($wallet) {
+            $balance = $wallet->balance + $request->add_amount;
+            $wallet->update(['balance' => $balance]);
+        } else {
+            $balance = $request->add_amount;
+            $wallet = Wallet::create([
+                'user_id' => $payment->user_id,
+                'balance' => $balance,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Payment Successful');
     }
 }

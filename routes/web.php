@@ -224,6 +224,7 @@ Route::middleware(['auth'])->group(
         Route::prefix('payment')->middleware("permission:user-list")->group(
             function () {
                 Route::get('index', [PaymentController::class, 'index'])->name('payment-index');
+                Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
             }
         );
         //role & permission
