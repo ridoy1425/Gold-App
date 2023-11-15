@@ -34,12 +34,8 @@ Route::middleware('auth:sanctum')->group(
             }
         );
 
-        Route::prefix('payment')->group(
-            function () {
-                Route::post('request', [UserController::class, 'paymentRequest']);
-                Route::post('add-wallet', [UserController::class, 'addWalletAmount']);
-            }
-        );
+
+        Route::post('payment/request', [PaymentController::class, 'paymentRequest']);
     }
 );
 
