@@ -20,6 +20,7 @@ class CreateKycInfosTable extends Migration
             $table->bigInteger('card_number')->nullable();
             $table->string('front_image')->nullable();
             $table->string('back_image')->nullable();
+            $table->enum('status', ['pending', 'approved'])->default('pending');
             $table->timestamps();
         });
     }
