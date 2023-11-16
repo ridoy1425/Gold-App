@@ -19,6 +19,7 @@ class BankInfoController extends Controller
             'branch_location' => 'sometimes|required|string',
             'routing_number'  => 'sometimes|required|string',
             'account_type'    => 'sometimes|required|string',
+            'client'  => 'sometimes|string',
         ]);
 
         $user = Auth::user();
@@ -27,6 +28,9 @@ class BankInfoController extends Controller
             'user_id' => $user->id,
         ], $data);
 
+        if ($request->client == 'web') {
+            return redirect()->back();
+        }
         return response()->json([
             'bankInfo' => $bankInfo,
         ], 201);
