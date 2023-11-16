@@ -100,14 +100,18 @@
                                                             aria-label="Close"></button>
                                                         <div class="popup-body-text" id="kyc-action-data">
                                                             <h3 class="title mb-4">
-                                                                Send Mail to Mourad El Naji
+                                                                Send Mail to {{ $user->name }}
                                                             </h3>
-                                                            <form action="" method="post">
+                                                            <form action="{{ url('user/send-notification') }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="user_id"
+                                                                    value="{{ $user->id }}">
                                                                 <div class="site-input-groups">
                                                                     <label for=""
                                                                         class="box-input-label">Subject:</label>
                                                                     <input type="text" name="subject"
-                                                                        class="box-input mb-0" required="">
+                                                                        class="box-input mb-0" required>
                                                                 </div>
                                                                 <div class="site-input-groups">
                                                                     <label for="" class="box-input-label">Details

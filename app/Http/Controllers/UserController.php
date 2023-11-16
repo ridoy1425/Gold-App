@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotificationMail;
 use App\Models\AppraisalCategory;
 use App\Models\Branch;
 use App\Models\KycInfo;
@@ -14,6 +15,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -126,7 +128,7 @@ class UserController extends Controller
 
     public function storeNomineeInfo(Request $request)
     {
-        $request->validate([
+        $this->validateWith([
             'name'        => 'sometimes|required|string',
             'phone'       => 'sometimes|required|numeric',
             'dob'         => 'sometimes|required|date',
@@ -151,22 +153,28 @@ class UserController extends Controller
         ]);
 
         if ($request->has('front_image')) {
-            $data = [
-                'id'    => $nominee->id,
-                'field' => 'front_image'
-            ];
-            $this->imageHandle($data, $request->front_image);
+            $this->imageHandle($nominee, $request->front_image, 'front_image');
         }
         if ($request->has('back_image')) {
-            $data = [
-                'id'    => $nominee->id,
-                'field' => 'back_image'
-            ];
-            $this->imageHandle($data, $request->front_image);
+            $this->imageHandle($nominee, $request->front_image, 'back_image');
         }
 
         return response()->json([
             'nominee' => $nominee,
         ], 201);
+    }
+
+    public function mailNotification(Request $request)
+    {
+        $this->validateWith([
+            'user_id' => 'required|exists:users,id',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $user = User::findOrFail($request->user_id);
+        Mail::to($user->email)->send(new NotificationMail($request->subject, $request->message));
+
+        return redirect()->back();
     }
 }
