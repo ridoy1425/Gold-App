@@ -86,8 +86,8 @@
 
                                                                 <ul class="list-group mb-4">
                                                                     <li class="list-group-item">
-                                                                        <p class="mb-0">NID Number:
-                                                                            <strong>vvxvxcvxe5435434</strong>
+                                                                        <p class="mb-0">Card Number:
+                                                                            <strong>{{ $label->card_number }}</strong>
                                                                         </p>
                                                                     </li>
                                                                     <li class="list-group-item nid_img_container">
@@ -95,25 +95,25 @@
                                                                             <p>
                                                                                 NID Front Side:
                                                                             </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
+                                                                            <img src="{{ asset('storage/' . $label->front_end) }}"
                                                                                 alt="">
                                                                         </div>
                                                                         <div class="nid_img">
                                                                             <p>
                                                                                 NID Back Side
                                                                             </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
+                                                                            <img src="{{ asset('storage/' . $label->back_end) }}"
                                                                                 alt="">
                                                                         </div>
                                                                     </li>
                                                                 </ul>
                                                                 <form action="" method="post">
-                                                                    <div class="site-input-groups">
+                                                                    {{-- <div class="site-input-groups">
                                                                         <label for=""
                                                                             class="box-input-label">Details
                                                                             Message(Optional)</label>
                                                                         <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div class="user_bank_info">
                                                                         <h3 class="title mb-2">
                                                                             User Bank Information
@@ -156,8 +156,8 @@
                                                                 <ul class="list-group mb-4">
 
                                                                     <li class="list-group-item">
-                                                                        <p class="mb-0">NID Number:
-                                                                            <strong>vvxvxcvxe5435434</strong>
+                                                                        <p class="mb-0">Card Number:
+                                                                            <strong>{{ optional($label->user->nominee)->card_number }}</strong>
                                                                         </p>
                                                                     </li>
                                                                     <li class="list-group-item nid_img_container">
@@ -165,25 +165,25 @@
                                                                             <p>
                                                                                 NID Front Side:
                                                                             </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
+                                                                            <img src="{{ asset('storage/' . optional($label->user->nominee)->front_image) }}"
                                                                                 alt="">
                                                                         </div>
                                                                         <div class="nid_img">
                                                                             <p>
                                                                                 NID Back Side
                                                                             </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
+                                                                            <img src="{{ asset('storage/' . optional($label->user->nominee)->back_image) }}"
                                                                                 alt="">
                                                                         </div>
                                                                     </li>
                                                                 </ul>
                                                                 <form action="" method="post">
-                                                                    <div class="site-input-groups">
+                                                                    {{-- <div class="site-input-groups">
                                                                         <label for=""
                                                                             class="box-input-label">Details
                                                                             Message(Optional)</label>
                                                                         <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div class="user_bank_info">
                                                                         <h3 class="title mb-2">
                                                                             Nominee Bank Information
