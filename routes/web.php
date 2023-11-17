@@ -60,9 +60,10 @@ Route::middleware(['auth'])->group(
             }
         );
         //app settings
-        Route::prefix('app')->middleware("permission:user-list")->group(
+        Route::prefix('setting')->middleware("permission:user-list")->group(
             function () {
                 Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
+                Route::post('gold-price-set', [AppSettingsController::class, 'goldPriceSet']);
             }
         );
 
