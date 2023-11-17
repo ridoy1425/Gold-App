@@ -80,14 +80,14 @@
                                                             aria-label="Close"></button>
                                                         <div class="kyc_container">
                                                             <div class="popup-body-text" id="kyc-action-data">
-                                                                <h3 class="title mb-4">
+                                                                <h3 class="title mb-3">
                                                                     User KYC Details
                                                                 </h3>
 
                                                                 <ul class="list-group mb-4">
                                                                     <li class="list-group-item">
                                                                         <p class="mb-0">Card Number:
-                                                                            <strong>{{ $label->card_number }}</strong>
+                                                                            <strong>{{ optional($label->user->nominee)->card_number }}</strong>
                                                                         </p>
                                                                     </li>
                                                                     <li class="list-group-item nid_img_container">
@@ -95,66 +95,23 @@
                                                                             <p>
                                                                                 NID Front Side:
                                                                             </p>
-                                                                            <img src="{{ asset('storage/' . $label->front_end) }}"
+                                                                            <img src="{{ asset('storage/' . optional($label->user->nominee)->front_image) }}"
                                                                                 alt="">
                                                                         </div>
                                                                         <div class="nid_img">
                                                                             <p>
                                                                                 NID Back Side
                                                                             </p>
-                                                                            <img src="{{ asset('storage/' . $label->back_end) }}"
+                                                                            <img src="{{ asset('storage/' . optional($label->user->nominee)->back_image) }}"
                                                                                 alt="">
                                                                         </div>
                                                                     </li>
                                                                 </ul>
-                                                                <form action="" method="post">
-                                                                    {{-- <div class="site-input-groups">
-                                                                        <label for=""
-                                                                            class="box-input-label">Details
-                                                                            Message(Optional)</label>
-                                                                        <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
-                                                                    </div> --}}
-                                                                    <div class="user_bank_info">
-                                                                        <h3 class="title mb-2">
-                                                                            User Bank Information
-                                                                        </h3>
-                                                                        <div class="site-input-groups ">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account Name</label>
-                                                                            <input type="text"
-                                                                                placeholder="Ratul Hasan Ruhan">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account
-                                                                                Number</label>
-                                                                            <input type="text" placeholder="4512 451564">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text" placeholder="Bank Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Branch Location">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text" placeholder="Branch Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Routing Number (Optional)">
-                                                                        </div>
-                                                                    </div>
-
-                                                                </form>
-                                                            </div>
-                                                            <div class="popup-body-text" id="kyc-action-data">
-                                                                <h3 class="title mb-4">
+                                                                <h3 class="title mb-3">
                                                                     Nominee KYC Details
                                                                 </h3>
 
                                                                 <ul class="list-group mb-4">
-
                                                                     <li class="list-group-item">
                                                                         <p class="mb-0">Card Number:
                                                                             <strong>{{ optional($label->user->nominee)->card_number }}</strong>
@@ -188,34 +145,40 @@
                                                                         <h3 class="title mb-2">
                                                                             Nominee Bank Information
                                                                         </h3>
-                                                                        <div class="site-input-groups ">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account
-                                                                                Name</label>
-                                                                            <input type="text"
-                                                                                placeholder="Ratul Hasan Ruhan">
+                                                                        <div class="input__group">
+                                                                            <div class="site-input-groups ">
+                                                                                <label for=""
+                                                                                    class="box-input-label">Account
+                                                                                    Name</label>
+                                                                                <input type="text"
+                                                                                    placeholder="Ratul Hasan Ruhan">
+                                                                            </div>
+                                                                            <div class="site-input-groups">
+                                                                                <label for=""
+                                                                                    class="box-input-label">Account
+                                                                                    Number</label>
+                                                                                <input type="text"
+                                                                                    placeholder="4512 451564">
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="site-input-groups">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account
-                                                                                Number</label>
-                                                                            <input type="text"
-                                                                                placeholder="4512 451564">
+                                                                        <div class="input__group">
+                                                                            <div class="site-input-groups">
+                                                                                <input type="text" placeholder="Bank Name">
+                                                                            </div>
+                                                                            <div class="site-input-groups">
+                                                                                <input type="text"
+                                                                                    placeholder="Branch Location">
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text" placeholder="Bank Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Branch Location">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Branch Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Routing Number (Optional)">
+                                                                        <div class="input__group">
+                                                                            <div class="site-input-groups">
+                                                                                <input type="text"
+                                                                                    placeholder="Branch Name">
+                                                                            </div>
+                                                                            <div class="site-input-groups">
+                                                                                <input type="text"
+                                                                                    placeholder="Routing Number (Optional)">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="action-btns">
