@@ -13,28 +13,6 @@
 @section('main_content')
     <div class="row page-content">
         <div class="container">
-            {{-- message alert --}}
-            <div class="alert_message mt-2">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul style="margin-bottom: 0rem;">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (Session::has('success'))
-                    <div class="alert alert-success" role="success">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif
-                @if (Session::has('error'))
-                    <div class="alert alert-danger" role="success">
-                        {{ Session::get('error') }}
-                    </div>
-                @endif
-            </div>
 
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
@@ -85,7 +63,8 @@
                                             <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                 alt="Message" class="action__icon">
                                         </a>
-                                        <a href="{{ URL('user/delete', $user->id) }}">
+                                        <a href="{{ URL('user/delete', $user->id) }}"
+                                            onclick="return confirm('Are you sure?')">
                                             <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
                                                 alt="Delete" class="action__icon">
                                         </a>
