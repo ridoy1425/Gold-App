@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(
             function () {
                 Route::get('index', [UserController::class, 'getKycData'])->name('kyc-list');
                 Route::get('edit/{id}', [UserController::class, 'getKycEdit'])->name('kyc-edit');
+                Route::post('status-update', [UserController::class, 'kycStatusUpdate']);
             }
         );
         //app settings
@@ -64,6 +65,8 @@ Route::middleware(['auth'])->group(
             function () {
                 Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
                 Route::post('gold-price-set', [AppSettingsController::class, 'goldPriceSet']);
+                Route::post('gold-order-set', [AppSettingsController::class, 'goldOrderDataSet']);
+                Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
             }
         );
 
@@ -74,8 +77,9 @@ Route::middleware(['auth'])->group(
                 Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
             }
         );
+        Route::get('order', [PaymentController::class, 'getOrderList'])->name('Order-index');
 
-        Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
+
         //role & permission
         Route::prefix('role')->middleware("permission:role-list")->group(
             function () {

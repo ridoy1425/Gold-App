@@ -15,6 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('order_id');
+            $table->decimal('gold_qty');
+            $table->decimal('price');
+            $table->decimal('profit');
+            $table->enum('status', ['active', 'in-process', 'completed']);
             $table->timestamps();
         });
     }
