@@ -71,7 +71,7 @@
                                                 class="action__icon">
                                         </a>
                                         <!-- Modal -->
-                                        <div class="kyc__modal modal fade action_modal" id="exampleModal" tabindex="-1"
+                                        <div class="payment__modal kyc__modal modal fade action_modal" id="exampleModal" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content site-table-modal">
@@ -80,154 +80,40 @@
                                                             aria-label="Close"></button>
                                                         <div class="kyc_container">
                                                             <div class="popup-body-text" id="kyc-action-data">
-                                                                <h3 class="title mb-4">
-                                                                    User KYC Details
+                                                                <h3 class="title mb-3">
+                                                                    Payment Details
                                                                 </h3>
-
-                                                                <ul class="list-group mb-4">
-                                                                    <li class="list-group-item">
-                                                                        <p class="mb-0">NID Number:
-                                                                            <strong>vvxvxcvxe5435434</strong>
-                                                                        </p>
-                                                                    </li>
-                                                                    <li class="list-group-item nid_img_container">
-                                                                        <div class="nid_img">
-                                                                            <p>
-                                                                                NID Front Side:
-                                                                            </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div class="nid_img">
-                                                                            <p>
-                                                                                NID Back Side
-                                                                            </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
+                                                                <p>
+                                                                    Amount:  $ <span>10</span>
+                                                                </p>
+                                                                <div class="nid_img mb-4">
+                                                                    <p>
+                                                                        Payment Receipt (Screenshot)
+                                                                    </p>
+                                                                    <img src="https://www.printablecashreceipts.com/samples-free/Payment_Receipt-free.png"
+                                                                        alt="">
+                                                                </div>
                                                                 <form action="" method="post">
-                                                                    <div class="site-input-groups">
-                                                                        <label for=""
-                                                                            class="box-input-label">Details
-                                                                            Message(Optional)</label>
-                                                                        <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
-                                                                    </div>
                                                                     <div class="user_bank_info">
-                                                                        <h3 class="title mb-2">
-                                                                            User Bank Information
-                                                                        </h3>
                                                                         <div class="site-input-groups ">
                                                                             <label for=""
-                                                                                class="box-input-label">Account Name</label>
-                                                                            <input type="text"
-                                                                                placeholder="Ratul Hasan Ruhan">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account
-                                                                                Number</label>
-                                                                            <input type="text" placeholder="4512 451564">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text" placeholder="Bank Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Branch Location">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text" placeholder="Branch Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Routing Number (Optional)">
-                                                                        </div>
-                                                                    </div>
-
-                                                                </form>
-                                                            </div>
-                                                            <div class="popup-body-text" id="kyc-action-data">
-                                                                <h3 class="title mb-4">
-                                                                    Nominee KYC Details
-                                                                </h3>
-
-                                                                <ul class="list-group mb-4">
-
-                                                                    <li class="list-group-item">
-                                                                        <p class="mb-0">NID Number:
-                                                                            <strong>vvxvxcvxe5435434</strong>
-                                                                        </p>
-                                                                    </li>
-                                                                    <li class="list-group-item nid_img_container">
-                                                                        <div class="nid_img">
-                                                                            <p>
-                                                                                NID Front Side:
-                                                                            </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div class="nid_img">
-                                                                            <p>
-                                                                                NID Back Side
-                                                                            </p>
-                                                                            <img src="{{ asset('ui/admin_assets/dist/img/nid-2.jpg') }}"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                                <form action="" method="post">
-                                                                    <div class="site-input-groups">
-                                                                        <label for=""
-                                                                            class="box-input-label">Details
-                                                                            Message(Optional)</label>
-                                                                        <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
-                                                                    </div>
-                                                                    <div class="user_bank_info">
-                                                                        <h3 class="title mb-2">
-                                                                            Nominee Bank Information
-                                                                        </h3>
-                                                                        <div class="site-input-groups ">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account
-                                                                                Name</label>
-                                                                            <input type="text"
-                                                                                placeholder="Ratul Hasan Ruhan">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <label for=""
-                                                                                class="box-input-label">Account
-                                                                                Number</label>
-                                                                            <input type="text"
-                                                                                placeholder="4512 451564">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text" placeholder="Bank Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Branch Location">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Branch Name">
-                                                                        </div>
-                                                                        <div class="site-input-groups">
-                                                                            <input type="text"
-                                                                                placeholder="Routing Number (Optional)">
+                                                                                class="box-input-label">
+                                                                                Add to Wallet
+                                                                            </label>
+                                                                            <input type="number"
+                                                                                placeholder="$ 10">
                                                                         </div>
                                                                     </div>
                                                                     <div class="action-btns">
                                                                         <button type="submit"
-                                                                            class="btn centered red-btn me-2">
-                                                                            <i class="fa fa-close"></i>
-                                                                            Reject
-                                                                        </button>
-                                                                        <button type="submit"
-                                                                            class="btn primary-btn centered">
+                                                                            class="btn primary-btn centered me-2">
                                                                             <i class="fas fa-check"></i>
                                                                             Approve
+                                                                        </button>
+                                                                        <button type="submit"
+                                                                            class="btn centered red-btn">
+                                                                            <i class="fa fa-close"></i>
+                                                                            Reject
                                                                         </button>
                                                                     </div>
                                                                 </form>

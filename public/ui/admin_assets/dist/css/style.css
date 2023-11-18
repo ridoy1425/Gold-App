@@ -529,10 +529,39 @@ img {
 .kyc__modal .modal-dialog {
     max-width: 750px;
 }
-
+.payment__modal .modal-dialog {
+	max-width: 500px;
+}
 .kyc__modal .popup-body .popup-body-text .action-btns {
     text-align: right;
     width: 100%;
+}
+.payment__modal .nid_img{
+	margin-right: 0;
+    width: 100%;
+}
+.payment__modal .nid_img img {
+	object-fit: contain;
+	/* border-radius: 10px; */
+	overflow: hidden;
+}
+.payment__modal .site-input-groups {
+	display: flex;
+}
+.payment__modal .box-input-label{
+    margin-bottom: 0;
+    margin-right: 10px;
+    min-width: 110px;
+  display: flex;
+  align-items: center;
+}.payment__modal .popup-body .popup-body-text .action-btns {
+	text-align: left;
+}.payment__modal p {
+	display: block;
+	color: rgba(16, 25, 53, 0.6);
+	font-weight: 400;
+	margin-bottom: 5px;
+	font-size: 16px;
 }
 .user_bank_info input {
 	width: 100%;
