@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasOne(NomineeInfo::class, 'user_id');
     }
 
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class, 'user_id');
+    }
+
     public function role()
     {
         return $this->BelongsTo(Role::class, 'role_id');

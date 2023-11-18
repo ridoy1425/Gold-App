@@ -72,19 +72,19 @@ class UserController extends Controller
 
     public function storeUserDetails(Request $request)
     {
-        try {
-            $this->validateWith([
-                'gender_id'         => 'sometimes|required|exists:payloads,id',
-                'dob'               => 'sometimes|required|date',
-                'occupation'        => 'sometimes|required|string',
-                'marital_status_id' => 'sometimes|required|exists:payloads,id',
-                'profile_image'     => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
-                'kyc_type_id'       => 'sometimes|required|exists:payloads,id',
-                'card_number'       => 'sometimes|required|numeric',
-                'front_image'       => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
-                'back_image'        => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
-            ]);
+        $this->validateWith([
+            'gender_id'         => 'sometimes|required|exists:payloads,id',
+            'dob'               => 'sometimes|required|date',
+            'occupation'        => 'sometimes|required|string',
+            'marital_status_id' => 'sometimes|required|exists:payloads,id',
+            'profile_image'     => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+            'kyc_type_id'       => 'sometimes|required|exists:payloads,id',
+            'card_number'       => 'sometimes|required|numeric',
+            'front_image'       => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+            'back_image'        => 'sometimes|required|file|mimes:jpg,jpeg,png,bmp,tiff,webp|max:104800',
+        ]);
 
+        try {
             $user = Auth::user();
             $userDetails = UserDetail::updateOrCreate([
                 'user_id' => $user->id,
@@ -188,5 +188,14 @@ class UserController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function kycStatusUpdate(Request $request)
+    {
+        $kyc = KycInfo::findOrFail($request->kyc_id);
+        $kyc->update(['status' => $request->action]);
+
+        toastr()->success('Success! Kyc Status Updated.');
+        return redirect()->back();
     }
 }

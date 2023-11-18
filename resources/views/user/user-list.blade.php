@@ -40,7 +40,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ optional($user->wallet)->balance }}</td>
                                     @if (optional($user->kyc)->status == 'pending')
                                         <td><span class="pending">Pending</span></td>
                                     @elseif(optional($user->kyc)->status == 'success')
@@ -94,8 +94,8 @@
                                                                 </div>
                                                                 <div class="site-input-groups">
                                                                     <label for="" class="box-input-label">Details
-                                                                        Message(Optional)</label>
-                                                                    <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
+                                                                        Message</label>
+                                                                    <textarea name="message" class="form-textarea mb-0"></textarea>
                                                                 </div>
 
                                                                 <div class="action-btns">
@@ -103,10 +103,6 @@
                                                                         class="btn primary-btn centered me-2">
                                                                         <i class="fas fa-paper-plane"></i>
                                                                         Send Email
-                                                                    </button>
-                                                                    <button type="submit" class="btn centered red-btn">
-                                                                        <i class="fa fa-close"></i>
-                                                                        Close
                                                                     </button>
                                                                 </div>
                                                             </form>

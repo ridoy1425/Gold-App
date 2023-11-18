@@ -114,7 +114,7 @@
                                 class="nav-link {{ $route == 'user-list' || $route == 'user-edit' ? ' active' : '' }}">
                                 <i class="fas fa-users nav-icon"></i>
                                 <p>
-                                    Users List
+                                    Users
                                 </p>
                             </a>
                         </li>
@@ -141,7 +141,16 @@
                                 class="nav-link {{ $route == 'payment-index' ? ' active' : '' }}">
                                 <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
                                 <p>
-                                    Payment
+                                    Payments
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('Order-index') }}"
+                                class="nav-link {{ $route == 'Order-index' ? ' active' : '' }}">
+                                <i class="fa-brands fa-first-order nav-icon"></i>
+                                <p>
+                                    Orders
                                 </p>
                             </a>
                         </li>
