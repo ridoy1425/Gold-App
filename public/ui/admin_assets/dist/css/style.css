@@ -494,10 +494,11 @@ img {
 .nid_img {
     width: calc(50% - 5px);
 }
-.nid_img img{
-    min-height: 100px;
-    width: 100%;
-    object-fit: contain;
+.nid_img img {
+	min-height: 170px;
+	width: 100%;
+	object-fit: contain;
+	max-height: 170px;
 }
 .kyc__modal .input__group .site-input-groups:first-child,
 .nid_img_container .nid_img:first-child {
@@ -544,6 +545,8 @@ img {
 	object-fit: contain;
 	/* border-radius: 10px; */
 	overflow: hidden;
+	min-height: 260px;
+	max-height: 160px;
 }
 .payment__modal .site-input-groups {
 	display: flex;
