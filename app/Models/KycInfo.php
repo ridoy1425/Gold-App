@@ -9,7 +9,7 @@ class KycInfo extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'kyc_type_id', 'card_number', 'front_image', 'back_image',
+        'user_id', 'kyc_type_id', 'card_number', 'front_image', 'back_image', 'status'
     ];
 
     public function user()

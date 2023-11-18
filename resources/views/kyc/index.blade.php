@@ -87,7 +87,7 @@
                                                                 <ul class="list-group mb-4">
                                                                     <li class="list-group-item">
                                                                         <p class="mb-0">Card Number:
-                                                                            <strong>{{ optional($label->user->nominee)->card_number }}</strong>
+                                                                            <strong>{{ $label->card_number }}</strong>
                                                                         </p>
                                                                     </li>
                                                                     <li class="list-group-item nid_img_container">
@@ -95,14 +95,14 @@
                                                                             <p>
                                                                                 NID Front Side:
                                                                             </p>
-                                                                            <img src="{{ asset('storage/' . optional($label->user->nominee)->front_image) }}"
+                                                                            <img src="{{ asset('storage/' . $label->front_image) }}"
                                                                                 alt="">
                                                                         </div>
                                                                         <div class="nid_img">
                                                                             <p>
                                                                                 NID Back Side
                                                                             </p>
-                                                                            <img src="{{ asset('storage/' . optional($label->user->nominee)->back_image) }}"
+                                                                            <img src="{{ asset('storage/' . $label->back_image) }}"
                                                                                 alt="">
                                                                         </div>
                                                                     </li>
@@ -134,13 +134,17 @@
                                                                         </div>
                                                                     </li>
                                                                 </ul>
-                                                                <form action="" method="post">
+                                                                <form action="{{ url('kyc/status-update') }}"
+                                                                    method="post">
+                                                                    @csrf
                                                                     {{-- <div class="site-input-groups">
                                                                         <label for=""
                                                                             class="box-input-label">Details
                                                                             Message(Optional)</label>
                                                                         <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
                                                                     </div> --}}
+                                                                    <input type="hidden" value="{{ $label->id }}"
+                                                                        name="kyc_id">
                                                                     <div class="user_bank_info">
                                                                         <h3 class="title mb-2">
                                                                             Nominee Bank Information
@@ -150,44 +154,53 @@
                                                                                 <label for=""
                                                                                     class="box-input-label">Account
                                                                                     Name</label>
-                                                                                <input type="text"
-                                                                                    placeholder="Ratul Hasan Ruhan">
+                                                                                <input type="text">
                                                                             </div>
                                                                             <div class="site-input-groups">
                                                                                 <label for=""
                                                                                     class="box-input-label">Account
                                                                                     Number</label>
-                                                                                <input type="text"
-                                                                                    placeholder="4512 451564">
+                                                                                <input type="text">
                                                                             </div>
                                                                         </div>
                                                                         <div class="input__group">
                                                                             <div class="site-input-groups">
-                                                                                <input type="text" placeholder="Bank Name">
+                                                                                <label for=""
+                                                                                    class="box-input-label">Bank
+                                                                                    Name</label>
+                                                                                <input type="text" value="">
                                                                             </div>
                                                                             <div class="site-input-groups">
-                                                                                <input type="text"
-                                                                                    placeholder="Branch Location">
+                                                                                <label for=""
+                                                                                    class="box-input-label">Branch
+                                                                                    Name</label>
+                                                                                <input type="text" value="">
                                                                             </div>
                                                                         </div>
                                                                         <div class="input__group">
                                                                             <div class="site-input-groups">
-                                                                                <input type="text"
-                                                                                    placeholder="Branch Name">
+                                                                                <label for=""
+                                                                                    class="box-input-label">Routing
+                                                                                    Number</label>
+                                                                                <input type="text">
                                                                             </div>
                                                                             <div class="site-input-groups">
-                                                                                <input type="text"
-                                                                                    placeholder="Routing Number (Optional)">
+                                                                                <label for=""
+                                                                                    class="box-input-label">Branch
+                                                                                    Location</label>
+                                                                                <input type="text">
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="action-btns">
-                                                                        <button type="submit"
+                                                                        <button type="submit" name="action"
+                                                                            value="rejected"
                                                                             class="btn centered red-btn me-2">
                                                                             <i class="fa fa-close"></i>
                                                                             Reject
                                                                         </button>
-                                                                        <button type="submit"
+                                                                        <button type="submit" name="action"
+                                                                            value="approved"
                                                                             class="btn primary-btn centered">
                                                                             <i class="fas fa-check"></i>
                                                                             Approve
