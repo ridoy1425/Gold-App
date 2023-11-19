@@ -500,7 +500,8 @@ img {
 .nid_img img {
 	min-height: 170px;
 	width: 100%;
-	object-fit: contain;
+	object-fit: cover;
+    object-position: top;
 	max-height: 170px;
 }
 .kyc__modal .input__group .site-input-groups:first-child,
