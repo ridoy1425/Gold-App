@@ -59,8 +59,10 @@
                                     <td>{{ $label->kycType ? $label->kycType->value : '' }}</td>
                                     @if ($label->status == 'pending')
                                         <td><span class="pending">Pending</span></td>
-                                    @else
+                                    @elseif($label->status == 'approved')
                                         <td><span class="success">Approved</span></td>
+                                    @else
+                                        <td><span class="rejected">Rejected</span></td>
                                     @endif
                                     <td class="action_td">
                                         <!-- <a href="{{ URL('kyc/edit', $label->id) }}"> -->

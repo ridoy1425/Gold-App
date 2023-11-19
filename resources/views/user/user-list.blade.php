@@ -41,12 +41,12 @@
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ optional($user->wallet)->balance }}</td>
-                                    @if (optional($user->kyc)->status == 'pending')
-                                        <td><span class="pending">Pending</span></td>
-                                    @elseif(optional($user->kyc)->status == 'success')
+                                    @if (optional($user->kyc)->status == 'rejected')
+                                        <td><span class="rejected">Rejected</span></td>
+                                    @elseif(optional($user->kyc)->status == 'approved')
                                         <td><span class="success">Approved</span></td>
                                     @else
-                                        <td></td>
+                                        <td><span class="pending">Pending</span></td>
                                     @endif
                                     @if ($user->status == 'pending')
                                         <td><span class="pending">Pending</span></td>

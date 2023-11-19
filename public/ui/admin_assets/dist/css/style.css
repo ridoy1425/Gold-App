@@ -471,11 +471,11 @@ img {
 }
 
 .success,
-.pending {
+.pending,.rejected {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #D3714A;
+    background-color: rgb(202, 167, 7);
     color: #fff;
     border-radius: 30px;
     width: max-content;
@@ -484,6 +484,9 @@ img {
 
 .success {
     background-color: #3DA98B;
+}
+.rejected{
+    background-color: rgb(207, 61, 31);
 }
 
 .nid_img_container {
