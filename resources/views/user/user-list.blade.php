@@ -40,7 +40,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ optional($user->wallet)->balance }}</td>
+                                    <td>{{ optional($user->wallet)->balance ?? "0.00"}}</td>
                                     @if (optional($user->kyc)->status == 'rejected')
                                         <td><span class="rejected">Rejected</span></td>
                                     @elseif(optional($user->kyc)->status == 'approved')

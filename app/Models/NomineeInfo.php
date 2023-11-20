@@ -9,6 +9,6 @@ class NomineeInfo extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'phone', 'dob', 'relation_id', 'kyc_type_id', 'card_number'
+        'user_id', 'name', 'phone', 'dob', 'relation_id', 'kyc_type_id', 'card_number', 'front_image', 'back_image'
     ];
 }

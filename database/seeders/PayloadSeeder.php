@@ -34,7 +34,19 @@ class PayloadSeeder extends Seeder
             ['type' => 'kyc_type', 'value' => 'School Certificate',],
         ];
 
-        $payload_data = array_merge($gender, $marital_status, $kyc_type);
+        $relation = [
+            ['type' => 'relation', 'value' => 'Father',],
+            ['type' => 'relation', 'value' => 'Mother',],
+            ['type' => 'relation', 'value' => 'Brother',],
+            ['type' => 'relation', 'value' => 'Sister',],
+            ['type' => 'relation', 'value' => 'Spouse',],
+            ['type' => 'relation', 'value' => 'Son',],
+            ['type' => 'relation', 'value' => 'Daughter',],
+            ['type' => 'relation', 'value' => 'Friend',],
+            ['type' => 'relation', 'value' => 'Other',],
+        ];
+
+        $payload_data = array_merge($gender, $marital_status, $kyc_type, $relation);
         foreach ($payload_data as $data) {
             Payload::firstOrCreate($data);
         }
