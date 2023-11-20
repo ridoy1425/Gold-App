@@ -156,13 +156,15 @@
                                                                                 <label for=""
                                                                                     class="box-input-label">Account
                                                                                     Name</label>
-                                                                                <input type="text">
+                                                                                <input type="text"
+                                                                                    value="{{ optional($label->user->bankInfo)->account_name }}">
                                                                             </div>
                                                                             <div class="site-input-groups">
                                                                                 <label for=""
                                                                                     class="box-input-label">Account
                                                                                     Number</label>
-                                                                                <input type="text">
+                                                                                <input type="text"
+                                                                                    value="{{ optional($label->user->bankInfo)->account_number }}">
                                                                             </div>
                                                                         </div>
                                                                         <div class="input__group">
@@ -170,13 +172,15 @@
                                                                                 <label for=""
                                                                                     class="box-input-label">Bank
                                                                                     Name</label>
-                                                                                <input type="text" value="">
+                                                                                <input type="text"
+                                                                                    value="{{ optional($label->user->bankInfo)->bank_name }}">
                                                                             </div>
                                                                             <div class="site-input-groups">
                                                                                 <label for=""
                                                                                     class="box-input-label">Branch
                                                                                     Name</label>
-                                                                                <input type="text" value="">
+                                                                                <input type="text"
+                                                                                    value="{{ optional($label->user->bankInfo)->branch_name }}">
                                                                             </div>
                                                                         </div>
                                                                         <div class="input__group">
@@ -184,13 +188,15 @@
                                                                                 <label for=""
                                                                                     class="box-input-label">Routing
                                                                                     Number</label>
-                                                                                <input type="text">
+                                                                                <input type="text"
+                                                                                    value="{{ optional($label->user->bankInfo)->routing_number }}">
                                                                             </div>
                                                                             <div class="site-input-groups">
                                                                                 <label for=""
                                                                                     class="box-input-label">Branch
                                                                                     Location</label>
-                                                                                <input type="text">
+                                                                                <input type="text"
+                                                                                    value="{{ optional($label->user->bankInfo)->branch_location }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>

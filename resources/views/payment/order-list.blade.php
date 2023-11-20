@@ -62,6 +62,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ optional($row->user)->name }}</td>
                                     <td>{{ $row->payment_amount }}</td>
+                                    <td>{{ $row->payment_amount }}</td>
+                                    <td>{{ $row->payment_amount }}</td>
+                                    <td>{{ $row->payment_amount }}</td>
+                                    <td>{{ $row->payment_amount }}</td>
                                     @if ($row->status == 'pending')
                                         <td><span class="pending">Pending</span></td>
                                     @else
