@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('payment_amount')->default(0);
             $table->string('receipt_image')->nullable();
             $table->decimal('add_amount')->default(0);
-            $table->enum('status', ['pending', 'success'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

@@ -88,15 +88,15 @@ class AuthController extends Controller
 
     public function userRegistration(Request $request)
     {
-        try {
-            $validate_data = [
-                'name'     => 'required|string',
-                'email'    => 'required|email|unique:users,email',
-                'phone'    => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-                'password' => 'required|confirmed|min:4',
-            ];
-            $validator = $request->validate($validate_data);
 
+        $validate_data = [
+            'name'     => 'required|string',
+            'email'    => 'required|email|unique:users,email',
+            'phone'    => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'password' => 'required|confirmed|min:4',
+        ];
+        $validator = $request->validate($validate_data);
+        try {
             $role = Role::where('slug', 'user')->first();
             $validator['role_id'] = $role->id;
             $validator['email_verify_token'] = rand(1000, 9999);

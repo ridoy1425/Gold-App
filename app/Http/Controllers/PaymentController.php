@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Traits\AttachmentTrait;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -42,31 +43,47 @@ class PaymentController extends Controller
 
     public function addWalletAmount(Request $request)
     {
-        $this->validateWith([
-            'id' => 'required|exists:payments,id',
-            'add_amount' => 'required|integer',
-        ]);
-
-        $payment = Payment::findOrFail($request->id);
-        $payment->update([
-            'add_amount' => $request->add_amount,
-            'status' => 'success'
-        ]);
-
-        $balance = 0;
-        $wallet = Wallet::where('user_id', $payment->user_id)->first();
-        if ($wallet) {
-            $balance = $wallet->balance + $request->add_amount;
-            $wallet->update(['balance' => $balance]);
-        } else {
-            $balance = $request->add_amount;
-            $wallet = Wallet::create([
-                'user_id' => $payment->user_id,
-                'balance' => $balance,
+        try {
+            $this->validateWith([
+                'id'         => 'required|exists:payments,id',
+                'add_amount' => 'nullable',
+                'action'     => 'required|in:approved,rejected'
             ]);
-        }
 
-        return redirect()->back()->with('success', 'Payment Successful');
+            if ($request->action == "approved") {
+                $payment = Payment::findOrFail($request->id);
+                $payment->update([
+                    'add_amount' => $request->add_amount,
+                    'status' => $request->action
+                ]);
+
+                $balance = 0;
+                $wallet = Wallet::where('user_id', $payment->user_id)->first();
+                if ($wallet) {
+                    $balance = $wallet->balance + $request->add_amount;
+                    $wallet->update(['balance' => $balance]);
+                } else {
+                    $balance = $request->add_amount;
+                    $wallet = Wallet::create([
+                        'user_id' => $payment->user_id,
+                        'balance' => $balance,
+                    ]);
+                }
+
+                toastr()->success('Success! Payment Request Accepted.');
+                return redirect()->back();
+            } else {
+                $payment = Payment::findOrFail($request->id);
+                $payment->update([
+                    'status' => $request->action
+                ]);
+                toastr()->error('Rejected! Payment Request Rejected.');
+                return redirect()->back();
+            }
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     public function getOrderList()
