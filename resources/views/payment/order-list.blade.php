@@ -57,19 +57,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payments as $row)
+                            @foreach ($orders as $row)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ date('d-M-y', strtotime($row->created_at)) }}</td>
+                                    <td>{{ $row->order_id }}</td>
                                     <td>{{ optional($row->user)->name }}</td>
-                                    <td>{{ $row->payment_amount }}</td>
-                                    <td>{{ $row->payment_amount }}</td>
-                                    <td>{{ $row->payment_amount }}</td>
-                                    <td>{{ $row->payment_amount }}</td>
-                                    <td>{{ $row->payment_amount }}</td>
-                                    @if ($row->status == 'pending')
-                                        <td><span class="pending">Pending</span></td>
+                                    <td>{{ $row->gold_qty }}</td>
+                                    <td>{{ $row->price }}</td>
+                                    <td>{{ $row->profit_amount }}</td>
+                                    <td>{{ date('d-M-y', strtotime($row->delivery_date)) }}</td>
+                                    @if ($row->status == 'active')
+                                        <td><span class="pending">pending</span></td>
                                     @else
-                                        <td><span class="success">Success</span></td>
+                                        <td><span class="success">Complete</span></td>
                                     @endif
                                     <td class="action_td">
                                         <!-- <a href="{{ URL('kyc/edit', $row->id) }}"> -->

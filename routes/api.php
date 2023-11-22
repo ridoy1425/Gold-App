@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginApiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 
@@ -37,6 +38,14 @@ Route::middleware('auth:sanctum')->group(
 
 
         Route::post('payment/request', [PaymentController::class, 'paymentRequest']);
+        //user
+        Route::prefix('order')->group(
+            function () {
+                Route::post('create', [OrderController::class, 'orderCreate']);
+                Route::post('gold-price', [OrderController::class, 'goldPrice']);
+                Route::post('profit', [OrderController::class, 'profitCalculation']);
+            }
+        );
     }
 );
 

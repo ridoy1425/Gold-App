@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
@@ -84,33 +83,5 @@ class PaymentController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
-    }
-
-    public function getOrderList()
-    {
-        $payments = Payment::latest()->get();
-        return view('payment.order-list', compact('payments'));
-    }
-
-    public function orderCreate(Request $request)
-    {
-        $this->validateWith([
-            'gold_qty' => 'required|integer',
-            'price' => 'required|file|mimes:png,jpg',
-            'profit' => 'required|file|mimes:png,jpg',
-        ]);
-
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'order_id' => rand(6),
-            'gold_qty' => $request->gold_qty,
-            'price' => $request->price,
-            'profit' => $request->profit,
-            'status' => "active",
-        ]);
-
-        return response()->json([
-            'order' => $order,
-        ], 201);
     }
 }

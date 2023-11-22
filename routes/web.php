@@ -11,6 +11,7 @@ use App\Http\Controllers\DesignationInfoController;
 use App\Http\Controllers\DesignationLabelController;
 use App\Http\Controllers\EmployeeInfoController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -77,7 +78,7 @@ Route::middleware(['auth'])->group(
                 Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
             }
         );
-        Route::get('order', [PaymentController::class, 'getOrderList'])->name('Order-index');
+        Route::get('order', [OrderController::class, 'getOrderList'])->name('Order-index');
 
 
         //role & permission

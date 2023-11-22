@@ -17,10 +17,12 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('order_id');
-            $table->integer('gold_qty');
+            $table->decimal('gold_qty');
             $table->decimal('price');
             $table->integer('profit_percentage');
             $table->decimal('profit_amount');
+            $table->string('delivery_time');
+            $table->date('delivery_date');
             $table->enum('status', ['active', 'in-process', 'completed'])->default('active');
             $table->timestamps();
         });
