@@ -46,17 +46,16 @@
                                 <h3 class="title">Today Gold Price</h3>
                             </div>
                             <div class="site-card-body">
-                                <form action="http://127.0.0.1:8000/setting/gold-price-set" method="post">
-                                    <input type="hidden" name="_token" value="o2JwOjsXMW2BT9AdPIIhREGAcj1LwIUxS1H8wF4J">
-                                    <input type="hidden" name="id" value="">
+                                <form action="{{ url('setting/gold-price-set') }}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                             <div class="site-input-groups">
                                                 <label for="" class="box-input-label">
                                                     TITLE/TEXT
                                                 </label>
-                                                <input type="text" name="title" value="" class="box-input"
-                                                    required="">
+                                                <input type="text" name="title" value="{{ $settings->title ?? '' }}"
+                                                    class="box-input" required="">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
@@ -64,10 +63,17 @@
                                                 <label for="" class="box-input-label">
                                                     TODAY GOLD PRICE
                                                 </label>
-                                                <input type="text" name="gold_price" value="" class="box-input"
+                                                <input type="text" name="gold_price"
+                                                    value="{{ $settings->gold_price ?? '' }}" class="box-input"
                                                     required="">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="action-btns">
+                                        <button type="submit" class="btn primary-btn centered">
+                                            <i class="fas fa-check"></i>
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -77,16 +83,16 @@
                                 <h3 class="title">Minimum Price</h3>
                             </div>
                             <div class="site-card-body">
-                                <form action="http://127.0.0.1:8000/setting/gold-price-set" method="post">
-                                    <input type="hidden" name="_token" value="o2JwOjsXMW2BT9AdPIIhREGAcj1LwIUxS1H8wF4J">
-                                    <input type="hidden" name="id" value="">
+                                <form action="{{ url('setting/minimum-price-set') }}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                             <div class="site-input-groups">
                                                 <label for="" class="box-input-label">
                                                     Minimum Quantity
                                                 </label>
-                                                <input type="text" name="title" value="" class="box-input"
+                                                <input type="text" name="minimum_quantity"
+                                                    value="{{ $settings->minimum_quantity ?? '' }}" class="box-input"
                                                     required="">
                                             </div>
                                         </div>
@@ -95,10 +101,17 @@
                                                 <label for="" class="box-input-label">
                                                     Price per gm
                                                 </label>
-                                                <input type="text" name="gold_price" value="" class="box-input"
+                                                <input type="text" name="price_per_gm"
+                                                    value="{{ $settings->price_per_gm ?? '' }}" class="box-input"
                                                     required="">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="action-btns">
+                                        <button type="submit" class="btn primary-btn centered">
+                                            <i class="fas fa-check"></i>
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -108,9 +121,8 @@
                                 <h3 class="title">App Header</h3>
                             </div>
                             <div class="site-card-body">
-                                <form action="http://127.0.0.1:8000/setting/gold-order-set" method="post">
-                                    <input type="hidden" name="_token"
-                                        value="o2JwOjsXMW2BT9AdPIIhREGAcj1LwIUxS1H8wF4J">
+                                <form action="{{ url('setting/gold-order-set') }}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <div class="site-input-groups">
@@ -118,9 +130,15 @@
                                                     HEADER TEXT
                                                 </label>
                                                 <input type="text" name="header_text" class="box-input"
-                                                    value="" required="">
+                                                    value="{{ $settings->header_text }}" required="">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="action-btns">
+                                        <button type="submit" class="btn primary-btn centered">
+                                            <i class="fas fa-check"></i>
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -130,9 +148,8 @@
                                 <h3 class="title">Account Details for Add Balance</h3>
                             </div>
                             <div class="site-card-body">
-                                <form action="http://127.0.0.1:8000/setting/bank-info" method="post">
-                                    <input type="hidden" name="_token"
-                                        value="o2JwOjsXMW2BT9AdPIIhREGAcj1LwIUxS1H8wF4J">
+                                <form action="{{ url('setting/bank-info') }}" method="post">
+                                    @csrf
                                     <input type="hidden" name="client" value="web">
                                     <input type="hidden" name="account_type" value="admin">
                                     <div class="row">
@@ -142,7 +159,7 @@
                                                     ACCOUNT NAME
                                                 </label>
                                                 <input type="text" name="account_name" class="box-input"
-                                                    value="" required="">
+                                                    value="{{ $bankInfo->account_name ?? '' }}" required="">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
@@ -151,7 +168,7 @@
                                                     ACCOUNT NUMBER
                                                 </label>
                                                 <input type="text" name="account_number" class="box-input"
-                                                    value="" required="">
+                                                    value="{{ $bankInfo->account_number ?? '' }}" required="">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
@@ -159,8 +176,8 @@
                                                 <label for="" class="box-input-label">
                                                     BANK CODE
                                                 </label>
-                                                <input type="text" name="bank_code" class="box-input" value=""
-                                                    required="">
+                                                <input type="text" name="bank_code" class="box-input"
+                                                    value="{{ $bankInfo->bank_code ?? '' }}" required="">
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
@@ -169,9 +186,15 @@
                                                     ROUTING NUMBER
                                                 </label>
                                                 <input type="text" name="routing_number" class="box-input"
-                                                    value="" required="">
+                                                    value="{{ $bankInfo->routing_number ?? '' }}" required="">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="action-btns">
+                                        <button type="submit" class="btn primary-btn centered">
+                                            <i class="fas fa-check"></i>
+                                            Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -186,20 +209,18 @@
                                 <h3 class="title">Delivery time & Percentage (%)</h3>
                             </div>
                             <div class="site-card-body">
-                                <form action="http://127.0.0.1:8000/setting/gold-price-set" method="post">
-                                    <input type="hidden" name="_token"
-                                        value="o2JwOjsXMW2BT9AdPIIhREGAcj1LwIUxS1H8wF4J">
-                                    <input type="hidden" name="id" value="">
+                                <form action="{{ url('setting/profit-package-set') }}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
                                             <div class="site-input-groups">
-                                                <input type="text" name="title" value=""
-                                                    placeholder="Month 6" class="box-input" required="">
+                                                <input type="text" name="month" placeholder="Month 6"
+                                                    class="box-input" required="">
                                             </div>
                                         </div>
                                         <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
                                             <div class="site-input-groups">
-                                                <input type="text" name="gold_price" value="" placeholder="% 2"
+                                                <input type="text" name="percentage" placeholder="% 2"
                                                     class="box-input" required="">
                                             </div>
                                         </div>
@@ -224,6 +245,11 @@
                                                     aria-describedby="user-investment-dataTable_info">
                                                     <thead>
                                                         <tr>
+                                                            <th class="sorting" tabindex="0"
+                                                                aria-controls="user-investment-dataTable" rowspan="1"
+                                                                colspan="1"
+                                                                aria-label="Schema: activate to sort column ascending">SL
+                                                                </td>
                                                             <th class="sorting sorting_asc" tabindex="0"
                                                                 aria-controls="user-investment-dataTable" rowspan="1"
                                                                 colspan="1" aria-sort="ascending"
@@ -245,11 +271,27 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr class="odd">
-                                                            <td valign="top" colspan="6" class="dataTables_empty">No
-                                                                data
-                                                                available in table</td>
-                                                        </tr>
+                                                        @if ($packages)
+                                                            @foreach ($packages as $row)
+                                                                <tr>
+                                                                    <td>{{ $loop->iteration }}</td>
+                                                                    <td>{{ $row->month }} months</td>
+                                                                    <td>% {{ $row->percentage }}</td>
+                                                                    <td> <a href="{{ URL('setting/package-delete', $row->id) }}"
+                                                                            onclick="return confirm('Are you sure?')">
+                                                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                                                alt="Delete" class="action__icon">
+                                                                        </a></td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @else
+                                                            <tr class="odd">
+                                                                <td valign="top" colspan="6"
+                                                                    class="dataTables_empty">No
+                                                                    data
+                                                                    available in table</td>
+                                                            </tr>
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                                 <div id="user-investment-dataTable_processing"

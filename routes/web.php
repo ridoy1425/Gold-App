@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(
                 Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
                 Route::post('gold-price-set', [AppSettingsController::class, 'goldPriceSet']);
                 Route::post('gold-order-set', [AppSettingsController::class, 'goldOrderDataSet']);
+                Route::post('minimum-price-set', [AppSettingsController::class, 'minimumPriceSet']);
+                Route::post('profit-package-set', [AppSettingsController::class, 'profitPackageSet']);
+                Route::get('package-delete/{id}', [AppSettingsController::class, 'packageDelete']);
                 Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
             }
         );

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProfitPackage extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['month', 'percentage'];
 }

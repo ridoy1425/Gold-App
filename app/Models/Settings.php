@@ -9,5 +9,5 @@ class Settings extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'gold_price', 'header_text', 'sub_header', 'buying_price', 'profit_percentage', 'return_period'];
+    protected $fillable = ['title', 'gold_price', 'header_text', 'minimum_quantity', 'price_per_gm'];
 }

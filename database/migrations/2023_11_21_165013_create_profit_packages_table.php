@@ -16,7 +16,7 @@ class CreateProfitPackagesTable extends Migration
         Schema::create('profit_packages', function (Blueprint $table) {
             $table->id();
             $table->integer('month');
-            $table->decimal('percentage', 2, 2);
+            $table->decimal('percentage');
             $table->timestamps();
         });
     }
