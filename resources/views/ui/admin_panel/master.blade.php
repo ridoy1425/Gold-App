@@ -148,9 +148,18 @@
                         <li class="nav-item ">
                             <a href="{{ route('Order-index') }}"
                                 class="nav-link {{ $route == 'Order-index' ? ' active' : '' }}">
-                                <i class="fa-brands fa-first-order nav-icon"></i>
+                                <i class="fa-solid fa-basket-shopping nav-icon"></i>
                                 <p>
                                     Orders
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('collect-request') }}"
+                                class="nav-link {{ $route == 'collect-request' ? ' active' : '' }}">
+                                <i class="fa-regular fa-money-bill-1 nav-icon"></i>
+                                <p>
+                                    Collect Request
                                 </p>
                             </a>
                         </li>

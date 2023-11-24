@@ -79,4 +79,10 @@ class OrderController extends Controller
             'profit' =>  $profit,
         ], 200);
     }
+
+    public function getCollectRequestList()
+    {
+        $orders = Order::latest()->get();
+        return view('payment.collect-request', compact('orders'));
+    }
 }

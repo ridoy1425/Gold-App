@@ -311,4 +311,4 @@
     </div>
 @endsection
 
-@section(' script') @endsection
+@section('script') @endsection
