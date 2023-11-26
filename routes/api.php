@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(
                 Route::post('create', [OrderController::class, 'orderCreate']);
                 Route::post('gold-price', [OrderController::class, 'goldPrice']);
                 Route::post('profit', [OrderController::class, 'profitCalculation']);
+                Route::post('collect-request', [OrderController::class, 'collectRequest']);
             }
         );
     }

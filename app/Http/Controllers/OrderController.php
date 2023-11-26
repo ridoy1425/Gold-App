@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CollectRequest;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\ProfitPackage;
@@ -82,7 +83,39 @@ class OrderController extends Controller
 
     public function getCollectRequestList()
     {
-        $orders = Order::latest()->get();
-        return view('payment.collect-request', compact('orders'));
+        $request= CollectRequest::latest()->get();
+        return view('payment.collect-request', compact('request'));
+    }
+
+    public function collectRequest()
+    {
+        $data = $this->validateWith([
+            'order_id' => 'required|exists:orders,id',
+            'collect_type' => 'required|string',
+            'amount' => 'nullable|numeric',
+            'gold' => 'nullable|string',
+            'method' => 'nullable|string'
+        ]);
+
+        $data['status'] = 'active';
+        $request = CollectRequest::create($data);
+
+        return response()->json([
+            'request' =>  $request,
+        ], 200);
+    }
+
+    public function changeCollectionStatus()
+    {
+        $data = $this->validateWith([
+            'request_id' => 'required|exists:collect_requests,id',
+            'status' => 'required|string',
+        ]);
+
+        $request = CollectRequest::findOrFail($data['request_id']);
+        $request->update(['status' => $data['status']]);
+
+        toastr()->success('Success! Status Changed');
+        return redirect()->back();
     }
 }

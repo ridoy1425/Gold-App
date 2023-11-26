@@ -1,13 +1,13 @@
 @extends('ui.admin_panel.master')
 
-@section('title', 'Deposit List')
+@section('title', 'Request List')
 
 @section('style')
 
 @endsection
 
 @section('content_title')
-    <h4 class="mt-2">Deposit List</h4>
+    <h4 class="mt-2">Request List</h4>
 @endsection
 
 @section('main_content')
@@ -45,27 +45,27 @@
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">Order Date</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">CUSTOMER</th>
-                                <th scope="col">GOLD QTY</th>
-                                <th scope="col">PRICE</th>
-                                <th scope="col">PROFIT</th>
-                                <th scope="col">DELIVERY TIME</th>
+                                <th scope="col">COLLECT TYPE</th>
+                                <th scope="col">AMOUNT</th>
+                                <th scope="col">GOLD</th>
+                                <th scope="col">METHOD</th>
                                 <th scope="col">STATUS</th>
                                 <th scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($orders as $row)
+                            @foreach ($request as $row)
                                 <tr>
-                                    <td>{{ date('d-M-y', strtotime($row->created_at)) }}</td>
+                                    <td>{{ date('d M Y', strtotime($row->created_at)) }}</td>
                                     <td>{{ $row->order_id }}</td>
                                     <td>{{ optional($row->user)->name }}</td>
-                                    <td>{{ $row->gold_qty }}</td>
-                                    <td>{{ $row->price }}</td>
-                                    <td>{{ $row->profit_amount }}</td>
-                                    <td>{{ date('d-M-y', strtotime($row->delivery_date)) }}</td>
+                                    <td>{{ $row->collect_type }}</td>
+                                    <td>{{ $row->amount }}</td>
+                                    <td>{{ $row->gold }}</td>
+                                    <td>{{ $row->method }}</td>
                                     @if ($row->status == 'active')
                                         <td><span class="pending">pending</span></td>
                                     @else

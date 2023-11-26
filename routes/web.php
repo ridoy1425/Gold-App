@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(
         );
         Route::get('order', [OrderController::class, 'getOrderList'])->name('Order-index');
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
+        Route::get('change-collection-request', [OrderController::class, 'changeCollectionStatus']);
 
 
         //role & permission
