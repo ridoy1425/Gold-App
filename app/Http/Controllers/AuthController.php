@@ -98,6 +98,7 @@ class AuthController extends Controller
         $validator = $request->validate($validate_data);
         try {
             $role = Role::where('slug', 'user')->first();
+            $validator['password'] = Hash::make($request->password);
             $validator['role_id'] = $role->id;
             $validator['email_verify_token'] = rand(1000, 9999);
             $user = User::create($validator);

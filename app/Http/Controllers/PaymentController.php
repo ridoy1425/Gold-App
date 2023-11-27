@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Models\Wallet;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Traits\AttachmentTrait;
 use Exception;
@@ -35,6 +36,8 @@ class PaymentController extends Controller
             $this->imageHandle($payment, $request->receipt_image, 'receipt_image');
         }
 
+        $message = "Your Payment Request Successfully done";
+        Auth::user()->notify(New UserNotification($message));
         return response()->json([
             'payment' => $payment,
         ], 201);
