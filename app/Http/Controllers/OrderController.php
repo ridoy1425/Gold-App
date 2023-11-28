@@ -83,21 +83,21 @@ class OrderController extends Controller
 
     public function getCollectRequestList()
     {
-        $request= CollectRequest::latest()->get();
+        $request = CollectRequest::latest()->get();
         return view('payment.collect-request', compact('request'));
     }
 
     public function collectRequest()
     {
         $data = $this->validateWith([
-            'order_id' => 'required|exists:orders,id',
-            'collect_type' => 'required|string',
-            'amount' => 'nullable|numeric',
-            'gold' => 'nullable|string',
-            'method' => 'nullable|string'
+            'order_id'       => 'required|exists:orders,id',
+            'collect_type'   => 'required|in:investment,profit',
+            'payment_type'   => 'required|in:balance,gold',
+            'amount'         => 'nullable|numeric',
+            'gold'           => 'nullable|integer',
+            'payment_method' => 'required|in:bank,wallet'
         ]);
 
-        $data['status'] = 'active';
         $request = CollectRequest::create($data);
 
         return response()->json([
