@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginApiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
@@ -45,6 +46,15 @@ Route::middleware('auth:sanctum')->group(
                 Route::post('gold-price', [OrderController::class, 'goldPrice']);
                 Route::post('profit', [OrderController::class, 'profitCalculation']);
                 Route::post('collect-request', [OrderController::class, 'collectRequest']);
+            }
+        );
+
+        Route::prefix('message')->group(
+            function () {
+                Route::get('list', [NotificationController::class, 'index']);
+                Route::get('mark-as-read', [NotificationController::class, 'markAsRead']);
+                Route::get('count', [NotificationController::class, 'messageCount']);
+                Route::post('send', [NotificationController::class, 'sendMessage']);
             }
         );
     }

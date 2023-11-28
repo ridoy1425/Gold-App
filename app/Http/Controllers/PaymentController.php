@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\User;
 use App\Models\Wallet;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class PaymentController extends Controller
         }
 
         $message = "Your Payment Request Successfully done";
-        Auth::user()->notify(New UserNotification($message));
+        $user = User::findOrFail(Auth::id());
+        $user->notify(new UserNotification($message, 1));
         return response()->json([
             'payment' => $payment,
         ], 201);

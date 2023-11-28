@@ -17,6 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('type');
             $table->morphs('notifiable');
+            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
             $table->text('data');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();

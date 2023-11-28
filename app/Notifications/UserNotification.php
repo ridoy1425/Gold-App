@@ -3,23 +3,26 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Channels\NotificationChannel;
 
 class UserNotification extends Notification
 {
     use Queueable;
+    public $subject;
     public $message;
+    public $sender_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($subject, $message, $sender_id)
     {
+        $this->subject = $subject;
         $this->message = $message;
+        $this->sender_id = $sender_id;
     }
 
     /**
@@ -30,7 +33,9 @@ class UserNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [
+            NotificationChannel::class
+        ];
     }
 
     /**
@@ -48,6 +53,8 @@ class UserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
+            'sender_id' => $this->sender_id,
+            'subject' => $this->subject,
             'message' => $this->message,
         ];
     }
