@@ -23,6 +23,7 @@
                     <div class="col-xxl-3 col-xl-6 col-lg-8 col-md-6 col-sm-12">
                         <div class="profile-card">
                             <div class="top">
+                                <h5>Profile Picture</h5>
                                 <div class="avatar">
                                     <span class="avatar-text"><img
                                             src="{{ asset('storage/' . optional($user->userDetails)->profile_image) }}"
@@ -45,6 +46,36 @@
                                     </button>
                                 @endif
 
+                            </div>
+                        </div>
+                        <div class="profile-card">
+                            <div class="top">
+                                <h5>User Document </h5>
+                                <div class="avatar">
+                                    <span class="avatar-text"><img
+                                            src="{{ asset('storage/' . optional($user->kyc)->front_image) }}"
+                                            alt="profile"></span>
+                                </div>
+                                <div class="avatar">
+                                    <span class="avatar-text"><img
+                                            src="{{ asset('storage/' . optional($user->kyc)->back_image) }}"
+                                            alt="profile"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-card">
+                            <div class="top">
+                                <h5>Nominee Document</h5>
+                                <div class="avatar">
+                                    <span class="avatar-text"><img
+                                            src="{{ asset('storage/' . optional($user->nominee)->front_image) }}"
+                                            alt="profile"></span>
+                                </div>
+                                <div class="avatar">
+                                    <span class="avatar-text"><img
+                                            src="{{ asset('storage/' . optional($user->nominee)->back_image) }}"
+                                            alt="profile"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +120,7 @@
                                     <div class="col-xl-12">
                                         <div class="site-card">
                                             <div class="site-card-header">
-                                                <h3 class="title">Basic Info</h3>
+                                                <h3 class="title">Basic Information</h3>
                                             </div>
                                             <div class="site-card-body">
                                                 <form action="https://hyiprio.tdevs.co/admin/user/2835" method="post">
@@ -97,7 +128,7 @@
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
-                                                                    Name:</label>
+                                                                    Name</label>
                                                                 <input type="text" class="box-input"
                                                                     value="{{ $user->name }}" name="name"
                                                                     required="">
@@ -106,7 +137,54 @@
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
-                                                                    Email:</label>
+                                                                    Email</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->email }}" required=""
+                                                                    name="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Phone
+                                                                    Number</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="Bangladesh" disabled="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <button type="submit"
+                                                                class="site-btn-sm primary-btn w-100 centered">
+                                                                Save Changes
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="site-card">
+                                            <div class="site-card-header">
+                                                <h3 class="title">User Details</h3>
+                                            </div>
+                                            <div class="site-card-body">
+                                                <form action="https://hyiprio.tdevs.co/admin/user/2835" method="post">
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for=""
+                                                                    class="box-input-label">Gender</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->name }}" name="name"
+                                                                    required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Date Of
+                                                                    Birth</label>
                                                                 <input type="text" class="box-input"
                                                                     value="{{ $user->email }}" required=""
                                                                     name="email">
@@ -115,82 +193,104 @@
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for=""
-                                                                    class="box-input-label">Country:</label>
+                                                                    class="box-input-label">Occupation</label>
                                                                 <input type="text" class="box-input"
                                                                     value="Bangladesh" disabled="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">Phone:</label>
+                                                                <label for="" class="box-input-label">Marital
+                                                                    Status</label>
                                                                 <input type="text" class="box-input"
                                                                     value="{{ $user->phone }}" disabled="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">Username:</label>
+                                                                <label for="" class="box-input-label">KYC
+                                                                    Type</label>
                                                                 <input type="text" class="box-input" name="username"
                                                                     value="MahfuzAhmed8477" required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">Email:</label>
+                                                                <label for="" class="box-input-label">Card
+                                                                    Number</label>
                                                                 <input type="email" class="box-input"
                                                                     value="ba*********@gm******m" disabled="">
                                                             </div>
                                                         </div>
+                                                        <div class="col-xl-12">
+                                                            <button type="submit"
+                                                                class="site-btn-sm primary-btn w-100 centered">
+                                                                Save Changes
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="site-card">
+                                            <div class="site-card-header">
+                                                <h3 class="title">Nominee Information</h3>
+                                            </div>
+                                            <div class="site-card-body">
+                                                <form action="https://hyiprio.tdevs.co/admin/user/2835" method="post">
+                                                    <div class="row">
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">Gender:</label>
-                                                                <input type="text" class="box-input" value=""
-                                                                    required="" disabled="">
+                                                                <label for="" class="box-input-label">Nominee
+                                                                    Name</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->name }}" name="name"
+                                                                    required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Phone
+                                                                    Number</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->email }}" required=""
+                                                                    name="email">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Date of
-                                                                    Birth:</label>
-                                                                <input type="text" class="box-input" value=""
-                                                                    disabled="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                                                            <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">City:</label>
-                                                                <input type="text" name="city" class="box-input"
-                                                                    value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                                                            <div class="site-input-groups">
-                                                                <label for="" class="box-input-label">Zip
-                                                                    Code:</label>
-                                                                <input type="text" class="box-input" name="zip_code"
-                                                                    value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                                                            <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">Address:</label>
-                                                                <input type="text" class="box-input" name="address"
-                                                                    value="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                                                            <div class="site-input-groups">
-                                                                <label for="" class="box-input-label">Joining
-                                                                    Date:</label>
+                                                                    Birth</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="Sun, Nov 12, 2023 10:59 AM" required=""
-                                                                    disabled="">
+                                                                    value="Bangladesh" disabled="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Relation
+                                                                    with User</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->phone }}" disabled="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">KYC
+                                                                    Type</label>
+                                                                <input type="text" class="box-input" name="username"
+                                                                    value="MahfuzAhmed8477" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Card
+                                                                    Number</label>
+                                                                <input type="email" class="box-input"
+                                                                    value="ba*********@gm******m" disabled="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12">
