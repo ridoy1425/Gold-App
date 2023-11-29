@@ -68,6 +68,15 @@ class OrderController extends Controller
         ], 201);
     }
 
+    public function changeProfitStatus(Request $request)
+    {
+        $profit = OrderProfit::findOrFail($request->profit_id);
+        $profit->update(['status' => $request->status]);
+
+        toastr()->success('Success! Profit Status Updated.');
+        return redirect()->back();
+    }
+
     public function goldPrice(Request $request)
     {
         $this->validateWith([
@@ -107,7 +116,6 @@ class OrderController extends Controller
 
     public function getCollectRequestList()
     {
-        $request = CollectRequest::latest()->get();
         $request = CollectRequest::latest()->get();
         return view('payment.collect-request', compact('request'));
     }

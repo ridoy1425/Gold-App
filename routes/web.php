@@ -80,11 +80,14 @@ Route::middleware(['auth'])->group(
             function () {
                 Route::get('index', [PaymentController::class, 'index'])->name('payment-index');
                 Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
+                Route::get('transaction', [PaymentController::class, 'transactionList'])->name('transaction-list');
+                Route::get('withdraw', [PaymentController::class, 'withdrawList'])->name('withdraw-list');
             }
         );
         Route::get('order', [OrderController::class, 'getOrderList'])->name('Order-index');
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
         Route::get('change-collection-request', [OrderController::class, 'changeCollectionStatus']);
+        Route::post('change-profit-status', [OrderController::class, 'changeProfitStatus']);
 
         Route::prefix('message')->group(
             function () {
@@ -92,6 +95,8 @@ Route::middleware(['auth'])->group(
                 Route::get('mark-as-read', [NotificationController::class, 'markAsRead']);
                 Route::get('count', [NotificationController::class, 'messageCount']);
                 Route::post('send', [NotificationController::class, 'sendMessage']);
+                Route::get('template', [NotificationController::class, 'messagingTemplate'])->name('template-index');
+                Route::get('sendbox', [NotificationController::class, 'messagingSendBox'])->name('sendbox-index');
             }
         );
         //role & permission

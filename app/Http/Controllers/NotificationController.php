@@ -61,4 +61,14 @@ class NotificationController extends Controller
         }
         return response()->json(['messages' => "Message Sent Successfully"], 200);
     }
+
+    public function messagingTemplate()
+    {
+        return view('message.template');
+    }
+
+    public function messagingSendBox()
+    {
+        return view('message.sendbox');
+    }
 }

@@ -164,11 +164,47 @@
                             </a>
                         </li>
                         <li class="nav-item ">
+                            <a href="{{ route('withdraw-list') }}"
+                                class="nav-link {{ $route == 'withdraw-list' ? ' active' : '' }}">
+                                <i class="fa-regular fa-message nav-icon"></i>
+                                <p>
+                                    Withdraws
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('transaction-list') }}"
+                                class="nav-link {{ $route == 'transaction-list' ? ' active' : '' }}">
+                                <i class="fa-regular fa-message nav-icon"></i>
+                                <p>
+                                    Transfer
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('template-index') }}"
+                                class="nav-link {{ $route == 'template-index' ? ' active' : '' }}">
+                                <i class="fa-regular fa-message nav-icon"></i>
+                                <p>
+                                    Message Template
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('sendbox-index') }}"
+                                class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
+                                <i class="fa-regular fa-message nav-icon"></i>
+                                <p>
+                                    Message To Users
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
                             <a href="{{ route('message-inbox') }}"
                                 class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
                                 <i class="fa-regular fa-message nav-icon"></i>
                                 <p>
-                                    Support
+                                    Support Message
                                 </p>
                             </a>
                         </li>

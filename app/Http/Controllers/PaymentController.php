@@ -37,9 +37,10 @@ class PaymentController extends Controller
             $this->imageHandle($payment, $request->receipt_image, 'receipt_image');
         }
 
+        $subject = "Your Payment Request Successfully done";
         $message = "Your Payment Request Successfully done";
         $user = User::findOrFail(Auth::id());
-        $user->notify(new UserNotification($message, 1));
+        $user->notify(new UserNotification($subject, $message, 1));
         return response()->json([
             'payment' => $payment,
         ], 201);
@@ -88,5 +89,15 @@ class PaymentController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function transactionList()
+    {
+        return view('payment.transaction');
+    }
+
+    public function withdrawList()
+    {
+        return view('payment.withdraw');
     }
 }

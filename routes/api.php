@@ -20,7 +20,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-request()->headers->set('Accept', 'application/json');
 
 // authentication
 Route::post('login', [AuthController::class, 'userLogin']);
