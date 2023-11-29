@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginApiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -26,6 +27,7 @@ Route::post('login', [AuthController::class, 'userLogin']);
 Route::post('registration', [AuthController::class, 'userRegistration']);
 Route::get('email-verify', [AuthController::class, 'emailVerify']);
 Route::post('user-info', [AuthController::class, 'userInfo']);
+Route::get('payload', [DashboardController::class, 'getPayloadData']);
 
 Route::prefix('password')->group(function () {
     Route::post('forgot', [AuthController::class, 'forgotPassword']);
