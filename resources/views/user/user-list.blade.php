@@ -13,7 +13,6 @@
 @section('main_content')
     <div class="row page-content">
         <div class="container">
-
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
                 {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
