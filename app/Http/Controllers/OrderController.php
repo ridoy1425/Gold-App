@@ -5,16 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\CollectRequest;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderProfit;
 use App\Models\ProfitPackage;
 use App\Models\Settings;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function getOrderList()
     {
-        $orders = Order::latest()->get();
+        $query = Order::with('user', 'orderProfit');
+
+        $user = User::findOrFail(Auth::id());
+
+        if ($user->hasRole('user')) {
+            $orders = $query->where('user_id', $user->id)->latest()->get();
+            return response()->json([
+                'orders' => $orders,
+            ], 201);
+        }
+
+        $orders = $query->latest()->get();
         return view('payment.order-list', compact('orders'));
     }
 
@@ -38,6 +52,16 @@ class OrderController extends Controller
             'delivery_time' => $request->delivery_time,
             'delivery_date' => Carbon::now()->addMonths($request->delivery_time),
         ]);
+
+        if ($order) {
+            for ($month = 1; $month <= $request->delivery_time; $month++) {
+                $date = Carbon::now()->addMonths($month);
+                OrderProfit::create([
+                    'order_id' => $order->id,
+                    'date' => $date,
+                ]);
+            }
+        }
 
         return response()->json([
             'order' => $order,
@@ -83,26 +107,40 @@ class OrderController extends Controller
 
     public function getCollectRequestList()
     {
-        $request= CollectRequest::latest()->get();
+        $request = CollectRequest::latest()->get();
         return view('payment.collect-request', compact('request'));
     }
 
     public function collectRequest()
     {
         $data = $this->validateWith([
-            'order_id' => 'required|exists:orders,id',
-            'collect_type' => 'required|string',
-            'amount' => 'nullable|numeric',
-            'gold' => 'nullable|string',
-            'method' => 'nullable|string'
+            'order_id'        => 'required|exists:orders,id',
+            'order_profit_id' => 'nullable|exists:order_profits,id',
+            'collect_type'    => 'required|string',
+            'amount'          => 'nullable|numeric',
+            'gold'            => 'nullable|string',
+            'method'          => 'nullable|string'
         ]);
 
-        $data['status'] = 'active';
-        $request = CollectRequest::create($data);
+        try {
+            $data['status'] = 'active';
+            $request = CollectRequest::create($data);
 
-        return response()->json([
-            'request' =>  $request,
-        ], 200);
+            if ($request->has('order_profit_id')) {
+                $profit = OrderProfit::findOrFail($request->order_profit_id);
+                $profit->update(['status', 'in-process']);
+            } else {
+                $order = Order::findOrFail($request->order_id);
+                $order->update(['status', 'in-process']);
+            }
+            return response()->json([
+                'request' =>  $request,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' =>  $e->getMessage(),
+            ]);
+        }
     }
 
     public function changeCollectionStatus()

@@ -163,6 +163,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('message-inbox') }}"
+                                class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
+                                <i class="fa-regular fa-message nav-icon"></i>
+                                <p>
+                                    Support
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

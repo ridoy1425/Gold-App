@@ -7,7 +7,7 @@ trait RolePermissionTrait
 
     public function hasRole($role)
     {
-        return $this->role->role_slug === $role;
+        return $this->role->slug === $role;
     }
 
     public function hasPermission($permission)

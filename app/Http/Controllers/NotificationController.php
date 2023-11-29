@@ -25,8 +25,9 @@ class NotificationController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $message = $user->message()->latest()->get();
+
         if ($user->hasRole('super-admin')) {
-            return view('message.message-list', compact('message'));
+            return view('message.index', compact('message'));
         }
         return response()->json(['messages' => $message], 200);
     }

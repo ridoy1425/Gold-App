@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('profit_amount');
             $table->string('delivery_time');
             $table->date('delivery_date');
-            $table->enum('status', ['active', 'in-process', 'completed'])->default('active');
+            $table->enum('status', ['active', 'in-process', 'completed', 'rejected'])->default('active');
             $table->timestamps();
         });
     }

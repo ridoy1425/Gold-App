@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->group(
         //user
         Route::prefix('order')->group(
             function () {
+                Route::get('list', [OrderController::class, 'getOrderList']);
                 Route::post('create', [OrderController::class, 'orderCreate']);
                 Route::post('gold-price', [OrderController::class, 'goldPrice']);
                 Route::post('profit', [OrderController::class, 'profitCalculation']);

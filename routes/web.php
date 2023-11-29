@@ -11,6 +11,7 @@ use App\Http\Controllers\DesignationInfoController;
 use App\Http\Controllers\DesignationLabelController;
 use App\Http\Controllers\EmployeeInfoController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
@@ -85,7 +86,14 @@ Route::middleware(['auth'])->group(
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
         Route::get('change-collection-request', [OrderController::class, 'changeCollectionStatus']);
 
-
+        Route::prefix('message')->group(
+            function () {
+                Route::get('list', [NotificationController::class, 'index'])->name('message-inbox');
+                Route::get('mark-as-read', [NotificationController::class, 'markAsRead']);
+                Route::get('count', [NotificationController::class, 'messageCount']);
+                Route::post('send', [NotificationController::class, 'sendMessage']);
+            }
+        );
         //role & permission
         Route::prefix('role')->middleware("permission:role-list")->group(
             function () {
