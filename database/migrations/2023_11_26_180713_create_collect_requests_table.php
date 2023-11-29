@@ -16,11 +16,12 @@ class CreateCollectRequestsTable extends Migration
         Schema::create('collect_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->string('collect_type');
-            $table->decimal('amount')->nullable;
-            $table->integer('gold')->nullable;
-            $table->string('method')->nullable;
-            $table->enum('status', ['active', 'in-process', 'completed', 'canceled']);
+            $table->enum('collect_type', ['investment', 'profit']);
+            $table->enum('payment_type', ['balance', 'gold']);
+            $table->decimal('amount')->nullable();
+            $table->integer('gold')->nullable();
+            $table->enum('payment_method', ['bank', 'wallet']);
+            $table->enum('status', ['active', 'in-process', 'completed', 'canceled'])->default('active');
             $table->timestamps();
         });
     }

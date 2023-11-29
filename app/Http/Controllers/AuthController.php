@@ -25,11 +25,11 @@ class AuthController extends Controller
 
     public function adminLoginData(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|string',
+            'password' => 'required|min:4',
+        ]);
         try {
-            $this->validate($request, [
-                'name' => 'required|string',
-                'password' => 'required|min:4',
-            ]);
             if (Auth::attempt($request->only(['name', 'password']))) {
                 $user = Auth::user();
 
@@ -117,11 +117,11 @@ class AuthController extends Controller
 
     public function emailVerify(Request $request)
     {
-        try {
-            Validator::make($request->all(), [
-                'token' => 'required|exists:users,email_verify_token',
-            ]);
+        $this->validateWith([
+            'token' => 'required|exists:users,email_verify_token',
+        ]);
 
+        try {
             $user =  User::where('email_verify_token', $request->token)->firstOrFail();
             $user->update(['email_verified_at' => now(), 'email_verify_token' => null, 'status' => 'active']);
 
@@ -137,13 +137,12 @@ class AuthController extends Controller
 
     public function userLogin(Request $request)
     {
+        $validate_data = [
+            'email' => 'required|email',
+            'password' => 'required|min:4',
+        ];
+        $request->validate($validate_data);
         try {
-            $validate_data = [
-                'email' => 'required|email',
-                'password' => 'required|min:4',
-            ];
-            $request->validate($validate_data);
-
             if (Auth::attempt($request->only(['email', 'password']))) {
                 $user = User::where('id', Auth::id())->where('status', 'active')->first();
                 if (!$user)
