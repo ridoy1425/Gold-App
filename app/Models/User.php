@@ -25,6 +25,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function userDetails()
+    {
+        return $this->hasOne(UserDetail::class, 'user_id');
+    }
+
     public function kyc()
     {
         return $this->hasOne(KycInfo::class, 'user_id');
@@ -54,5 +59,10 @@ class User extends Authenticatable
     public function message()
     {
         return $this->morphMany(Notification::class, 'notifiable');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 }

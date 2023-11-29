@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Mail\EmailVerify;
-use App\Models\Branch;
-use App\Models\EmployeeInfo;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
+use App\Mail\ForgotPasswordMail;
 
 class AuthController extends Controller
 {
@@ -157,6 +156,121 @@ class AuthController extends Controller
             return response()->json([
                 'error' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    public function getAuthUser()
+    {
+        try {
+            $user = User::withSum('orders', 'price')->with(['role' => function ($role) {
+                return $role->with('permissions');
+            }, 'userDetails', 'wallet', 'message', 'kyc', 'nominee', 'bankInfo', 'orders' => function ($order) {
+                return $order->with('orderProfit');
+            }])->findOrFail(Auth::id());
+
+            return response()->json([
+                'user' => $user
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'user' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function userLogout(Request $request)
+    {
+        try {
+            $user = User::findOrFail(Auth::id());
+            $user->tokens()->delete();
+
+            return response()->json([
+                'message' => trans('user_logout')
+            ], 200);
+        } catch (\Exception $e) {
+            abort(500, $e->getMessage());
+        }
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $validate_data = [
+            'email' => 'required|string|email|exists:users,email',
+        ];
+        $request->validate($validate_data);
+
+        $user = User::where('email', $request->email)->where('status', 'active')->first();
+        if ($user) {
+            $token = rand(10000, 99999);
+            DB::table('password_resets')->insert([
+                'email'      => $request->email,
+                'token'      => $token,
+                'created_at' => Carbon::now()
+            ]);
+            Mail::to($user->email)->send(new ForgotPasswordMail($token, $request->redirect_url));
+
+            return response()->json([
+                'message' => 'Token is sent to your gmail.'
+            ], 200);
+        } else {
+            abort(404, 'User associated with this email is not found.');
+        }
+    }
+
+    public function verifyForgotPasswordToken(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|exists:password_resets,token',
+        ]);
+
+        $password_reset = DB::table('password_resets')->where('token', $request->token)->first();
+        if ($password_reset === null)
+            abort(400, 'Token not valid');
+
+        if (Carbon::parse($password_reset->created_at)->addMinutes(720)->isPast()) {
+            $password_reset->delete();
+            abort(500, 'Password reset token is expired.');
+        }
+
+        return response()->json([
+            'message' => 'Password reset token is valid.',
+            'token'  => $password_reset
+        ], 200);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email'             => 'required|email|exists:users,email',
+            'password'          => 'required|different:previous_password|min:8|confirmed',
+            'token'             => 'required_without:previous_password',
+            'previous_password' => 'required_without:token',
+        ]);
+
+        try {
+            $user = User::where('email', $request->email)->firstOrFail();
+
+            if (!$user) abort(404, 'User not found or invalid email address.');
+
+            if ($request->has('previous_password')) {
+                if ($user && !Hash::check($request->previous_password, $user->password))
+                    return abort(422, 'The previous password you gave is incorrect.');
+            } else {
+                $reset_token = DB::table('password_resets')->where([
+                    ['token', $request->token],
+                    ['email', $request->email]
+                ])->first();
+                if (!$reset_token) abort(404, 'Token not found or invalid.');
+            }
+            $user->update(['password' => Hash::make($request->password)]);
+
+            return response()->json([
+                'message' => 'Password reset successfully.'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

@@ -1,6 +1,6 @@
 @extends('ui.admin_panel.master')
 
-@section('title', 'Create Designation Label')
+@section('title', 'User Details')
 
 @section('style')
     <style>
@@ -11,11 +11,7 @@
 @endsection
 
 @section('content_title')
-    @if (isset($label))
-        <h4 class="mt-2">Update Designation Label</h4>
-    @else
-        <h4 class="mt-2">Create Designation Label</h4>
-    @endif
+    <h4 class="mt-2">User Details</h4>
 @endsection
 
 @section('main_content')
@@ -28,14 +24,27 @@
                         <div class="profile-card">
                             <div class="top">
                                 <div class="avatar">
-                                    <span class="avatar-text"><img src="{{asset('storage/'.$user->)}}" alt="profile"></span>
+                                    <span class="avatar-text"><img
+                                            src="{{ asset('storage/' . optional($user->userDetails)->profile_image) }}"
+                                            alt="profile"></span>
                                 </div>
                                 <div class="title-des">
-                                    <h4>asdfgn dfghb</h4>
+                                    <h4>{{ $user->name }}</h4>
                                 </div>
-                                <button class="site-btn-sm primary-btn w-100 centered">
-                                    Active
-                                </button>
+                                @if ($user->status == 'active')
+                                    <button class="site-btn-sm primary-btn w-100 centered">
+                                        Active
+                                    </button>
+                                @elseif($user->status == 'inactive')
+                                    <button class="site-btn-sm danger-btn w-100 centered">
+                                        Inactive
+                                    </button>
+                                @else
+                                    <button class="site-btn-sm warning-btn w-100 centered">
+                                        Pending
+                                    </button>
+                                @endif
+
                             </div>
                         </div>
                     </div>

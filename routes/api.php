@@ -20,15 +20,24 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
+// request()->headers->set('Accept', 'application/json');
 // authentication
 Route::post('login', [AuthController::class, 'userLogin']);
 Route::post('registration', [AuthController::class, 'userRegistration']);
 Route::get('email-verify', [AuthController::class, 'emailVerify']);
 Route::post('user-info', [AuthController::class, 'userInfo']);
 
+Route::prefix('password')->group(function () {
+    Route::post('forgot', [AuthController::class, 'forgotPassword']);
+    Route::post('token/verify', [AuthController::class, 'verifyForgotPasswordToken']);
+    Route::post('reset', [AuthController::class, 'resetPassword']);
+});
+
 Route::middleware('auth:sanctum')->group(
     function () {
+        Route::get('auth-user', [AuthController::class, 'getAuthUser']);
+        Route::get('logout', [AuthController::class, 'userLogout']);
+
         //user
         Route::prefix('user')->group(
             function () {
