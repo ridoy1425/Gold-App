@@ -1,5 +1,5 @@
 @php
-    $route = Route::current()->getName();
+$route = Route::current()->getName();
 @endphp
 
 <!DOCTYPE html>
@@ -61,8 +61,8 @@
 
                             <a class="dropdown-toggle" href="#" id="dropdownMenu2" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                    fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                    class="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path
                                         d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                 </svg>
@@ -72,7 +72,7 @@
                                 <li>
                                     <a class="dropdown-item" href="#" type="button">
                                         @auth
-                                            {{ auth()->user()->user_name }}
+                                        {{ auth()->user()->user_name }}
                                         @endauth
                                     </a>
 
@@ -148,7 +148,8 @@
                         <li class="nav-item ">
                             <a href="{{ route('Order-index') }}"
                                 class="nav-link {{ $route == 'Order-index' ? ' active' : '' }}">
-                                <i class="fa-solid fa-basket-shopping nav-icon"></i>
+                                <!-- <i class="fa-solid fa-basket-shopping nav-icon"></i> -->
+                                <i class="fa-solid fa-cart-plus nav-icon"></i>
                                 <p>
                                     Orders
                                 </p>
@@ -166,7 +167,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('withdraw-list') }}"
                                 class="nav-link {{ $route == 'withdraw-list' ? ' active' : '' }}">
-                                <i class="fa-regular fa-message nav-icon"></i>
+                                <i class="fa-solid fa-landmark nav-icon"></i>
                                 <p>
                                     Withdraws
                                 </p>
@@ -175,7 +176,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('transaction-list') }}"
                                 class="nav-link {{ $route == 'transaction-list' ? ' active' : '' }}">
-                                <i class="fa-regular fa-message nav-icon"></i>
+                                <i class="fa-solid fa-money-bill-transfer nav-icon"></i>
                                 <p>
                                     Transfer
                                 </p>
@@ -193,7 +194,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('sendbox-index') }}"
                                 class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
-                                <i class="fa-regular fa-message nav-icon"></i>
+                                <i class="fa-regular fa-comment-dots nav-icon "></i>
                                 <p>
                                     Message To Users
                                 </p>
@@ -202,7 +203,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('message-inbox') }}"
                                 class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
-                                <i class="fa-regular fa-message nav-icon"></i>
+                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
                                 <p>
                                     Support Message
                                 </p>
