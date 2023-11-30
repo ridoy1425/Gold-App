@@ -242,7 +242,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'email'             => 'required|email|exists:users,email',
-            'password'          => 'required|different:previous_password|min:8|confirmed',
+            'password'          => 'required|different:previous_password|min:4|confirmed',
             'token'             => 'required_without:previous_password',
             'previous_password' => 'required_without:token',
         ]);
