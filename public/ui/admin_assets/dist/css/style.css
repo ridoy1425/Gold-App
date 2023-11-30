@@ -473,6 +473,7 @@ img {
     border-radius: 30px;
     width: max-content;
     padding: 3px 15px;
+    cursor: pointer;
 }
 
 .success {
@@ -627,7 +628,126 @@ img {
 .replay__btn:hover {
     color: #fff;
 }
-
+.edit__inner__container .site-input-groups .form-textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 2px solid #e5e8f2;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px 15px;
+    transition: 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    margin-bottom: -5px;
+}
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+.switch-field {
+    display: flex;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.switch-field label {
+    cursor: pointer;
+    background-color: rgba(94, 63, 201, 0.1);
+    color: rgba(16, 25, 53, 0.6);
+    font-size: 14px;
+    line-height: 1;
+    text-align: center;
+    padding: 8px 16px;
+    margin-right: -1px;
+    border: 1px solid rgba(16, 25, 53, 0.2);
+    transition: all 0.1s ease-in-out;
+    font-weight: 700;
+    width: 50%;
+}
+.switch-field label:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+.switch-field label:last-of-type {
+    border-radius: 0 4px 4px 0;
+}
+.switch-field input:checked + label {
+    background-color: #2a9d8f;
+    box-shadow: none;
+    color: #ffffff;
+}
+.site-input-groups .col-label {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: rgba(16, 25, 53, 0.6);
+    font-weight: 600;
+    font-size: 14px;
+}
+.site-input-groups .col-label svg {
+    height: 10px;
+    color: rgba(16, 25, 53, 0.6);
+    position: relative;
+    top: 0px;
+    left: -3px;
+    cursor: help;
+}
+.site-card .site-card-body .paragraph {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(16, 25, 53, 0.7);
+}
+.site-card .site-card-body .paragraph svg {
+    height: 12px;
+    position: relative;
+    top: -2px;
+    color: #ffc300;
+}
+.site-card .site-card-header .card-header-links .card-header-link {
+    display: inline-block;
+    border-radius: 3px;
+    padding: 8px 18px;
+    border: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 10px;
+    color: #343a40;
+    background: #dab873;
+}
+.primary-btn,
+.site-btn-sm {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: #343a40;
+    background: #dab873;
+}
+.edit__inner__container .table-description .icon {
+    height: 45px;
+    width: 45px;
+    line-height: 42px;
+    border-radius: 50%;
+    background: rgba(94, 63, 201, 0.2);
+    color: #5e3fc9;
+    text-align: center;
+    margin-right: 15px;
+}
+.edit__inner__container .table-description .icon svg {
+    height: 18px;
+}
+.table td,
+.table th {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
 @media only screen and (max-width: 767px) {
     .kyc_container {
         flex-direction: column;

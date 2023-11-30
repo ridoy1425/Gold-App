@@ -52,53 +52,56 @@
                         @else
                         <td><span class="success">Active</span></td>
                         @endif
-                        <td class="action_td">
-                            <a href="{{ URL('user/edit', $user->id) }}">
-                                <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
-                                    class="action__icon">
-                            </a>
-                            <a href="" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}" alt="Message"
-                                    class="action__icon">
-                            </a>
-                            <a href="{{ URL('user/delete', $user->id) }}" onclick="return confirm('Are you sure?')">
-                                <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete"
-                                    class="action__icon">
-                            </a>
+                        <td>
+                            <div class="action_td">
+                                <a href="{{ URL('user/edit', $user->id) }}">
+                                    <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
+                                        class="action__icon">
+                                </a>
+                                <a href="" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}" alt="Message"
+                                        class="action__icon">
+                                </a>
+                                <a href="{{ URL('user/delete', $user->id) }}" onclick="return confirm('Are you sure?')">
+                                    <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete"
+                                        class="action__icon">
+                                </a>
 
-                            <!-- Modal -->
-                            <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content site-table-modal">
-                                        <div class="modal-body popup-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                            <div class="popup-body-text" id="kyc-action-data">
-                                                <h3 class="title mb-4">
-                                                    Send Mail to {{ $user->name }}
-                                                </h3>
-                                                <form action="{{ url('user/send-notification') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">Subject:</label>
-                                                        <input type="text" name="subject" class="box-input mb-0"
-                                                            required>
-                                                    </div>
-                                                    <div class="site-input-groups">
-                                                        <label for="" class="box-input-label">Details
-                                                            Message</label>
-                                                        <textarea name="message" class="form-textarea mb-0"></textarea>
-                                                    </div>
+                                <!-- Modal -->
+                                <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content site-table-modal">
+                                            <div class="modal-body popup-body">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                                <div class="popup-body-text" id="kyc-action-data">
+                                                    <h3 class="title mb-4">
+                                                        Send Mail to {{ $user->name }}
+                                                    </h3>
+                                                    <form action="{{ url('user/send-notification') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                        <div class="site-input-groups">
+                                                            <label for="" class="box-input-label">Subject:</label>
+                                                            <input type="text" name="subject" class="box-input mb-0"
+                                                                required>
+                                                        </div>
+                                                        <div class="site-input-groups">
+                                                            <label for="" class="box-input-label">Details
+                                                                Message</label>
+                                                            <textarea name="message"
+                                                                class="form-textarea mb-0"></textarea>
+                                                        </div>
 
-                                                    <div class="action-btns">
-                                                        <button type="submit" class="btn primary-btn centered me-2">
-                                                            <i class="fas fa-paper-plane"></i>
-                                                            Send Email
-                                                        </button>
-                                                    </div>
-                                                </form>
+                                                        <div class="action-btns">
+                                                            <button type="submit" class="btn primary-btn centered me-2">
+                                                                <i class="fas fa-paper-plane"></i>
+                                                                Send Email
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
