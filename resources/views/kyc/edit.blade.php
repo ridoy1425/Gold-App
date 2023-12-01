@@ -4,9 +4,9 @@
 
 @section('style')
 <style>
-    .display {
-        display: none;
-    }
+.display {
+    display: none;
+}
 </style>
 @endsection
 
@@ -74,7 +74,7 @@
                                                 <h3 class="title">Basic Info</h3>
                                             </div>
                                             <div class="site-card-body">
-                                                <form action="https://hyiprio.tdevs.co/admin/user/2835" method="post">
+                                                <form action="" method="post">
                                                     <div class="row">
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
@@ -185,8 +185,7 @@
                                                 <h3 class="title">Change Password</h3>
                                             </div>
                                             <div class="site-card-body">
-                                                <form action="https://hyiprio.tdevs.co/admin/user/password-update/2835"
-                                                    method="post">
+                                                <form action="" method="post">
                                                     <input type="hidden" name="_token"
                                                         value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
                                                     <div class="row">
