@@ -25,7 +25,7 @@
                         <div class="site-card-header">
                             <h3 class="title"> Edit New User Template</h3>
                             <div class="card-header-links">
-                                <a href="" class="card-header-link primary-btn btn">Back
+                                <a href="" class="card-header-link primary-btn back_btn btn">Back
                                 </a>
                             </div>
                         </div>

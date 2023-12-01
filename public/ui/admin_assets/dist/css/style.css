@@ -151,6 +151,22 @@ table.dataTable thead {
     height: 30px;
     object-fit: cover;
 }
+.send_message_arrow {
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fcdada;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.send_message_arrow .action__icon {
+    min-width: 18px;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 0 0;
@@ -461,9 +477,12 @@ img {
 .content-wrapper {
     min-height: 100vh !important;
 }
+.action_td .active,
+.completed,
 .replay__btn,
 .success,
 .pending,
+.in_process,
 .rejected {
     display: flex;
     align-items: center;
@@ -475,12 +494,20 @@ img {
     padding: 3px 15px;
     cursor: pointer;
 }
-
+.pending {
+    background-color: #d40000;
+}
 .success {
     background-color: #3da98b;
 }
 .rejected {
     background-color: rgb(207, 61, 31);
+}
+.completed {
+    background-color: #313131;
+}
+.in_process {
+    background-color: #d17918;
 }
 
 .nid_img_container {
@@ -588,6 +615,16 @@ img {
 }
 .profile-card .top .avatar {
     margin-bottom: 20px;
+}
+.user_nominee_document .avatar {
+    background-color: #003566;
+}
+.user_nominee_document .avatar img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    min-height: 200px;
+    background-color: #003566;
 }
 .profile-card .top .avatar .avatar-text {
     width: 120px;
@@ -705,6 +742,8 @@ img {
     top: -2px;
     color: #ffc300;
 }
+.btn__small .btn,
+.site-tab-bars .btn,
 .site-card .site-card-header .card-header-links .card-header-link {
     display: inline-block;
     border-radius: 3px;
@@ -718,6 +757,11 @@ img {
     color: #343a40;
     background: #dab873;
 }
+.btn__small .btn,
+.back_btn {
+    background-color: #003566 !important;
+    color: #fff !important;
+}
 .primary-btn,
 .site-btn-sm {
     display: inline-block;
@@ -728,6 +772,16 @@ img {
     text-transform: capitalize;
     color: #343a40;
     background: #dab873;
+}
+
+.active_btn {
+    background-color: #3da98b !important;
+}
+.inactive_btn {
+    background-color: #d40000 !important;
+}
+.pending_btn {
+    background-color: #d17918 !important;
 }
 .edit__inner__container .table-description .icon {
     height: 45px;
@@ -747,6 +801,87 @@ img {
     padding: 0.75rem;
     vertical-align: middle;
     border-top: 1px solid #dee2e6;
+}
+.site-card .site-card-body .paragraph {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(16, 25, 53, 0.7);
+}
+.single-gateway {
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.single-gateway .gateway-name {
+    display: flex;
+    align-items: center;
+}
+.single-gateway .gateway-right {
+    display: flex;
+    align-items: center;
+}
+.single-gateway .gateway-name .gateway-icon {
+    margin-right: 45px;
+    position: relative;
+}
+.single-gateway .gateway-name .gateway-icon img {
+    height: 30px;
+}
+.single-gateway .gateway-name .gateway-icon .icon-currency-type {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #151d30;
+    padding: 1px 8px;
+    border-radius: 50px;
+    color: #ffffff;
+    position: absolute;
+    top: -12px;
+}
+.single-gateway .gateway-name .gateway-title h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+.single-gateway .gateway-name .gateway-title p {
+    font-size: 12px;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+.single-gateway .gateway-right .gateway-status {
+    margin-right: 60px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #101935;
+}
+.site-badge.success {
+    background: #2a9d8f;
+}
+.site-badge {
+    padding: 3px 14px;
+    border-radius: 25px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+.single-gateway .gateway-right .gateway-edit a {
+    color: #ffffff;
+    height: 40px;
+    width: 40px;
+    line-height: 38px;
+    border-radius: 50%;
+    background: #5e3fc9;
+    display: inline-block;
+    text-align: center;
+}
+.single-gateway .gateway-right .gateway-edit a svg {
+    height: 18px;
 }
 @media only screen and (max-width: 767px) {
     .kyc_container {

@@ -13,11 +13,16 @@
 @section('main_content')
 <div class="row page-content">
     <div class="container">
+        <div class="btn__small mb-2 mt-1 text-end">
+            <a href="#" class="card-header-link primary-btn btn">Add
+            </a>
+        </div>
         {{-- card-body start --}}
         <div class="card card-default edit__inner__container">
             {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
                 <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
         </div> --}}
+
         <div class="card-body table-responsive">
             <table class="table dataTable no-footer" id="table_id">
                 <thead>
