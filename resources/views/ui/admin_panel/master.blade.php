@@ -1,5 +1,5 @@
 @php
-$route = Route::current()->getName();
+    $route = Route::current()->getName();
 @endphp
 
 <!DOCTYPE html>
@@ -61,8 +61,8 @@ $route = Route::current()->getName();
 
                             <a class="dropdown-toggle" href="#" id="dropdownMenu2" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                    fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path
                                         d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                 </svg>
@@ -72,7 +72,7 @@ $route = Route::current()->getName();
                                 <li>
                                     <a class="dropdown-item" href="#" type="button">
                                         @auth
-                                        {{ auth()->user()->user_name }}
+                                            {{ auth()->user()->user_name }}
                                         @endauth
                                     </a>
 
@@ -174,8 +174,8 @@ $route = Route::current()->getName();
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="{{ route('transaction-list') }}"
-                                class="nav-link {{ $route == 'transaction-list' ? ' active' : '' }}">
+                            <a href="{{ route('transfer-list') }}"
+                                class="nav-link {{ $route == 'transfer-list' ? ' active' : '' }}">
                                 <i class="fa-solid fa-money-bill-transfer nav-icon"></i>
                                 <p>
                                     Transfer

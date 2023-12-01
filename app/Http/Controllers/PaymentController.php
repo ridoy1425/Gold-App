@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\PaymentTransfer;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Notifications\UserNotification;
@@ -48,13 +49,13 @@ class PaymentController extends Controller
 
     public function addWalletAmount(Request $request)
     {
-        try {
-            $this->validateWith([
-                'id'         => 'required|exists:payments,id',
-                'add_amount' => 'nullable',
-                'action'     => 'required|in:approved,rejected'
-            ]);
+        $this->validateWith([
+            'id'         => 'required|exists:payments,id',
+            'add_amount' => 'nullable',
+            'action'     => 'required|in:approved,rejected'
+        ]);
 
+        try {
             if ($request->action == "approved") {
                 $payment = Payment::findOrFail($request->id);
                 $payment->update([
@@ -91,9 +92,45 @@ class PaymentController extends Controller
         }
     }
 
-    public function transactionList()
+    public function transferList()
     {
-        return view('payment.transaction');
+        return view('payment.transfer');
+    }
+
+    public function paymentTransfer(Request $request)
+    {
+        $this->validateWith([
+            'master_id' => 'required|exists:users,master_id',
+            'amount'    => 'required|numeric'
+        ]);
+
+        $recipient = User::where('master_id', $request->master_id)->first();
+
+        $transfer = PaymentTransfer::create([
+            'sender_id'    => Auth::id(),
+            'recipient_id' => $recipient->id,
+            'amount'       => $request->amount
+        ]);
+
+        $balance = 0;
+        $wallet = Wallet::where('user_id', $recipient->id)->first();
+        if ($wallet) {
+            $balance = $wallet->balance + $request->amount;
+            $wallet->update(['balance' => $balance]);
+        } else {
+            $balance = $request->amount;
+            $wallet = Wallet::create([
+                'user_id' => $recipient->id,
+                'balance' => $balance,
+            ]);
+        }
+
+        return response()->json(
+            [
+                'transfer' => $transfer,
+            ],
+            201
+        );
     }
 
     public function withdrawList()

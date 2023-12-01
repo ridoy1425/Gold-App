@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ForgotPasswordMail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -76,6 +77,7 @@ class AuthController extends Controller
         $role = Role::where('role_slug', 'employee')->first();
         User::create([
             'name'   => $request->name,
+            'master_id'   => Str::random(2) . rand(1000, 9999),
             'email'   => $request->email,
             'phone'   => $request->phone,
             'password'    => Hash::make($request->password),
@@ -89,10 +91,11 @@ class AuthController extends Controller
     {
 
         $validate_data = [
-            'name'     => 'required|string',
-            'email'    => 'required|email|unique:users,email',
-            'phone'    => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'password' => 'required|confirmed|min:4',
+            'name'      => 'required|string',
+            'master_id' => Str::random(2) . rand(1000, 9999),
+            'email'     => 'required|email|unique:users,email',
+            'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'password'  => 'required|confirmed|min:4',
         ];
         $validator = $request->validate($validate_data);
         try {

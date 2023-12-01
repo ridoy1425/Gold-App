@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(
             function () {
                 Route::get('index', [PaymentController::class, 'index'])->name('payment-index');
                 Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
-                Route::get('transaction', [PaymentController::class, 'transactionList'])->name('transaction-list');
+                Route::get('transfer', [PaymentController::class, 'transferList'])->name('transfer-list');
                 Route::get('withdraw', [PaymentController::class, 'withdrawList'])->name('withdraw-list');
             }
         );

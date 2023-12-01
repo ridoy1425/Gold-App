@@ -27,6 +27,7 @@ class usersTableSeeder extends Seeder
 
         User::firstOrCreate([
             'name' => 'admin',
+            'master_id' => 'admin1234',
             'email' => 'admin@admin.com',
             'phone' => '+880183297787'
         ], [
