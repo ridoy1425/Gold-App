@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginApiController;
+use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
@@ -48,16 +49,28 @@ Route::middleware('auth:sanctum')->group(
             }
         );
 
-
-        Route::post('payment/request', [PaymentController::class, 'paymentRequest']);
+        Route::prefix('payment')->group(
+            function () {
+                Route::post('request', [PaymentController::class, 'paymentRequest']);
+                Route::post('transfer', [PaymentController::class, 'paymentTransfer']);
+                Route::post('withdraw', [PaymentController::class, 'withdrawRequest']);
+            }
+        );
+        Route::get('package/list', [AppSettingsController::class, 'packageList']);
         //user
         Route::prefix('order')->group(
             function () {
                 Route::get('list', [OrderController::class, 'getOrderList']);
                 Route::post('create', [OrderController::class, 'orderCreate']);
-                Route::post('gold-price', [OrderController::class, 'goldPrice']);
+                Route::get('gold-price', [OrderController::class, 'goldPrice']);
                 Route::post('profit', [OrderController::class, 'profitCalculation']);
                 Route::post('collect-request', [OrderController::class, 'collectRequest']);
+            }
+        );
+
+        Route::prefix('settings')->group(
+            function () {
+                Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
             }
         );
 

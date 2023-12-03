@@ -71,6 +71,8 @@ Route::middleware(['auth'])->group(
                 Route::post('minimum-price-set', [AppSettingsController::class, 'minimumPriceSet']);
                 Route::post('profit-package-set', [AppSettingsController::class, 'profitPackageSet']);
                 Route::get('package-delete/{id}', [AppSettingsController::class, 'packageDelete']);
+                Route::post('add-poster', [AppSettingsController::class, 'addPoster']);
+                Route::get('poster-delete/{id}', [AppSettingsController::class, 'posterDelete']);
                 Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
             }
         );

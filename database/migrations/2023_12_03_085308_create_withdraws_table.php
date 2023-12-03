@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentTransfersTable extends Migration
+class CreateWithdrawsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePaymentTransfersTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_transfers', function (Blueprint $table) {
+        Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('reason')->nullable();
             $table->decimal('amount');
-            $table->enum('status', ['success', 'failed'])->default('failed');
+            $table->enum('status', ['active', 'completed', 'rejected', 'pending', 'cancelled', 'in-process'])->default('pending');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePaymentTransfersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_transfers');
+        Schema::dropIfExists('withdraws');
     }
 }

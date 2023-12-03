@@ -24,12 +24,14 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         $user = User::findOrFail(Auth::id());
-        $message = $user->message()->latest()->get();
 
-        if ($user->hasRole('super-admin')) {
-            return view('message.index', compact('message'));
+        if ($user->hasRole('user')) {
+            $message = $user->message()->latest()->get();
+            return response()->json(['messages' => $message], 200);
         }
-        return response()->json(['messages' => $message], 200);
+
+        $message = $user->message()->where('read_at', null)->latest()->get();
+        return view('message.index', compact('message'));
     }
 
     public function messageCount()
@@ -50,16 +52,17 @@ class NotificationController extends Controller
         $admin = User::whereHas('role', function ($role) {
             return $role->where('slug', 'super-admin');
         })->first();
-
         $user = User::findOrFail(Auth::id());
 
-        $user->notify(new UserNotification($request->subject, $request->message, $request->receiver_id ?? $admin->id));
-
-        if ($user->hasRole('super-admin')) {
-            toastr()->success('Success! Message Sent Successfully!');
-            return redirect()->back();
+        if ($user->hasRole('user')) {
+            $admin->notify(new UserNotification($request->subject, $request->message, $user->id));
+            return response()->json(['messages' => "Message Sent Successfully"], 200);
         }
-        return response()->json(['messages' => "Message Sent Successfully"], 200);
+
+        $receiver = User::findOrFail($request->receiver_id);
+        $receiver->notify(new UserNotification($request->subject, $request->message, $user->id));
+        toastr()->success('Success! Message Sent Successfully!');
+        return redirect()->back();
     }
 
     public function messagingTemplate()
@@ -70,5 +73,12 @@ class NotificationController extends Controller
     public function messagingSendBox()
     {
         return view('message.sendbox');
+    }
+
+    public function messageRead($id)
+    {
+        dd($id);
+        Notification::destroy($id);
+        return redirect()->back();
     }
 }

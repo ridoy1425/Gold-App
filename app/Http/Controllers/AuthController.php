@@ -92,7 +92,6 @@ class AuthController extends Controller
 
         $validate_data = [
             'name'      => 'required|string',
-            'master_id' => Str::random(2) . rand(1000, 9999),
             'email'     => 'required|email|unique:users,email',
             'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
             'password'  => 'required|confirmed|min:4',
@@ -101,6 +100,7 @@ class AuthController extends Controller
         try {
             $role = Role::where('slug', 'user')->first();
             $validator['password'] = Hash::make($request->password);
+            $validator['master_id'] = Str::lower(Str::random(2)) . rand(1000, 9999);
             $validator['role_id'] = $role->id;
             $validator['email_verify_token'] = rand(1000, 9999);
             $user = User::create($validator);
@@ -149,6 +149,8 @@ class AuthController extends Controller
                 $user = User::where('id', Auth::id())->where('status', 'active')->first();
                 if (!$user)
                     return response()->json(['message' => 'User is not active'], 404);
+                if (!$user->hasRole('user'))
+                    return response()->json(['message' => 'You are not a user.'], 404);
 
                 return response()->json([
                     'token' => $user->createToken('Api Token')->plainTextToken,

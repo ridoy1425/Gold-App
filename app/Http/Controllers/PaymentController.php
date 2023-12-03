@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\PaymentTransfer;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Models\Withdraw;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Traits\AttachmentTrait;
@@ -94,7 +95,8 @@ class PaymentController extends Controller
 
     public function transferList()
     {
-        return view('payment.transfer');
+        $transfer = PaymentTransfer::latest()->get();
+        return view('payment.transfer', compact('transfer'));
     }
 
     public function paymentTransfer(Request $request)
@@ -104,37 +106,133 @@ class PaymentController extends Controller
             'amount'    => 'required|numeric'
         ]);
 
-        $recipient = User::where('master_id', $request->master_id)->first();
+        try {
+            $admin = User::whereHas('role', function ($role) {
+                return $role->where('slug', 'super-admin');
+            })->first();
+            $sender = User::findOrFail(Auth::id());
+            $recipient = User::where('master_id', $request->master_id)->first();
 
-        $transfer = PaymentTransfer::create([
-            'sender_id'    => Auth::id(),
-            'recipient_id' => $recipient->id,
-            'amount'       => $request->amount
-        ]);
+            if ($sender->id == $recipient->id) {
+                return response()->json(
+                    [
+                        'error' => "you can't transfer to your account",
+                    ],
+                    500
+                );
+            }
 
-        $balance = 0;
-        $wallet = Wallet::where('user_id', $recipient->id)->first();
-        if ($wallet) {
-            $balance = $wallet->balance + $request->amount;
-            $wallet->update(['balance' => $balance]);
-        } else {
-            $balance = $request->amount;
-            $wallet = Wallet::create([
-                'user_id' => $recipient->id,
-                'balance' => $balance,
+            $senderWallet = Wallet::where('user_id', $sender->id)->first();
+            if ($senderWallet->balance > $request->amount) {
+                $balance = 0;
+                $balance = $senderWallet->balance - $request->amount;
+                $senderWallet->update(['balance' => $balance]);
+            } else {
+                return response()->json(
+                    [
+                        'error' => "you doesn't have sufficient balance",
+                    ],
+                    500
+                );
+            }
+
+            $balance = 0;
+            $wallet = Wallet::where('user_id', $recipient->id)->first();
+            if ($wallet) {
+                $balance = $wallet->balance + $request->amount;
+                $wallet->update(['balance' => $balance]);
+            } else {
+                $balance = $request->amount;
+                $wallet = Wallet::create([
+                    'user_id' => $recipient->id,
+                    'balance' => $balance,
+                ]);
+            }
+
+            $transfer = PaymentTransfer::create([
+                'sender_id'    => $sender->id,
+                'recipient_id' => $recipient->id,
+                'amount'       => $request->amount,
+                'status'       => 'success'
             ]);
-        }
 
-        return response()->json(
-            [
-                'transfer' => $transfer,
-            ],
-            201
-        );
+            $subject1 = "Transfer Balance";
+            $message = "You have transfer " . $request->amount . " to " . $recipient->name;
+            $sender->notify(new UserNotification($subject1, $message, $admin->id));
+
+            $subject1 = "Transfer Balance";
+            $message = "You have receive " . $request->amount . " from " . $sender->name;
+            $recipient->notify(new UserNotification($subject1, $message, $admin->id));
+
+            $subject1 = "Transfer Balance";
+            $message = $sender->name . " have transfer " . $request->amount . " to " . $recipient->name;
+            $admin->notify(new UserNotification($subject1, $message, $sender->id));
+
+            return response()->json(
+                [
+                    'transfer' => $transfer,
+                ],
+                201
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                [
+                    'error' => $e->getMessage(),
+                ]
+            );
+        }
     }
 
     public function withdrawList()
     {
         return view('payment.withdraw');
+    }
+
+    public function withdrawRequest(Request $request)
+    {
+        $this->validateWith([
+            'reason' => 'nullable|string',
+            'amount' => 'required|numeric'
+        ]);
+
+        try {
+            $admin = User::whereHas('role', function ($role) {
+                return $role->where('slug', 'super-admin');
+            })->first();
+            $user = User::findOrFail(Auth::id());
+
+            $senderWallet = Wallet::where('user_id', $user->id)->first();
+            if ($senderWallet->balance < $request->amount) {
+                return response()->json(
+                    [
+                        'error' => "you doesn't have sufficient balance",
+                    ],
+                    500
+                );
+            }
+
+            $withdraw = Withdraw::create([
+                'user_id' => $user->id,
+                'reason'  => $request->reason,
+                'amount'  => $request->amount,
+            ]);
+
+            $subject = "Withdraw Request";
+            $message = $user->name . " have withdraw request for amount " . $request->amount;
+            $admin->notify(new UserNotification($subject, $message, $user->id));
+
+            return response()->json(
+                [
+                    'withdraw' => $withdraw,
+                ],
+                201
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                [
+                    'error' => $e->getMessage(),
+                ]
+            );
+        }
     }
 }

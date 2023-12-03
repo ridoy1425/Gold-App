@@ -12,13 +12,14 @@ class User extends Authenticatable
 {
     use HasFactory, RolePermissionTrait, HasApiTokens, Notifiable;
     protected $fillable = [
-        'name', 'email', 'phone', 'password', 'role_id', 'email_verify_token',
-        'status'
+        'name', 'master_id', 'email', 'phone', 'password', 'role_id', 'email_verify_token',
+        'status', 'email_verified_at'
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'email_verify_token'
     ];
 
     protected $cast = [

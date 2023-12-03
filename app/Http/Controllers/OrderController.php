@@ -9,6 +9,7 @@ use App\Models\OrderProfit;
 use App\Models\ProfitPackage;
 use App\Models\Settings;
 use App\Models\User;
+use App\Models\Wallet;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,13 @@ class OrderController extends Controller
             'profit_percentage' => 'required|integer',
             'delivery_time'     => 'required|integer',
         ]);
+
+        $wallet = Wallet::where('user_id', Auth::id())->first();
+        if ($wallet->balance < $request->price) {
+            return response()->json([
+                'message' => "You doesn't have sufficient balance",
+            ], 500);
+        }
 
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -79,21 +87,12 @@ class OrderController extends Controller
 
     public function goldPrice(Request $request)
     {
-        $this->validateWith([
-            'gold_qty' => 'required|numeric'
-        ]);
 
         $settings = Settings::first();
-        if (isset($settings->minimum_quantity) && ($request->gold_qty >= $settings->minimum_quantity)) {
-            return response()->json([
-                'error' => 'You have to by minimum' . $settings->minimum_quantity . 'gm gold.',
-            ], 422);
-        }
-
-        $price = $request->gold_qty * ($settings->price_per_gm ?? 100);
 
         return response()->json([
-            'price' =>  $price,
+            'price' =>  $settings->price_per_gm,
+            'minimum_qty' =>  $settings->minimum_quantity,
         ], 200);
     }
 
@@ -104,8 +103,7 @@ class OrderController extends Controller
             'package_id' => 'required|exists:profit_packages,id'
         ]);
 
-        $package = ProfitPackage::findOrFail($request->profit_id);
-
+        $package = ProfitPackage::findOrFail($request->package_id);
         $profit = ($request->price / 100) * $package->percentage;
         $profit += $request->price;
 

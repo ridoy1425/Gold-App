@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('title')->nullable();
             $table->decimal('gold_price')->nullable();
             $table->string('header_text')->nullable();
+            $table->string('phone_number')->nullable();
             $table->integer('minimum_quantity')->nullable();
             $table->decimal('price_per_gm')->nullable();
             $table->timestamps();
