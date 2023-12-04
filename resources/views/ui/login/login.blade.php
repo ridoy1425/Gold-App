@@ -15,7 +15,7 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{{ asset('ui/login_assets/css/style.css') }}">
     <!-- Title and favicon -->
-    <title>Gold App-login</title>
+    <title>World Shine-login</title>
     <link rel="icon" type="image/png" href="{{ asset('images/ywca.png') }}" />
 </head>
 
@@ -45,7 +45,7 @@
 
         <div class="login_form">
             <div class="login_title text-center">
-                <h3>Employee Login</h3>
+                <h3>World Shine</h3>
             </div>
             <div class="tab-content">
                 <div class="tab-pane active" id="login_page">

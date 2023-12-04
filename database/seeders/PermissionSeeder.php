@@ -16,34 +16,20 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            ['name' => 'Designation Label', 'category' => 'general_settings'],
-            ['name' => 'Designation Info', 'category' => 'general_settings'],
-            ['name' => 'Branch Information', 'category' => 'general_settings'],
-            ['name' => 'Leave Type', 'category' => 'general_settings'],
-
-            ['name' => 'Employee Information', 'category' => 'Employees'],
-
-            ['name' => 'Employee Basic Report', 'category' => 'Employee Info Report'],
-            ['name' => 'Staff Summary Report', 'category' => 'Employee Info Report'],
-
-            ['name' => 'Leave Entry', 'category' => 'Leave Information'],
-            ['name' => 'Leave Approval', 'category' => 'Leave Information'],
-            ['name' => 'Leave Application Form', 'category' => 'Leave Information'],
-
-            ['name' => 'Leave Register', 'category' => 'Leave Report'],
-
-            ['name' => 'Appraisal Category', 'category' => 'Appraisal'],
-            ['name' => 'Appraisal Evaluator', 'category' => 'Appraisal'],
-            ['name' => 'Duty & Responsibilities', 'category' => 'Appraisal'],
-            ['name' => 'Attitude & Behavior', 'category' => 'Appraisal'],
-            ['name' => 'Evaluation Form', 'category' => 'Appraisal'],
-
-            ['name' => 'Evaluation List', 'category' => 'Appraisal Report'],
-            ['name' => 'Appraisal Summary Report', 'category' => 'Appraisal Report'],
-
-            ['name' => 'User List', 'category' => 'User'],
-            ['name' => 'Role List', 'category' => 'User'],
-
+            ['name' => 'Dashboard', 'category' => 'web'],
+            ['name' => 'Users', 'category' => 'web'],
+            ['name' => 'KYC', 'category' => 'web'],
+            ['name' => 'App Settings', 'category' => 'web'],
+            ['name' => 'Payments', 'category' => 'web'],
+            ['name' => 'Orders', 'category' => 'web'],
+            ['name' => 'Collection Request', 'category' => 'web'],
+            ['name' => 'Withdraws', 'category' => 'web'],
+            ['name' => 'Transfers', 'category' => 'web'],
+            ['name' => 'Message Template', 'category' => 'web'],
+            ['name' => 'Message To Users', 'category' => 'web'],
+            ['name' => 'Support Message', 'category' => 'web'],
+            ['name' => 'Role & Permissions', 'category' => 'web'],
+            ['name' => 'Website', 'category' => 'web'],
         ];
 
         // Generating slugs for each permission
