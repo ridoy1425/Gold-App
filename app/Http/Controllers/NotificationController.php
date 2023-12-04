@@ -74,11 +74,4 @@ class NotificationController extends Controller
     {
         return view('message.sendbox');
     }
-
-    public function messageRead($id)
-    {
-        dd($id);
-        Notification::destroy($id);
-        return redirect()->back();
-    }
 }

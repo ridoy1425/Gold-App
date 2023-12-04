@@ -32,6 +32,40 @@
                                 <div class="site-card-body">
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="site-input-groups row">
+                                            <label for="" class="col-sm-3 col-label">User
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    data-lucide="info" icon-name="info" data-bs-toggle="tooltip"
+                                                    title="" data-bs-original-title="Write the main Messages here"
+                                                    class="lucide lucide-info">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <path d="M12 16v-4"></path>
+                                                    <path d="M12 8h.01"></path>
+                                                </svg>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="" class="form-textarea">
+                                            </div>
+                                        </div>
+                                        <div class="site-input-groups row">
+                                            <label for="" class="col-sm-3 col-label">Subject
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    data-lucide="info" icon-name="info" data-bs-toggle="tooltip"
+                                                    title="" data-bs-original-title="Write the main Messages here"
+                                                    class="lucide lucide-info">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <path d="M12 16v-4"></path>
+                                                    <path d="M12 8h.01"></path>
+                                                </svg>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="subject" class="form-textarea">
+                                            </div>
+                                        </div>
+                                        <div class="site-input-groups row">
                                             <label for="" class="col-sm-3 col-label">Message Body
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -45,7 +79,7 @@
                                                 </svg>
                                             </label>
                                             <div class="col-sm-9">
-                                                <textarea name="message_body" class="form-textarea" cols="30" rows="8">Thanks for joining us  [[full_name]] [[message]]</textarea>
+                                                <textarea name="message" class="form-textarea" cols="30" rows="8">Thanks for joining us  [[full_name]] [[message]]</textarea>
 
                                                 {{-- <p class="paragraph mb-0 mt-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

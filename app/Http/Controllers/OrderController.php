@@ -163,4 +163,13 @@ class OrderController extends Controller
         toastr()->success('Success! Status Changed');
         return redirect()->back();
     }
+
+    public function profitCancel($id)
+    {
+        $profit = OrderProfit::findOrFail($id);
+        $profit->update(['status', 'rejected']);
+
+        toastr()->success('Success! Profit Canceled');
+        return redirect()->back();
+    }
 }

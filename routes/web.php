@@ -87,6 +87,7 @@ Route::middleware(['auth'])->group(
             }
         );
         Route::get('order', [OrderController::class, 'getOrderList'])->name('Order-index');
+        Route::get('order/profit-cancel/{id}', [OrderController::class, 'profitCancel']);
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
         Route::get('change-collection-request', [OrderController::class, 'changeCollectionStatus']);
         Route::post('change-profit-status', [OrderController::class, 'changeProfitStatus']);
