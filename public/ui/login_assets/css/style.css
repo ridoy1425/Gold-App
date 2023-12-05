@@ -6,13 +6,14 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-color: #666;
+    background-color: #3d3c56;
 }
 
 .login_page {
     height: 420px;
     width: 360px;
-    background: rgb(33, 31, 31, .8);
+    /* background: rgb(33, 31, 31, 0.8); */
+    background: #2a2a3f;
     color: #fff;
     top: 50%;
     left: 50%;
@@ -20,11 +21,10 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
     /* overflow: auto; */
-
 }
 
 .login_page .forgotPass p {
-    color: #DAB873;
+    color: #dab873;
     line-height: 0;
 }
 
@@ -38,7 +38,7 @@ body {
 }
 
 .signUp p:hover {
-    color: #DAB873;
+    color: #dab873;
     cursor: pointer;
 }
 
@@ -53,7 +53,7 @@ body {
 
 .nav_bar .nav .nav-item .active {
     color: #fff;
-    border-bottom: 5px solid #DAB873;
+    border-bottom: 5px solid #dab873;
 }
 
 .nav_bar .nav .nav-item .nav-link {
@@ -111,7 +111,6 @@ body {
     padding-top: 5px !important;
     padding-left: 5px !important;
     color: #1d1b1b !important;
-
 }
 
 .select2-container .select2-selection--single {
