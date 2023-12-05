@@ -32,15 +32,19 @@
                                 <div class="title-des">
                                     <h4>{{ $user->name }}</h4>
                                 </div>
-                                <button class="site-btn-sm active_btn text-white w-100 centered">
-                                    Active
-                                </button>
-                                <button class="site-btn-sm inactive_btn text-white w-100 centered">
-                                    Inactive
-                                </button>
-                                <button class="site-btn-sm pending_btn text-white w-100 centered">
-                                    Pending
-                                </button>
+                                @if ($user->status = 'active')
+                                    <button class="site-btn-sm active_btn text-white w-100 centered">
+                                        Active
+                                    </button>
+                                @elseif($user->status = 'inactive')
+                                    <button class="site-btn-sm inactive_btn text-white w-100 centered">
+                                        Inactive
+                                    </button>
+                                @elseif($user->status = 'pending')
+                                    <button class="site-btn-sm pending_btn text-white w-100 centered">
+                                        Pending
+                                    </button>
+                                @endif
 
                             </div>
                         </div>
@@ -91,18 +95,18 @@
                                         data-bs-target="#pills-deposit" type="button" role="tab"
                                         aria-controls="pills-deposit" aria-selected="true">
                                         <i class="fas fa-money-check"></i>
-                                        Earnings</a>
+                                        Payments</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a href="" class="nav-link" id="pills-transactions-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-transactions" type="button" role="tab"
                                         aria-controls="pills-transactions" aria-selected="true">
                                         <i class="fa-solid fa-money-bill-transfer"></i>
-                                        Transactions</a>
+                                        Transfers</a>
                                 </li>
                             </ul>
                             <div class="btn__small text-end">
-                                <a href="#" class="card-header-link primary-btn back_btn btn">Back
+                                <a href="{{ route('user-list') }}" class="card-header-link primary-btn back_btn btn">Back
                                 </a>
                             </div>
                         </div>
@@ -353,7 +357,7 @@
                                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <table class="table" id="table_id">
+                                                                <table class="table table_id" id="table_id">
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">Order Date</th>
@@ -369,7 +373,7 @@
                                                                     <tbody>
                                                                         @foreach ($user->orders as $row)
                                                                             <tr>
-                                                                                <td>{{ date('d-M-y', strtotime($row->created_at)) }}
+                                                                                <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
                                                                                 </td>
                                                                                 <td>{{ $row->order_id }}</td>
                                                                                 <td>{{ $row->gold_qty }}</td>
@@ -503,19 +507,23 @@
                                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <table class="table" id="table_id">
+                                                                <table class="table table_id" id="table_id">
                                                                     <thead>
                                                                         <tr>
+                                                                            <th scope="col">Date</th>
                                                                             <th scope="col">REQUEST AMOUNT</th>
                                                                             <th scope="col">STATUS</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @foreach ($user->paymentRequest as $row)
+                                                                        @foreach ($user->payments as $row)
                                                                             <tr>
+                                                                                <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
+                                                                                </td>
                                                                                 <td>{{ $row->payment_amount }}</td>
-                                                                                @if ($row->status == 'active')
-                                                                                    <td><span class="success">Active</span>
+                                                                                @if ($row->status == 'approved')
+                                                                                    <td><span
+                                                                                            class="success">Approved</span>
                                                                                     </td>
                                                                                 @elseif ($row->status == 'in-process')
                                                                                     <td><span class="in_process">In
@@ -560,7 +568,7 @@
                                                         class="dataTables_wrapper dt-bootstrap5 no-footer">
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <table class="table" id="table_id">
+                                                                <table class="table table_id" id="table_id">
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">Date</th>
@@ -573,28 +581,18 @@
                                                                     <tbody>
                                                                         @foreach ($user->transfers as $row)
                                                                             <tr>
-                                                                                <td>{{ date('d-M-y', strtotime($row->created_at)) }}
+                                                                                <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
                                                                                 </td>
                                                                                 <td>{{ $row->receiver->name }}</td>
                                                                                 <td>{{ $row->receiver->master_id }}</td>
                                                                                 <td>{{ $row->amount }}</td>
-                                                                                @if ($row->status == 'active')
-                                                                                    <td><span class="success">Active</span>
-                                                                                    </td>
-                                                                                @elseif ($row->status == 'in-process')
-                                                                                    <td><span class="in_process">In
-                                                                                            Process</span></td>
-                                                                                @elseif ($row->status == 'completed')
+                                                                                @if ($row->status == 'success')
                                                                                     <td><span
-                                                                                            class="completed">Completed</span>
-                                                                                    </td>
-                                                                                @elseif ($row->status == 'rejected')
-                                                                                    <td><span
-                                                                                            class="rejected">Canceled</span>
+                                                                                            class="success">Success</span>
                                                                                     </td>
                                                                                 @else
                                                                                     <td><span
-                                                                                            class="pending">Pending</span>
+                                                                                            class="rejected">Failed</span>
                                                                                     </td>
                                                                                 @endif
                                                                             </tr>
@@ -622,7 +620,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('.table').DataTable({
+            $('.table_id').DataTable({
                 rowHeight: 20,
             });
         });

@@ -36,7 +36,7 @@
                         <tbody>
                             @foreach ($orders as $row)
                                 <tr>
-                                    <td>{{ date('d-M-y', strtotime($row->created_at)) }}</td>
+                                    <td>{{ date('d-M, Y', strtotime($row->created_at)) }}</td>
                                     <td>{{ $row->order_id }}</td>
                                     <td>{{ optional($row->user)->name }}</td>
                                     <td>{{ $row->gold_qty }}</td>

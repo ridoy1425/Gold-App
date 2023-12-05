@@ -72,7 +72,7 @@
                                 <li>
                                     <a class="dropdown-item" href="#" type="button">
                                         @auth
-                                            {{ auth()->user()->user_name }}
+                                            {{ auth()->user()->name }}
                                         @endauth
                                     </a>
 
@@ -179,6 +179,15 @@
                                 <i class="fa-solid fa-money-bill-transfer nav-icon"></i>
                                 <p>
                                     Transfer
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('template-index') }}"
+                                class="nav-link {{ $route == 'template-index' ? ' active' : '' }}">
+                                <i class="fa-regular fa-message nav-icon"></i>
+                                <p>
+                                    Manage Roles
                                 </p>
                             </a>
                         </li>

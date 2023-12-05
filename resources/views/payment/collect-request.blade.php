@@ -35,7 +35,7 @@
                         </thead>
                         <tbody>
                             @foreach ($request as $row)
-                                <tr>{{ date('d-M-y', strtotime($row->created_at)) }}</tr>
+                                <tr>{{ date('d-M, Y', strtotime($row->created_at)) }}</tr>
                                 <tr>{{ $row->order->order_id }}</tr>
                                 <tr>{{ $row->order->user->name }}</tr>
                                 <tr>{{ $row->collect_type }}</tr>

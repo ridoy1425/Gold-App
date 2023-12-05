@@ -100,7 +100,7 @@ Route::middleware(['auth'])->group(
                 Route::post('send', [NotificationController::class, 'sendMessage']);
                 Route::get('template', [NotificationController::class, 'messagingTemplate'])->name('template-index');
                 Route::get('sendbox', [NotificationController::class, 'messagingSendBox'])->name('sendbox-index');
-                Route::get('send-to-users', [NotificationController::class, 'messageSendToUser']);
+                Route::post('send-to-users', [NotificationController::class, 'messageSendToUser']);
             }
         );
         //role & permission

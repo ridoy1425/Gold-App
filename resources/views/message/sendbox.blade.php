@@ -30,7 +30,8 @@
                             </div> --}}
                                 </div>
                                 <div class="site-card-body">
-                                    <form action="" method="post" enctype="multipart/form-data">
+                                    <form action="{{ url('message/send-to-users') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="site-input-groups row">
                                             <label for="" class="col-sm-3 col-label">Users
                                             </label>

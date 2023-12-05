@@ -89,7 +89,6 @@ class NotificationController extends Controller
 
             foreach ($request->users as $id) {
                 $user = User::findOrFail($id);
-
                 $user->notify(new UserNotification($request->subject, $request->message, $admin->id));
             }
 

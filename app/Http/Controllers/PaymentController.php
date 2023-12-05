@@ -185,7 +185,8 @@ class PaymentController extends Controller
 
     public function withdrawList()
     {
-        return view('payment.withdraw');
+        $withdraws = Withdraw::latest()->get();
+        return view('payment.withdraw', compact('withdraws'));
     }
 
     public function withdrawRequest(Request $request)

@@ -35,7 +35,7 @@
                         <tbody>
                             @foreach ($transfer as $row)
                                 <tr>
-                                    <td>{{ date('d-M-y', strtotime($row->created_at)) }}</td>
+                                    <td>{{ date('d-M, Y', strtotime($row->created_at)) }}</td>
                                     <td>{{ $row->sender->name }}</td>
                                     <td>{{ $row->sender->master_id }}</td>
                                     <td>{{ $row->receiver->name }}</td>
