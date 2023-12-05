@@ -89,7 +89,7 @@ Route::middleware(['auth'])->group(
         Route::get('order', [OrderController::class, 'getOrderList'])->name('Order-index');
         Route::get('order/profit-cancel/{id}', [OrderController::class, 'profitCancel']);
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
-        Route::get('change-collection-request', [OrderController::class, 'changeCollectionStatus']);
+        Route::get('change-collection-request-status', [OrderController::class, 'changeCollectionStatus']);
         Route::post('change-profit-status', [OrderController::class, 'changeProfitStatus']);
 
         Route::prefix('message')->group(
@@ -100,6 +100,7 @@ Route::middleware(['auth'])->group(
                 Route::post('send', [NotificationController::class, 'sendMessage']);
                 Route::get('template', [NotificationController::class, 'messagingTemplate'])->name('template-index');
                 Route::get('sendbox', [NotificationController::class, 'messagingSendBox'])->name('sendbox-index');
+                Route::get('send-to-users', [NotificationController::class, 'messageSendToUser']);
             }
         );
         //role & permission

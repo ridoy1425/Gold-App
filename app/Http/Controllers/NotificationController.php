@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -74,5 +75,29 @@ class NotificationController extends Controller
     {
         $users = User::all();
         return view('message.sendbox', compact('users'));
+    }
+
+    public function messageSendToUser(Request $request)
+    {
+        try {
+            $this->validateWith([
+                'subject' => 'nullable|string',
+                'message' => 'required|string',
+                'users'   => 'required|array'
+            ]);
+            $admin = User::findOrFail(Auth::id());
+
+            foreach ($request->users as $id) {
+                $user = User::findOrFail($id);
+
+                $user->notify(new UserNotification($request->subject, $request->message, $admin->id));
+            }
+
+            toastr()->success('Success! Message Sent Successfully!');
+            return redirect()->back();
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
     }
 }
