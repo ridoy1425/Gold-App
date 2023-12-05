@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Gold App-@yield('title')</title>
+    <title>World Shine-@yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/ywca.png') }}">
     <!-- Google Font: Source Sans Pro -->
     {{-- <link rel="stylesheet"
@@ -90,9 +90,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index.html" class="brand-link">
-                <img src="{{ asset('ui/admin_assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+                <img src="{{ asset('images/ywca.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text">Gold App</span>
+                <span class="brand-text">World Shine</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">

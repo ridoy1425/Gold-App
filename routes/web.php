@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(
         // Dashboard page--
         Route::get('/', [DashboardController::class, 'getDashboard'])->name('dashboard');
         //user
-        Route::prefix('user')->middleware("permission:user-list")->group(
+        Route::prefix('user')->middleware("permission:users")->group(
             function () {
                 Route::get('index', [UserController::class, 'getUserList'])->name('user-list');
                 Route::get('create', [UserController::class, 'userCreate'])->name('user-create');
@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(
             }
         );
         //kyc
-        Route::prefix('kyc')->middleware("permission:user-list")->group(
+        Route::prefix('kyc')->middleware("permission:kyc")->group(
             function () {
                 Route::get('index', [UserController::class, 'getKycData'])->name('kyc-list');
                 Route::get('edit/{id}', [UserController::class, 'getKycEdit'])->name('kyc-edit');
@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(
             }
         );
         //app settings
-        Route::prefix('setting')->middleware("permission:user-list")->group(
+        Route::prefix('setting')->middleware("permission:app-settings")->group(
             function () {
                 Route::get('index', [AppSettingsController::class, 'index'])->name('app-index');
                 Route::post('gold-price-set', [AppSettingsController::class, 'goldPriceSet']);
@@ -78,7 +78,7 @@ Route::middleware(['auth'])->group(
         );
 
         //payment
-        Route::prefix('payment')->middleware("permission:user-list")->group(
+        Route::prefix('payment')->middleware("permission:payments")->group(
             function () {
                 Route::get('index', [PaymentController::class, 'index'])->name('payment-index');
                 Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
@@ -103,7 +103,7 @@ Route::middleware(['auth'])->group(
             }
         );
         //role & permission
-        Route::prefix('role')->middleware("permission:role-list")->group(
+        Route::prefix('role')->middleware("permission:role-permissions")->group(
             function () {
                 Route::get('index', [RoleController::class, 'getRoleList'])->name('role-list');
                 Route::get('create', [RoleController::class, 'roleCreate'])->name('role-create');

@@ -72,6 +72,7 @@ class NotificationController extends Controller
 
     public function messagingSendBox()
     {
-        return view('message.sendbox');
+        $users = User::all();
+        return view('message.sendbox', compact('users'));
     }
 }
