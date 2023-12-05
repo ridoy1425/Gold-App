@@ -22,7 +22,7 @@
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">Date sdfdfsdf</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">CUSTOMER</th>
                                 <th scope="col">COLLECT TYPE</th>
