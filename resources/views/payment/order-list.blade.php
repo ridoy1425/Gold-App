@@ -44,9 +44,20 @@
                                     <td>{{ $row->profit_amount }}</td>
                                     <td>{{ date('d-M-y', strtotime($row->delivery_date)) }}</td>
                                     @if ($row->status == 'active')
-                                        <td><span class="pending">pending</span></td>
+                                        <td><span class="success">Active</span>
+                                        </td>
+                                    @elseif ($row->status == 'in-process')
+                                        <td><span class="in_process">In
+                                                Process</span></td>
+                                    @elseif ($row->status == 'completed')
+                                        <td><span class="completed">Completed</span>
+                                        </td>
+                                    @elseif ($row->status == 'rejected')
+                                        <td><span class="rejected">Canceled</span>
+                                        </td>
                                     @else
-                                        <td><span class="success">Complete</span></td>
+                                        <td><span class="pending">Pending</span>
+                                        </td>
                                     @endif
                                     <td>
                                         <div class="action_td">

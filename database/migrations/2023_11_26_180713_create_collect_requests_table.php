@@ -21,7 +21,7 @@ class CreateCollectRequestsTable extends Migration
             $table->decimal('amount')->nullable();
             $table->integer('gold')->nullable();
             $table->enum('payment_method', ['bank', 'wallet']);
-            $table->enum('status', ['active', 'in-process', 'completed', 'canceled', 'pending'])->default('pending');
+            $table->enum('status', ['active', 'in-process', 'completed', 'canceled', 'pending'])->default('active');
             $table->timestamps();
         });
     }

@@ -48,6 +48,10 @@ class OrderController extends Controller
             return response()->json([
                 'message' => "You doesn't have sufficient balance",
             ], 500);
+        } else {
+            $balance = 0;
+            $balance = $wallet->balance - $request->price;
+            $wallet->update(['balance' => $balance]);
         }
 
         $order = Order::create([
