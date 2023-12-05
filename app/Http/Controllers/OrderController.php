@@ -6,10 +6,12 @@ use App\Models\CollectRequest;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderProfit;
+use App\Models\PaymentTransfer;
 use App\Models\ProfitPackage;
 use App\Models\Settings;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Models\Withdraw;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +46,7 @@ class OrderController extends Controller
         ]);
 
         $wallet = Wallet::where('user_id', Auth::id())->first();
-        if ($wallet->balance < $request->price) {
+        if (!$wallet || $wallet->balance < $request->price) {
             return response()->json([
                 'message' => "You doesn't have sufficient balance",
             ], 500);
@@ -175,5 +177,20 @@ class OrderController extends Controller
 
         toastr()->success('Success! Profit Canceled');
         return redirect()->back();
+    }
+
+    public function transactionData()
+    {
+        $user = User::findOrFail(Auth::id());
+
+        $orders = Order::with('user', 'orderProfit')->where('user_id', $user->id)->latest()->get();
+        $transfers = PaymentTransfer::with('sender', 'receiver')->where('sender_id', $user->id)->latest()->get();
+        $withdraws = Withdraw::with('user')->where('user_id', $user->id)->latest()->get();
+
+        return response()->json([
+            'orders' => $orders,
+            'transfers' => $transfers,
+            'withdraws' => $withdraws,
+        ], 201);
     }
 }

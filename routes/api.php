@@ -57,6 +57,7 @@ Route::middleware('auth:sanctum')->group(
             }
         );
         Route::get('package/list', [AppSettingsController::class, 'packageList']);
+        Route::get('transactions-data', [OrderController::class, 'transactionData']);
         //user
         Route::prefix('order')->group(
             function () {
