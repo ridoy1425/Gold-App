@@ -98,9 +98,18 @@ Route::middleware(['auth'])->group(
                 Route::get('mark-as-read', [NotificationController::class, 'markAsRead']);
                 Route::get('count', [NotificationController::class, 'messageCount']);
                 Route::post('send', [NotificationController::class, 'sendMessage']);
-                Route::get('template', [NotificationController::class, 'messagingTemplate'])->name('template-index');
                 Route::get('sendbox', [NotificationController::class, 'messagingSendBox'])->name('sendbox-index');
                 Route::post('send-to-users', [NotificationController::class, 'messageSendToUser']);
+                Route::prefix('template')->group(
+                    function () {
+                        Route::get('/', [NotificationController::class, 'messagingTemplate'])->name('template-index');
+                        Route::get('create', [NotificationController::class, 'createTemplate']);
+                        Route::post('create', [NotificationController::class, 'saveTemplateData']);
+                        Route::get('edit/{id}', [NotificationController::class, 'editTemplateData']);
+                        Route::post('update/{id}', [NotificationController::class, 'updateTemplateData']);
+                        Route::post('single', [NotificationController::class, 'singleTemplateData']);
+                    }
+                );
             }
         );
         //role & permission

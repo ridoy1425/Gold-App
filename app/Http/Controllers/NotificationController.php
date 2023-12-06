@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MessageTemplate;
 use App\Models\Notification;
 use App\Models\User;
 use App\Notifications\UserNotification;
@@ -68,13 +69,62 @@ class NotificationController extends Controller
 
     public function messagingTemplate()
     {
-        return view('message.template');
+        $templates = MessageTemplate::latest()->get();
+        return view('message.template', compact('templates'));
+    }
+
+    public function createTemplate()
+    {
+        return view('message.template-create');
+    }
+
+    public function saveTemplateData()
+    {
+        $data = $this->validateWith([
+            'subject' => 'required|string',
+            'message' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        MessageTemplate::create($data);
+
+        toastr()->success('Success! Template Save Successfully!');
+        return redirect()->back();
+    }
+
+    public function editTemplateData($id)
+    {
+        $template = MessageTemplate::findOrFail($id);
+        return view('message.template-create', compact('template'));
+    }
+
+    public function updateTemplateData($id)
+    {
+        $data = $this->validateWith([
+            'subject' => 'required|string',
+            'message' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        $template = MessageTemplate::findOrFail($id);
+        $template->update($data);
+
+        toastr()->success('Success! Template Update Successfully!');
+        return redirect()->back();
+    }
+
+    public function singleTemplateData(Request $request)
+    {
+        $template = MessageTemplate::findOrFail($request->id);
+        return response()->json($template);
     }
 
     public function messagingSendBox()
     {
         $users = User::all();
-        return view('message.sendbox', compact('users'));
+        $template = MessageTemplate::where('status', 'enable')->latest()->get();
+
+        return view('message.sendbox', compact('users', 'template'));
     }
 
     public function messageSendToUser(Request $request)

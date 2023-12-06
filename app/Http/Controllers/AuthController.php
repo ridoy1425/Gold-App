@@ -150,7 +150,7 @@ class AuthController extends Controller
                 if (!$user)
                     return response()->json(['message' => 'User is not active'], 404);
                 if (!$user->hasRole('user'))
-                    return response()->json(['message' => 'You are not a user.'], 404);
+                    return response()->json(['message' => "You doesn't have a user role."], 404);
 
                 return response()->json([
                     'token' => $user->createToken('Api Token')->plainTextToken,
