@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginApiController;
 use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankInfoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
@@ -46,6 +47,7 @@ Route::middleware('auth:sanctum')->group(
             function () {
                 Route::post('details', [UserController::class, 'storeUserDetails']);
                 Route::post('nominee', [UserController::class, 'storeNomineeInfo']);
+                Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
             }
         );
 
