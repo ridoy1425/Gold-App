@@ -48,6 +48,8 @@ Route::middleware('auth:sanctum')->group(
                 Route::post('details', [UserController::class, 'storeUserDetails']);
                 Route::post('nominee', [UserController::class, 'storeNomineeInfo']);
                 Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
+                Route::post('mobile-banking', [BankInfoController::class, 'storeMobileBankingInfo']);
+                Route::post('delivery-info', [BankInfoController::class, 'storeDeliveryInfo']);
             }
         );
 

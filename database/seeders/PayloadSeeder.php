@@ -46,7 +46,13 @@ class PayloadSeeder extends Seeder
             ['type' => 'relation', 'value' => 'Other',],
         ];
 
-        $payload_data = array_merge($gender, $marital_status, $kyc_type, $relation);
+        $mobile_banking = [
+            ['type' => 'mobile_banking', 'value' => 'Rocket',],
+            ['type' => 'mobile_banking', 'value' => 'Bkash',],
+            ['type' => 'mobile_banking', 'value' => 'Nagad',],
+        ];
+
+        $payload_data = array_merge($gender, $marital_status, $kyc_type, $relation, $mobile_banking);
         foreach ($payload_data as $data) {
             Payload::firstOrCreate($data);
         }
