@@ -16,4 +16,14 @@ class UserDetail extends Model
     protected $cast = [
         'dob' => 'datetime',
     ];
+
+    public function gender()
+    {
+        return $this->belongsTo(Payload::class, 'gender_id');
+    }
+
+    public function maritalStatus()
+    {
+        return $this->belongsTo(Payload::class, 'marital_status_id');
+    }
 }

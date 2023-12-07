@@ -52,10 +52,10 @@
                             <div class="top">
                                 <h5>User Document </h5>
                                 <div class="avatar">
-                                    <img src="{{ asset('storage/' . optional($user->kyc)->front_image) }}" alt="profile">
+                                    <img src="{{ asset('storage/' . optional($user->kyc)->front_image) }}" alt="document">
                                 </div>
                                 <div class="avatar">
-                                    <img src="{{ asset('storage/' . optional($user->kyc)->back_image) }}" alt="profile">
+                                    <img src="{{ asset('storage/' . optional($user->kyc)->back_image) }}" alt="document">
                                 </div>
                             </div>
                         </div>
@@ -64,11 +64,11 @@
                                 <h5>Nominee Document</h5>
                                 <div class="avatar">
                                     <img src="{{ asset('storage/' . optional($user->nominee)->front_image) }}"
-                                        alt="profile">
+                                        alt="document">
                                 </div>
                                 <div class="avatar">
                                     <img src="{{ asset('storage/' . optional($user->nominee)->back_image) }}"
-                                        alt="profile">
+                                        alt="document">
                                 </div>
                             </div>
                         </div>
@@ -121,15 +121,15 @@
                                                 <h3 class="title">Basic Information</h3>
                                             </div>
                                             <div class="site-card-body">
-                                                <form action="" method="post">
+                                                <form action="{{ url('user/update', $user->id) }}" method="post">
+                                                    @csrf
                                                     <div class="row">
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
                                                                     Name</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->name }}" name="name"
-                                                                    required="">
+                                                                    value="{{ $user->name ?? '' }}" name="name">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -137,8 +137,7 @@
                                                                 <label for="" class="box-input-label">User
                                                                     Email</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->email }}" required=""
-                                                                    name="email">
+                                                                    value="{{ $user->email ?? '' }}" name="email">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -146,7 +145,32 @@
                                                                 <label for="" class="box-input-label">Phone
                                                                     Number</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="Bangladesh" disabled="">
+                                                                    value="{{ $user->phone ?? '' }}" name="phone">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">User
+                                                                    Role</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->role->name ?? '' }}" name="role_id">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Master
+                                                                    ID</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->master_id ?? '' }}"
+                                                                    name="master_id">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for=""
+                                                                    class="box-input-label">Status</label>
+                                                                <input type="text" class="box-input"
+                                                                    value="{{ $user->master_id ?? '' }}" name="status">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12">
@@ -174,9 +198,12 @@
                                                             <div class="site-input-groups">
                                                                 <label for=""
                                                                     class="box-input-label">Gender</label>
+                                                                <input type="hidden"
+                                                                    value="{{ $user->userDetails->gender_id ?? '' }}"
+                                                                    name="gender_id">
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->name }}" name="name"
-                                                                    required="">
+                                                                    value="{{ $user->userDetails->gender->value ?? '' }}"
+                                                                    name="gender" required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -184,8 +211,8 @@
                                                                 <label for="" class="box-input-label">Date Of
                                                                     Birth</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->email }}" required=""
-                                                                    name="email">
+                                                                    value="{{ $user->userDetails->dob ?? '' }}"
+                                                                    required="" name="email">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -193,15 +220,20 @@
                                                                 <label for=""
                                                                     class="box-input-label">Occupation</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="Bangladesh" disabled="">
+                                                                    value="{{ $user->userDetails->occupation ?? '' }}"
+                                                                    disabled="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Marital
                                                                     Status</label>
+                                                                <input type="hidden"
+                                                                    value="{{ $user->userDetails->marital_status_id ?? '' }}"
+                                                                    name="marital_status_id">
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->phone }}" disabled="">
+                                                                    value="{{ $user->userDetails->maritalStatus->value ?? '' }}"
+                                                                    disabled="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -209,7 +241,8 @@
                                                                 <label for="" class="box-input-label">KYC
                                                                     Type</label>
                                                                 <input type="text" class="box-input" name="username"
-                                                                    value="MahfuzAhmed8477" required="">
+                                                                    value="{{ $user->kyc->kycType->value ?? '' }}"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -217,7 +250,8 @@
                                                                 <label for="" class="box-input-label">Card
                                                                     Number</label>
                                                                 <input type="email" class="box-input"
-                                                                    value="ba*********@gm******m" disabled="">
+                                                                    value="{{ $user->kyc->card_number ?? '' }}"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12">
@@ -246,8 +280,8 @@
                                                                 <label for="" class="box-input-label">Nominee
                                                                     Name</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->name }}" name="name"
-                                                                    required="">
+                                                                    value="{{ $user->nominee->name ?? '' }}"
+                                                                    name="name" required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -255,8 +289,8 @@
                                                                 <label for="" class="box-input-label">Phone
                                                                     Number</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->email }}" required=""
-                                                                    name="email">
+                                                                    value="{{ $user->nominee->phone ?? '' }}"
+                                                                    required="" name="phone">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -264,7 +298,8 @@
                                                                 <label for="" class="box-input-label">Date of
                                                                     Birth</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="Bangladesh" disabled="">
+                                                                    value="{{ $user->nominee->dob ?? '' }}"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -272,7 +307,8 @@
                                                                 <label for="" class="box-input-label">Relation
                                                                     with User</label>
                                                                 <input type="text" class="box-input"
-                                                                    value="{{ $user->phone }}" disabled="">
+                                                                    value="{{ $user->nominee->relation->value ?? '' }}"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -280,15 +316,18 @@
                                                                 <label for="" class="box-input-label">KYC
                                                                     Type</label>
                                                                 <input type="text" class="box-input" name="username"
-                                                                    value="MahfuzAhmed8477" required="">
+                                                                    value="{{ $user->nominee->kycType->value ?? '' }}"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Card
                                                                     Number</label>
-                                                                <input type="email" class="box-input"
-                                                                    value="ba*********@gm******m" disabled="">
+                                                                <input type="text" class="box-input"
+                                                                    name="card_number"
+                                                                    value="{{ $user->nominee->card_number ?? '' }}"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12">
@@ -310,23 +349,23 @@
                                                 <h3 class="title">Change Password</h3>
                                             </div>
                                             <div class="site-card-body">
-                                                <form action="" method="post">
-                                                    <input type="hidden" name="_token"
-                                                        value="HoURYRw8yjEK5pUXqBZJAtFAQIXvUlfeZZJUytt4">
+                                                <form action="{{ url('user/password-change', $user->id) }}"
+                                                    method="post">
+                                                    @csrf
                                                     <div class="row">
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
-                                                                <label for="" class="box-input-label">New
+                                                                <label for="new_password" class="box-input-label">New
                                                                     Password:</label>
-                                                                <input type="password" name="new_password"
-                                                                    class="box-input" required="">
+                                                                <input type="password" name="password" class="box-input"
+                                                                    required="">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Confirm
                                                                     Password:</label>
-                                                                <input type="password" name="new_confirm_password"
+                                                                <input type="password" name="password_confirmation"
                                                                     class="box-input" required="">
                                                             </div>
                                                         </div>

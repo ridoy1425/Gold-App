@@ -49,9 +49,10 @@ Route::middleware(['auth'])->group(
                 Route::get('create', [UserController::class, 'userCreate'])->name('user-create');
                 Route::post('store', [UserController::class, 'userStore']);
                 Route::get('edit/{id}', [UserController::class, 'userEdit'])->name('user-edit');
-                Route::patch('update/{id}', [UserController::class, 'userUpdate']);
+                Route::post('update/{id}', [UserController::class, 'userUpdate']);
                 Route::get('delete/{id}', [UserController::class, 'userDelete']);
                 Route::post('send-notification', [UserController::class, 'mailNotification']);
+                Route::post('password-change/{id}', [UserController::class, 'passwordUpdate']);
             }
         );
         //kyc

@@ -32,30 +32,50 @@ class UserController extends Controller
 
     public function userUpdate(Request $request, $id)
     {
-        $validate_data = $this->validate($request, [
-            'employee_id' => 'required|exists:employee_infos,id',
-            'user_name'   => 'required|string',
-            'expire_date' => 'required',
-            'role_id'     => 'required|exists:roles,id',
-        ]);
+        $validate_data = [
+            'name'      => 'required|string',
+            'email'     => 'required|email',
+            'phone'     => 'required|numeric',
+            'role_id'   => 'required|exists:roles,id',
+            'status'    => 'required|string',
+            'master_id' => 'required|string',
+        ];
+        $validator = $request->validate($validate_data);
+        try {
+            $user = User::findOrFail($id);
+            $user->update($validator);
 
-        $user = User::findOrFail($id);
-        $user->update($validate_data);
-        if ($request->password) {
-            $validate_data = $this->validate($request, [
-                'password'    => 'required|confirmed|min:4',
-            ]);
-            $user->update(['password' => Hash::make($request->password)]);
+            toastr()->success('Success! User Data Updated!');
+            return redirect()->back();
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
         }
+    }
 
-        toastr()->success('Success! Data Updated!');
-        return redirect('user/index');
+    public function passwordUpdate(Request $request, $id)
+    {
+        $validate_data = [
+            'password'  => 'required|confirmed|min:4',
+        ];
+        $validator = $request->validate($validate_data);
+        try {
+            $validator['password'] = Hash::make($request->password);
+            $user = User::findOrFail($id);
+            $user->update($validator);
+
+            toastr()->success('Success! User Password Updated!');
+            return redirect()->back();
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     public function userDelete($id)
     {
         User::destroy($id);
-        toastr()->success('Success! Data Deleted!');
+        toastr()->success('Success! User Deleted!');
         return redirect('user/index');
     }
 
