@@ -13,11 +13,6 @@ class CollectRequest extends Model
 
     public function order()
     {
-        return $this->belongsTo(CollectRequest::class, 'order_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Order::class, 'order_id');
     }
 }

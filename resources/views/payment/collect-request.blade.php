@@ -35,82 +35,85 @@
                         </thead>
                         <tbody>
                             @foreach ($request as $row)
-                                <tr>{{ date('d-M, Y', strtotime($row->created_at)) }}</tr>
-                                <tr>{{ $row->order->order_id }}</tr>
-                                <tr>{{ $row->order->user->name }}</tr>
-                                <tr>{{ $row->collect_type }}</tr>
-                                <tr>{{ $row->amount }}</tr>
-                                <tr>{{ $row->gold }}</tr>
-                                <tr>{{ $row->payment_method }}</tr>
-                                @if ($row->status == 'pending')
-                                    <td><span class="pending">Pending</span></td>
-                                @elseif ($row->status == 'in-process')
-                                    <td><span class="in_process">In Process</span></td>
-                                @elseif ($row->status == 'completed')
-                                    <td><span class="completed">Completed</span></td>
-                                @elseif ($row->status == 'rejected')
-                                    <td><span class="rejected">Canceled</span></td>
-                                @else
-                                    <td><span class="success">Active</span></td>
-                                @endif
-                                <td>
-                                    <div class="action_td">
-                                        <a href="#">
-                                            <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
-                                                class="action__icon">
-                                        </a>
-                                        <a href="{{ url('order/profit-cancel', $row->id) }}">
-                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
-                                                alt="Delete" class="action__icon">
-                                        </a>
-                                        <a class="send_message_arrow" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal">
-                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}"
-                                                alt="Send" class="action__icon">
-                                        </a>
+                                <tr>
+                                    <td>{{ date('d-M, Y', strtotime($row->created_at)) }}</td>
+                                    <td>{{ $row->order->order_id }}</td>
+                                    <td>{{ $row->order->user->name }}</td>
+                                    <td>{{ $row->collect_type }}</td>
+                                    <td>{{ $row->amount }}</td>
+                                    <td>{{ $row->gold }}</td>
+                                    <td>{{ $row->payment_method }}</td>
+                                    @if ($row->status == 'pending')
+                                        <td><span class="pending">Pending</span></td>
+                                    @elseif ($row->status == 'in-process')
+                                        <td><span class="in_process">In Process</span></td>
+                                    @elseif ($row->status == 'completed')
+                                        <td><span class="completed">Completed</span></td>
+                                    @elseif ($row->status == 'rejected')
+                                        <td><span class="rejected">Canceled</span></td>
+                                    @else
+                                        <td><span class="success">Active</span></td>
+                                    @endif
+                                    <td>
+                                        <div class="action_td">
+                                            <a href="#">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
+                                                    alt="Edit" class="action__icon">
+                                            </a>
+                                            <a href="{{ url('order/profit-cancel', $row->id) }}">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                    alt="Delete" class="action__icon">
+                                            </a>
+                                            <a class="send_message_arrow" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}"
+                                                    alt="Send" class="action__icon">
+                                            </a>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content site-table-modal">
-                                                    <div class="modal-body popup-body">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                        <div class="popup-body-text" id="kyc-action-data">
-                                                            <h3 class="title mb-4">
-                                                                Send Message
-                                                            </h3>
-                                                            <form action="{{ url('message/send') }}" method="post">
-                                                                <input type="hidden" name="receiver_id"
-                                                                    value="{{ $row->order->user->id }}">
-                                                                <div class="site-input-groups">
-                                                                    <label for=""
-                                                                        class="box-input-label">Subject:</label>
-                                                                    <input type="text" name="subject"
-                                                                        class="box-input mb-0" required>
-                                                                </div>
-                                                                <div class="site-input-groups">
-                                                                    <label for="" class="box-input-label">Details
-                                                                        Message</label>
-                                                                    <textarea name="message" class="form-textarea mb-0"></textarea>
-                                                                </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content site-table-modal">
+                                                        <div class="modal-body popup-body">
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                            <div class="popup-body-text" id="kyc-action-data">
+                                                                <h3 class="title mb-4">
+                                                                    Send Message
+                                                                </h3>
+                                                                <form action="{{ url('message/send') }}" method="post">
+                                                                    <input type="hidden" name="receiver_id"
+                                                                        value="{{ $row->order->user->id }}">
+                                                                    <div class="site-input-groups">
+                                                                        <label for=""
+                                                                            class="box-input-label">Subject:</label>
+                                                                        <input type="text" name="subject"
+                                                                            class="box-input mb-0" required>
+                                                                    </div>
+                                                                    <div class="site-input-groups">
+                                                                        <label for=""
+                                                                            class="box-input-label">Details
+                                                                            Message</label>
+                                                                        <textarea name="message" class="form-textarea mb-0"></textarea>
+                                                                    </div>
 
-                                                                <div class="action-btns">
-                                                                    <button type="submit"
-                                                                        class="btn primary-btn centered me-2">
-                                                                        <i class="fas fa-paper-plane"></i>
-                                                                        Send Message
-                                                                    </button>
-                                                                </div>
-                                                            </form>
+                                                                    <div class="action-btns">
+                                                                        <button type="submit"
+                                                                            class="btn primary-btn centered me-2">
+                                                                            <i class="fas fa-paper-plane"></i>
+                                                                            Send Message
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

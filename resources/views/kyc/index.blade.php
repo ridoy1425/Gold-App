@@ -43,7 +43,6 @@
                             @endif
                             <td>
                                 <div class="action_td">
-                                    <!-- <a href="{{ URL('kyc/edit', $label->id) }}"> -->
                                     <a href="" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <img src="{{ asset('ui/admin_assets/dist/img/eyes_icon.png') }}" alt="Edit"
                                             class="action__icon">

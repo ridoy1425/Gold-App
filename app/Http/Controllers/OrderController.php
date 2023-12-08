@@ -124,20 +124,19 @@ class OrderController extends Controller
         return view('payment.collect-request', compact('request'));
     }
 
-    public function collectRequest()
+    public function collectRequest(Request $request)
     {
         $data = $this->validateWith([
-            'order_id'       => 'required|exists:orders,id',
-            'collect_type'   => 'required|in:investment,profit',
-            'payment_type'   => 'required|in:balance,gold',
-            'amount'         => 'nullable|numeric',
-            'gold'           => 'nullable|integer',
-            'payment_method' => 'required|in:bank,wallet'
+            'order_id'        => 'required|exists:orders,id',
+            'collect_type'    => 'required|in:investment,profit',
+            'payment_type'    => 'required|in:balance,gold',
+            'amount'          => 'nullable|numeric',
+            'gold'            => 'nullable|integer',
+            'payment_method'  => 'required|string',
+            'order_profit_id' => 'nullable|exists:order_profits,id',
         ]);
-
         try {
-            $data['status'] = 'active';
-            $request = CollectRequest::create($data);
+            $collectRequest = CollectRequest::create($data);
 
             if ($request->has('order_profit_id')) {
                 $profit = OrderProfit::findOrFail($request->order_profit_id);
@@ -146,8 +145,9 @@ class OrderController extends Controller
                 $order = Order::findOrFail($request->order_id);
                 $order->update(['status', 'in-process']);
             }
+
             return response()->json([
-                'request' =>  $request,
+                'collectRequest' =>  $collectRequest,
             ], 200);
         } catch (Exception $e) {
             return response()->json([

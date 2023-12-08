@@ -67,6 +67,60 @@
                                                 <img src="{{ asset('ui/admin_assets/dist/img/eyes_icon.png') }}"
                                                     alt="Edit" class="action__icon">
                                             </a>
+                                            <a href="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
+                                                    alt="Edit" class="action__icon">
+                                            </a>
+                                            <a href="" onclick="return confirm('Are you sure?')">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                    alt="Delete" class="action__icon">
+                                            </a>
+                                            {{-- <!-- Modal -->
+                                            <div class="kyc__modal modal fade action_modal" id="exampleModal1"
+                                                tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content site-table-modal">
+                                                        <div class="modal-body popup-body">
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                            <div class="kyc_container">
+                                                                <div class="popup-body-text" id="kyc-action-data">
+                                                                    <h3 class="title mb-3">
+                                                                        Status Update
+                                                                    </h3>
+                                                                    <form action="{{ url('order/status-update') }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        <input type="hidden"
+                                                                            value="{{ $label->id ?? '' }}" name="kyc_id">
+                                                                        <div class="user_bank_info">
+                                                                            <div class="input__group">
+                                                                                <div class="site-input-groups ">
+                                                                                    <label for=""
+                                                                                        class="box-input-label">Status</label>
+                                                                                    <select
+                                                                                        class="form-select-md form-select"
+                                                                                        id="status" name="status">
+                                                                                        <option value="pending">
+                                                                                            Pending</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="action-btns">
+                                                                                <button type="submit" name="action"
+                                                                                    value="approved"
+                                                                                    class="btn primary-btn">
+                                                                                    <i class="fas fa-check"></i>
+                                                                                    Submit
+                                                                                </button>
+                                                                            </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
                                             <!-- Modal -->
                                             <div class="payment__modal kyc__modal modal fade action_modal" id="exampleModal"
                                                 tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
