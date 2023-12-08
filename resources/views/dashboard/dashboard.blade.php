@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <h4 class="mt-4">Transfer Data of This month</h4>
+            {{-- <h4 class="mt-4">Transfer Data of This month</h4>
             <div class="card card-default edit__inner__container">
                 <div class="card-body table-responsive">
                     <table class="table dataTable no-footer" id="table_id">
@@ -119,7 +119,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> --}}
         </section>
         <!-- /.content -->
         {{-- @include('employees.employee-search-modal') --}}

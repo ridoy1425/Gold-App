@@ -32,15 +32,15 @@
                                 <div class="title-des">
                                     <h4>{{ $user->name }}</h4>
                                 </div>
-                                @if ($user->status = 'active')
+                                @if ($user->status == 'active')
                                     <button class="site-btn-sm active_btn text-white w-100 centered">
                                         Active
                                     </button>
-                                @elseif($user->status = 'inactive')
+                                @elseif($user->status == 'inactive')
                                     <button class="site-btn-sm inactive_btn text-white w-100 centered">
                                         Inactive
                                     </button>
-                                @elseif($user->status = 'pending')
+                                @elseif($user->status == 'pending')
                                     <button class="site-btn-sm pending_btn text-white w-100 centered">
                                         Pending
                                     </button>
@@ -152,8 +152,15 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
                                                                     Role</label>
-                                                                <input type="text" class="box-input"
-                                                                    value="{{ $user->role->name ?? '' }}" name="role_id">
+                                                                <select class="form-select-md form-select" id="role_id"
+                                                                    name="role_id">
+                                                                    @foreach ($roles as $role)
+                                                                        <option value="{{ $role->id }}"
+                                                                            @if (isset($user->role_id)) {{ $role->id == $user->role_id ? 'selected' : '' }} @endif>
+                                                                            {{ $role->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -167,10 +174,19 @@
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
-                                                                <label for=""
-                                                                    class="box-input-label">Status</label>
-                                                                <input type="text" class="box-input"
-                                                                    value="{{ $user->master_id ?? '' }}" name="status">
+                                                                <label for="" class="-input-label">Status</label>
+                                                                <select class="form-select-md form-select" id="status"
+                                                                    name="status">
+                                                                    <option value="pending"
+                                                                        {{ $user->status == 'pending' ? 'selected' : '' }}>
+                                                                        Pending</option>
+                                                                    <option value="active"
+                                                                        {{ $user->status == 'active' ? 'selected' : '' }}>
+                                                                        Active</option>
+                                                                    <option value="inactive"
+                                                                        {{ $user->status == 'inactive' ? 'selected' : '' }}>
+                                                                        Inactive</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12">
@@ -198,12 +214,18 @@
                                                             <div class="site-input-groups">
                                                                 <label for=""
                                                                     class="box-input-label">Gender</label>
-                                                                <input type="hidden"
-                                                                    value="{{ $user->userDetails->gender_id ?? '' }}"
-                                                                    name="gender_id">
-                                                                <input type="text" class="box-input"
-                                                                    value="{{ $user->userDetails->gender->value ?? '' }}"
-                                                                    name="gender" required="">
+                                                                <select class="form-select-md form-select" id="gender"
+                                                                    name="gender_id" required>
+                                                                    <option value=""></option>
+                                                                    @foreach ($payloads as $payload)
+                                                                        @if ($payload->type == 'gender')
+                                                                            <option value="{{ $payload->id }}"
+                                                                                @if (isset($user->userDetails->gender_id)) {{ $payload->id == $user->userDetails->gender_id ? 'selected' : '' }} @endif>
+                                                                                {{ $payload->value }}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -228,21 +250,37 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Marital
                                                                     Status</label>
-                                                                <input type="hidden"
-                                                                    value="{{ $user->userDetails->marital_status_id ?? '' }}"
-                                                                    name="marital_status_id">
-                                                                <input type="text" class="box-input"
-                                                                    value="{{ $user->userDetails->maritalStatus->value ?? '' }}"
-                                                                    disabled="">
+                                                                <select class="form-select-md form-select"
+                                                                    id="marital_status_id" name="marital_status_id"
+                                                                    required>
+                                                                    <option value=""></option>
+                                                                    @foreach ($payloads as $payload)
+                                                                        @if ($payload->type == 'marital_status')
+                                                                            <option value="{{ $payload->id }}"
+                                                                                @if (isset($user->userDetails->marital_status_id)) {{ $payload->id == $user->userDetails->marital_status_id ? 'selected' : '' }} @endif>
+                                                                                {{ $payload->value }}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">KYC
                                                                     Type</label>
-                                                                <input type="text" class="box-input" name="username"
-                                                                    value="{{ $user->kyc->kycType->value ?? '' }}"
-                                                                    required="">
+                                                                <select class="form-select-md form-select"
+                                                                    id="kyc_type_id" name="kyc_type_id" required>
+                                                                    <option value=""></option>
+                                                                    @foreach ($payloads as $payload)
+                                                                        @if ($payload->type == 'kyc_type')
+                                                                            <option value="{{ $payload->id }}"
+                                                                                @if (isset($user->kyc->kyc_type_id)) {{ $payload->id == $user->kyc->kyc_type_id ? 'selected' : '' }} @endif>
+                                                                                {{ $payload->value }}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -306,18 +344,36 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Relation
                                                                     with User</label>
-                                                                <input type="text" class="box-input"
-                                                                    value="{{ $user->nominee->relation->value ?? '' }}"
-                                                                    required="">
+                                                                <select class="form-select-md form-select"
+                                                                    id="relation_id " name="relation_id " required>
+                                                                    <option value=""></option>
+                                                                    @foreach ($payloads as $payload)
+                                                                        @if ($payload->type == 'relation')
+                                                                            <option value="{{ $payload->id }}"
+                                                                                @if (isset($user->nominee->relation_id)) {{ $payload->id == $user->nominee->relation_id ? 'selected' : '' }} @endif>
+                                                                                {{ $payload->value }}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">KYC
                                                                     Type</label>
-                                                                <input type="text" class="box-input" name="username"
-                                                                    value="{{ $user->nominee->kycType->value ?? '' }}"
-                                                                    required="">
+                                                                <select class="form-select-md form-select"
+                                                                    id="kyc_type_id" name="kyc_type_id" required>
+                                                                    <option value=""></option>
+                                                                    @foreach ($payloads as $payload)
+                                                                        @if ($payload->type == 'kyc_type')
+                                                                            <option value="{{ $payload->id }}"
+                                                                                @if (isset($user->nominee->kyc_type_id)) {{ $payload->id == $user->nominee->kyc_type_id ? 'selected' : '' }} @endif>
+                                                                                {{ $payload->value }}
+                                                                            </option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
@@ -406,7 +462,7 @@
                                                                             <th scope="col">PROFIT</th>
                                                                             <th scope="col">DELIVERY TIME</th>
                                                                             <th scope="col">STATUS</th>
-                                                                            <th scope="col">Action</th>
+                                                                            <th scope="col">profit details</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>

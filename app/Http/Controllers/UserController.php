@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\NotificationMail;
 use App\Models\KycInfo;
 use App\Models\NomineeInfo;
+use App\Models\Payload;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\UserDetail;
 use App\Traits\AttachmentTrait;
@@ -27,7 +29,9 @@ class UserController extends Controller
     public function userEdit($id)
     {
         $user = User::findOrFail($id);
-        return view('user.user-create', compact('user'));
+        $roles = Role::all();
+        $payloads = Payload::all();
+        return view('user.user-create', compact('user', 'roles', 'payloads'));
     }
 
     public function userUpdate(Request $request, $id)

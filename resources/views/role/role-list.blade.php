@@ -5,9 +5,13 @@
 @section('style')
     <style>
         .button {
-            background: forestgreen;
+            justify-content: center;
+            background-color: rgb(202, 167, 7);
             color: #fff;
-            padding: 0 2px;
+            border-radius: 30px;
+            width: max-content;
+            padding: 3px 15px;
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -41,9 +45,15 @@
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->slug }}</td>
                                     <td>
-                                        <a href="{{ URL('/role/edit', $role->id) }}"><i class="fas fa-edit"></i></a>
-                                        <a style="color:red;" href="{{ URL('/role/delete', $role->id) }}"><i
-                                                class="fas fa-trash"></i></a>
+                                        <a href="{{ URL('/role/edit', $role->id) }}">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
+                                                class="action__icon">
+                                        </a>
+                                        <a href="{{ URL('/role/delete', $role->id) }}"
+                                            onclick="return confirm('Are you sure?')">
+                                            <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                alt="Delete" class="action__icon">
+                                        </a>
                                         <a class="button"
                                             href="{{ route('permission-list', ['role_id' => $role->id]) }}">Set
                                             Permission</a>

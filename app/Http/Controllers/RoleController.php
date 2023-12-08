@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AppraisalCategory;
-use App\Models\Branch;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
