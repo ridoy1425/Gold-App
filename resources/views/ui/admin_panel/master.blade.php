@@ -100,124 +100,150 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item ">
-                            <a href="{{ route('dashboard') }}"
-                                class="nav-link {{ $route == 'dashboard' ? ' active' : '' }}">
-                                <i class="fas fa-tachometer-alt nav-icon"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('user-list') }}"
-                                class="nav-link {{ $route == 'user-list' || $route == 'user-edit' ? ' active' : '' }}">
-                                <i class="fas fa-users nav-icon"></i>
-                                <p>
-                                    Users
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('kyc-list') }}"
-                                class="nav-link {{ $route == 'kyc-list' || $route == 'kyc-edit' ? ' active' : '' }}">
-                                <i class="fa-regular fa-square-check nav-icon"></i>
-                                <p>
-                                    KYC
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('app-index') }}"
-                                class="nav-link {{ $route == 'app-index' ? ' active' : '' }}">
-                                <i class="fa-solid fa-gear nav-icon"></i>
-                                <p>
-                                    App Settings
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('payment-index') }}"
-                                class="nav-link {{ $route == 'payment-index' ? ' active' : '' }}">
-                                <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
-                                <p>
-                                    Payments
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('Order-index') }}"
-                                class="nav-link {{ $route == 'Order-index' ? ' active' : '' }}">
-                                <!-- <i class="fa-solid fa-basket-shopping nav-icon"></i> -->
-                                <i class="fa-solid fa-cart-plus nav-icon"></i>
-                                <p>
-                                    Orders
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('collect-request') }}"
-                                class="nav-link {{ $route == 'collect-request' ? ' active' : '' }}">
-                                <i class="fa-regular fa-money-bill-1 nav-icon"></i>
-                                <p>
-                                    Collect Request
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('withdraw-list') }}"
-                                class="nav-link {{ $route == 'withdraw-list' ? ' active' : '' }}">
-                                <i class="fa-solid fa-landmark nav-icon"></i>
-                                <p>
-                                    Withdraws
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('transfer-list') }}"
-                                class="nav-link {{ $route == 'transfer-list' ? ' active' : '' }}">
-                                <i class="fa-solid fa-money-bill-transfer nav-icon"></i>
-                                <p>
-                                    Transfer
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('role-list') }}"
-                                class="nav-link {{ $route == 'role-list' ? ' active' : '' }}">
-                                <i class="fa-regular fa-message nav-icon"></i>
-                                <p>
-                                    Manage Roles
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('template-index') }}"
-                                class="nav-link {{ $route == 'template-index' ? ' active' : '' }}">
-                                <i class="fa-regular fa-message nav-icon"></i>
-                                <p>
-                                    Message Template
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('sendbox-index') }}"
-                                class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
-                                <i class="fa-regular fa-comment-dots nav-icon "></i>
-                                <p>
-                                    Message To Users
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('message-inbox') }}"
-                                class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
-                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
-                                <p>
-                                    Support Message
-                                </p>
-                            </a>
-                        </li>
+                        @if (auth()->user()->hasPermission('dashboard'))
+                            <li class="nav-item ">
+                                <a href="{{ route('dashboard') }}"
+                                    class="nav-link {{ $route == 'dashboard' ? ' active' : '' }}">
+                                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('users'))
+                            <li class="nav-item ">
+                                <a href="{{ route('user-list') }}"
+                                    class="nav-link {{ $route == 'user-list' || $route == 'user-edit' ? ' active' : '' }}">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>
+                                        Users
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('kyc'))
+                            <li class="nav-item ">
+                                <a href="{{ route('kyc-list') }}"
+                                    class="nav-link {{ $route == 'kyc-list' || $route == 'kyc-edit' ? ' active' : '' }}">
+                                    <i class="fa-regular fa-square-check nav-icon"></i>
+                                    <p>
+                                        KYC
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('app-settings'))
+                            <li class="nav-item ">
+                                <a href="{{ route('app-index') }}"
+                                    class="nav-link {{ $route == 'app-index' ? ' active' : '' }}">
+                                    <i class="fa-solid fa-gear nav-icon"></i>
+                                    <p>
+                                        App Settings
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('payments'))
+                            <li class="nav-item ">
+                                <a href="{{ route('payment-index') }}"
+                                    class="nav-link {{ $route == 'payment-index' ? ' active' : '' }}">
+                                    <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
+                                    <p>
+                                        Payments
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('orders'))
+                            <li class="nav-item ">
+                                <a href="{{ route('Order-index') }}"
+                                    class="nav-link {{ $route == 'Order-index' ? ' active' : '' }}">
+                                    <!-- <i class="fa-solid fa-basket-shopping nav-icon"></i> -->
+                                    <i class="fa-solid fa-cart-plus nav-icon"></i>
+                                    <p>
+                                        Orders
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('collection-request'))
+                            <li class="nav-item ">
+                                <a href="{{ route('collect-request') }}"
+                                    class="nav-link {{ $route == 'collect-request' ? ' active' : '' }}">
+                                    <i class="fa-regular fa-money-bill-1 nav-icon"></i>
+                                    <p>
+                                        Collect Request
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('withdraws'))
+                            <li class="nav-item ">
+                                <a href="{{ route('withdraw-list') }}"
+                                    class="nav-link {{ $route == 'withdraw-list' ? ' active' : '' }}">
+                                    <i class="fa-solid fa-landmark nav-icon"></i>
+                                    <p>
+                                        Withdraws
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('transfers'))
+                            <li class="nav-item ">
+                                <a href="{{ route('transfer-list') }}"
+                                    class="nav-link {{ $route == 'transfer-list' ? ' active' : '' }}">
+                                    <i class="fa-solid fa-money-bill-transfer nav-icon"></i>
+                                    <p>
+                                        Transfer
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('manage-role'))
+                            <li class="nav-item ">
+                                <a href="{{ route('role-list') }}"
+                                    class="nav-link {{ $route == 'role-list' ? ' active' : '' }}">
+                                    <i class="fa-solid fa-person-circle-plus nav-icon"></i>
+                                    <p>
+                                        Manage Roles
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('message-template'))
+                            <li class="nav-item ">
+                                <a href="{{ route('template-index') }}"
+                                    class="nav-link {{ $route == 'template-index' ? ' active' : '' }}">
+                                    <i class="fa-regular fa-message nav-icon"></i>
+                                    <p>
+                                        Message Template
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('message-to-users'))
+                            <li class="nav-item ">
+                                <a href="{{ route('sendbox-index') }}"
+                                    class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
+                                    <i class="fa-regular fa-comment-dots nav-icon "></i>
+                                    <p>
+                                        Message To Users
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->hasPermission('support-message'))
+                            <li class="nav-item ">
+                                <a href="{{ route('message-inbox') }}"
+                                    class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
+                                    <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                    <p>
+                                        Support Message
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
