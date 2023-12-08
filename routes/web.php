@@ -114,7 +114,7 @@ Route::middleware(['auth'])->group(
             }
         );
         //role & permission
-        Route::prefix('role')->middleware("permission:role-permissions")->group(
+        Route::prefix('role')->middleware("permission:manage-role")->group(
             function () {
                 Route::get('index', [RoleController::class, 'getRoleList'])->name('role-list');
                 Route::get('create', [RoleController::class, 'roleCreate'])->name('role-create');

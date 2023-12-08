@@ -19,51 +19,48 @@ class RoleController extends Controller
 
     public function roleCreate()
     {
-        $branches = Branch::all();
-        $categories = AppraisalCategory::all();
-        return view('role.role-create', compact('branches', 'categories'));
+        return view('role.role-create');
     }
 
     public function roleStore(Request $request)
     {
         $validate_data = $this->validate($request, [
-            'role_name'           => 'required|unique:roles,role_name',
-            'display_name'        => 'required|unique:roles,display_name',
-            'branch_id'           => 'required|exists:branches,id',
+            'name' => 'required|unique:roles,name',
         ]);
 
-        $validate_data['role_slug'] = Str::slug($request->role_name);
+        $validate_data['slug'] = Str::slug($request->name);
         Role::create($validate_data);
 
-        return redirect('role/index')->with('success', 'Successfully Added');
+        toastr()->success('Success! Role Added Successfully');
+        return redirect('role/index');
     }
 
     public function roleEdit($id)
     {
-        $branches = Branch::all();
-        $categories = AppraisalCategory::all();
         $role = Role::findOrFail($id);
-        return view('role.role-create', compact('branches', 'role', 'categories'));
+        return view('role.role-create', compact('role'));
     }
 
     public function roleUpdate(Request $request, $id)
     {
         $validate_data = $this->validate($request, [
-            'role_name' => 'required|unique:roles,role_name,' . $id . ',id',
-            'display_name'        => 'required|unique:roles,display_name,' . $id . ',id',
-            'branch_id'           => 'required|exists:branches,id',
+            'name' => 'required|unique:roles,name,' . $id,
         ]);
 
         $role = Role::findOrFail($id);
+        $validate_data['slug'] = Str::slug($request->name);
         $role->update($validate_data);
 
-        return redirect('role/index')->with('success', 'Successfully Updated');
+        toastr()->success('Success! Role Updated Successfully');
+        return redirect('role/index');
     }
 
-    public function userDelete($id)
+    public function roleDelete($id)
     {
         Role::destroy($id);
-        return redirect('role/index')->with('error', 'Successfully Deleted');
+
+        toastr()->success('Success! Role Deleted Successfully');
+        return redirect('role/index');
     }
 
     public function getPermissionList(Request $request)
@@ -79,6 +76,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($request->role_id);
         $role->permissions()->sync($request->permissions);
 
-        return redirect('role/index')->with('success', 'Permission Successfully Updated');
+        toastr()->success('Success! Permission Successfully Updated');
+        return redirect('role/index');
     }
 }

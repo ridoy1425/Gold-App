@@ -28,10 +28,9 @@
                                             Name</label>
                                         <div class="col-sm-8">
                                             <input type="hidden" value="{{ old('role_name', $role->id ?? '') }}"
-                                                name="role_id">
+                                                name="role_id" readonly>
                                             <input type="text" class="form-control form-control-sm" id="role_name"
-                                                name="role_name" value="{{ old('role_name', $role->role_name ?? '') }}"
-                                                readonly>
+                                                name="name" value="{{ old('role_name', $role->name ?? '') }}" readonly>
                                         </div>
                                     </div>
                                 </div>

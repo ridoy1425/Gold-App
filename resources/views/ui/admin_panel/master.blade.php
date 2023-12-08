@@ -183,8 +183,8 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="{{ route('template-index') }}"
-                                class="nav-link {{ $route == 'template-index' ? ' active' : '' }}">
+                            <a href="{{ route('role-list') }}"
+                                class="nav-link {{ $route == 'role-list' ? ' active' : '' }}">
                                 <i class="fa-regular fa-message nav-icon"></i>
                                 <p>
                                     Manage Roles

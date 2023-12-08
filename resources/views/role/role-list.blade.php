@@ -19,29 +19,6 @@
 @section('main_content')
     <div class="row page-content">
         <div class="container">
-            {{-- message alert --}}
-            <div class="alert_message mt-2">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul style="margin-bottom: 0rem;">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (Session::has('success'))
-                    <div class="alert alert-success" role="success">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif
-                @if (Session::has('error'))
-                    <div class="alert alert-danger" role="success">
-                        {{ Session::get('error') }}
-                    </div>
-                @endif
-            </div>
-
             {{-- card-body start --}}
             <div class="card card-default">
                 <div class=" ml-auto mb-2 mt-2 mr-3">
@@ -53,8 +30,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Role Name</th>
-                                <th scope="col">Display Name</th>
-                                <th scope="col">Branch</th>
+                                <th scope="col">Role Slug</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -62,9 +38,8 @@
                             @foreach ($roles as $role)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $role->role_name }}</td>
-                                    <td>{{ $role->display_name }}</td>
-                                    <td>{{ $role->branch->name ?? '' }}({{ $role->branch->code ?? '' }})</td>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->slug }}</td>
                                     <td>
                                         <a href="{{ URL('/role/edit', $role->id) }}"><i class="fas fa-edit"></i></a>
                                         <a style="color:red;" href="{{ URL('/role/delete', $role->id) }}"><i

@@ -28,10 +28,10 @@ class PermissionSeeder extends Seeder
             ['name' => 'Message Template', 'category' => 'web'],
             ['name' => 'Message To Users', 'category' => 'web'],
             ['name' => 'Support Message', 'category' => 'web'],
-            ['name' => 'Role & Permissions', 'category' => 'web'],
-            ['name' => 'Website', 'category' => 'web'],
+            ['name' => 'Manage Role', 'category' => 'web'],
+            // ['name' => 'Website', 'category' => 'web'],
         ];
-
+        Permission::query()->truncate();
         // Generating slugs for each permission
         foreach ($permissions as &$permission) {
             $permission['slug'] = Str::slug($permission['name']);
