@@ -88,6 +88,7 @@ Route::middleware(['auth'])->group(
                 Route::get('withdraw', [PaymentController::class, 'withdrawList'])->name('withdraw-list');
             }
         );
+        Route::get('transfer-delete/{id}', [PaymentController::class, 'transferDelete']);
         Route::get('withdraw-delete/{id}', [PaymentController::class, 'withdrawDelete']);
         Route::post('withdraw-status', [PaymentController::class, 'changeWithdrawStatus']);
 
@@ -101,7 +102,7 @@ Route::middleware(['auth'])->group(
         );
 
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
-        Route::get('change-collection-status', [OrderController::class, 'changeCollectionStatus']);
+        Route::post('change-collection-status', [OrderController::class, 'changeCollectionStatus']);
         Route::get('collection-delete/{id}', [OrderController::class, 'collectionDelete']);
         Route::post('change-profit-status', [OrderController::class, 'changeProfitStatus']);
 
@@ -116,7 +117,7 @@ Route::middleware(['auth'])->group(
                 Route::prefix('template')->group(
                     function () {
                         Route::get('/', [NotificationController::class, 'messagingTemplate'])->name('template-index');
-                        Route::get('create', [NotificationController::class, 'createTemplate']);
+                        Route::get('create', [NotificationController::class, 'createTemplate'])->name('template-create');
                         Route::post('create', [NotificationController::class, 'saveTemplateData']);
                         Route::get('edit/{id}', [NotificationController::class, 'editTemplateData']);
                         Route::post('update/{id}', [NotificationController::class, 'updateTemplateData']);

@@ -214,7 +214,7 @@
                         @if (auth()->user()->hasPermission('message-template'))
                             <li class="nav-item ">
                                 <a href="{{ route('template-index') }}"
-                                    class="nav-link {{ $route == 'template-index' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'template-index' || $route == 'template-create' ? ' active' : '' }}">
                                     <i class="fa-regular fa-message nav-icon"></i>
                                     <p>
                                         Message Template

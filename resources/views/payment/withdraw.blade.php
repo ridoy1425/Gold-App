@@ -47,7 +47,7 @@
                                         <td><span class="completed">Completed</span>
                                         </td>
                                     @elseif ($row->status == 'rejected')
-                                        <td><span class="rejected">Canceled</span>
+                                        <td><span class="rejected">Rejected</span>
                                         </td>
                                     @else
                                         <td><span class="pending">Pending</span>
@@ -56,15 +56,16 @@
                                     <td>
                                         <div class="action_td">
                                             <a href="button" data-bs-toggle="modal" data-bs-target="#edit_iconModal">
-                                    <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
-                                        class="action__icon">
-                                </a>
+                                                <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
+                                                    alt="Edit" class="action__icon">
+                                            </a>
                                             <a href="" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                     alt="Message" class="action__icon">
                                             </a>
-                                            <a href="#">
+                                            <a href="{{ url('withdraw-delete', $row->id) }}"
+                                                onclick="return confirm('Are you sure?')">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
                                                     alt="Delete" class="action__icon">
                                             </a>
@@ -74,31 +75,39 @@
                                             </a> --}}
 
                                             <!-- Modal -->
-                                            <div class="payment__modal kyc__modal modal fade action_modal" id="edit_iconModal"
-                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content site-table-modal">
-                                            <div class="modal-body popup-body">
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                                <div class="mt-4">
-                                                    <label for="">Status changes</label>
-                                                <select class="form-select-md form-select box-input"
-                                                                    id="marital_status_id" name="marital_status_id"
-                                                                    required>
-                                                    <option value="">sdfsdf</option>
-                                                    <option value="">sdfsdf</option>
-                                                    <option value="">sdfsdf</option>
-                                                    <option value="">sdfsdf</option>
-                                                    <option value="">sdfsdf</option>
-                                                </select>
+                                            <div class="payment__modal kyc__modal modal fade action_modal"
+                                                id="edit_iconModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content site-table-modal">
+                                                        <div class="modal-body popup-body">
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                            <form action="{{ url('withdraw-status') }}" method="post">
+                                                                @csrf
+                                                                <div class="mt-4">
+                                                                    <input type="hidden" value="{{ $row->id }}"
+                                                                        name="withdraw_id" readonly>
+                                                                    <label for="">Update Status</label>
+                                                                    <select class="form-select-md form-select box-input"
+                                                                        id="status" name="status" required>
+                                                                        @foreach ($statuses as $status)
+                                                                            <option
+                                                                                value="{{ \Illuminate\Support\Str::slug($status->value) }}"
+                                                                                {{ $row->status == \Illuminate\Support\Str::slug($status->value) ? 'selected' : '' }}>
+                                                                                {{ $status->value }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <button type="submit"
+                                                                    class="site-btn-sm mt-3 primary-btn w-100">Update
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <button type="submit" class="site-btn-sm mt-3 primary-btn w-100">Send Message
-                                            </button>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
                                             <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">

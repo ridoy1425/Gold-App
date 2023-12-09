@@ -48,15 +48,15 @@
                                     @endif
                                     <td>
                                         <div class="action_td">
-                                            <!-- <a class="send_message_arrow" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}"
-                                                    alt="Send" class="action__icon">
-                                            </a> -->
                                             <a href="" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                     alt="Send" class="action__icon">
+                                            </a>
+                                            <a href="{{ url('transfer-delete', $row->id) }}"
+                                                onclick="return confirm('Are you sure?')">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                    alt="Delete" class="action__icon">
                                             </a>
                                             <!-- Modal -->
                                             <div class="modal fade action_modal" id="exampleModal" tabindex="-1"

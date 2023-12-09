@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payload;
 use App\Models\Payment;
 use App\Models\PaymentTransfer;
 use App\Models\User;
@@ -191,10 +192,19 @@ class PaymentController extends Controller
         }
     }
 
+    public function transferDelete($id)
+    {
+        PaymentTransfer::destroy($id);
+
+        toastr()->success('Success! Deleted Successfully');
+        return redirect()->back();
+    }
+
     public function withdrawList()
     {
         $withdraws = Withdraw::latest()->get();
-        return view('payment.withdraw', compact('withdraws'));
+        $statuses = Payload::where('type', 'status')->get();
+        return view('payment.withdraw', compact('withdraws', 'statuses'));
     }
 
     public function withdrawRequest(Request $request)
