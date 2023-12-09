@@ -55,10 +55,10 @@
                                     @endif
                                     <td>
                                         <div class="action_td">
-                                            <a href="#">
-                                                <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
-                                                    alt="Edit" class="action__icon">
-                                            </a>
+                                            <a href="button" data-bs-toggle="modal" data-bs-target="#edit_iconModal">
+                                    <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
+                                        class="action__icon">
+                                </a>
                                             <a href="" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
@@ -74,6 +74,31 @@
                                             </a> --}}
 
                                             <!-- Modal -->
+                                            <div class="payment__modal kyc__modal modal fade action_modal" id="edit_iconModal"
+                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content site-table-modal">
+                                            <div class="modal-body popup-body">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                                <div class="mt-4">
+                                                    <label for="">Status changes</label>
+                                                <select class="form-select-md form-select box-input"
+                                                                    id="marital_status_id" name="marital_status_id"
+                                                                    required>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                </select>
+                                                </div>
+                                                <button type="submit" class="site-btn-sm mt-3 primary-btn w-100">Send Message
+                                            </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                             <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">

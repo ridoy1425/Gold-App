@@ -30,7 +30,7 @@
                                         <label for="" class="col-sm-3 col-label">Select Users
                                         </label>
                                         <div class="col-sm-9">
-                                            <select class="form-select-md form-select" id="user_data" name="users[]"
+                                            <select class="form-select-md form-select box-input" id="user_data" name="users[]"
                                                 multiple="multiple" runat="server">
                                                 @foreach ($users as $user)
                                                 <option value="{{ $user->id }}">
@@ -44,7 +44,7 @@
                                         <label for="" class="col-sm-3 col-label">Message Template
                                         </label>
                                         <div class="col-sm-9">
-                                            <select class="form-select-md form-select" id="template" name="template">
+                                            <select class="form-select-md form-select box-input" id="template" name="template">
                                                 <option value="" selected></option>
                                                 @foreach ($template as $row)
                                                 <option value="{{ $row->id }}">

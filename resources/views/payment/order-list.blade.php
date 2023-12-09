@@ -123,35 +123,20 @@
                                             <div class="modal-body popup-body">
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
-                                                <div class="kyc_container">
-                                                    <div class="popup-body-text" id="kyc-action-data">
-                                                        <h3 class="title mb-3">
-                                                            Profit List
-                                                        </h3>
-                                                        <form action="" method="post">
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th scope="col">Profit Date</th>
-                                                                        <th scope="col">Amount</th>
-                                                                        <th scope="col">Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($row->orderProfit as $profit)
-                                                                    <tr>
-                                                                        <td>{{ date('d-M-y', strtotime($profit->date)) }}
-                                                                        </td>
-                                                                        <td>{{ $row->profit_amount }}
-                                                                        </td>
-                                                                        <td>{{ $profit->status }}</td>
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </form>
-                                                    </div>
+                                                <div class="mt-4">
+                                                    <label for="">Status changes</label>
+                                                <select class="form-select-md form-select box-input"
+                                                                    id="marital_status_id" name="marital_status_id"
+                                                                    required>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                    <option value="">sdfsdf</option>
+                                                </select>
                                                 </div>
+                                                <button type="submit" class="site-btn-sm mt-3 primary-btn w-100">Send Message
+                                            </button>
                                             </div>
                                         </div>
                                     </div>

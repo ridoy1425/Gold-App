@@ -152,7 +152,7 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
                                                                     Role</label>
-                                                                <select class="form-select-md form-select" id="role_id"
+                                                                <select class="form-select-md form-select box-input" id="role_id"
                                                                     name="role_id">
                                                                     @foreach ($roles as $role)
                                                                         <option value="{{ $role->id }}"
@@ -175,7 +175,7 @@
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="-input-label">Status</label>
-                                                                <select class="form-select-md form-select" id="status"
+                                                                <select class="form-select-md form-select box-input" id="status"
                                                                     name="status">
                                                                     <option value="pending"
                                                                         {{ $user->status == 'pending' ? 'selected' : '' }}>
@@ -214,7 +214,7 @@
                                                             <div class="site-input-groups">
                                                                 <label for=""
                                                                     class="box-input-label">Gender</label>
-                                                                <select class="form-select-md form-select" id="gender"
+                                                                <select class="form-select-md form-select box-input" id="gender"
                                                                     name="gender_id" required>
                                                                     <option value=""></option>
                                                                     @foreach ($payloads as $payload)
@@ -250,7 +250,7 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Marital
                                                                     Status</label>
-                                                                <select class="form-select-md form-select"
+                                                                <select class="form-select-md form-select box-input"
                                                                     id="marital_status_id" name="marital_status_id"
                                                                     required>
                                                                     <option value=""></option>
@@ -269,7 +269,7 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">KYC
                                                                     Type</label>
-                                                                <select class="form-select-md form-select"
+                                                                <select class="form-select-md form-select box-input"
                                                                     id="kyc_type_id" name="kyc_type_id" required>
                                                                     <option value=""></option>
                                                                     @foreach ($payloads as $payload)
@@ -344,7 +344,7 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">Relation
                                                                     with User</label>
-                                                                <select class="form-select-md form-select"
+                                                                <select class="form-select-md form-select box-input"
                                                                     id="relation_id " name="relation_id " required>
                                                                     <option value=""></option>
                                                                     @foreach ($payloads as $payload)
@@ -362,7 +362,7 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">KYC
                                                                     Type</label>
-                                                                <select class="form-select-md form-select"
+                                                                <select class="form-select-md form-select box-input"
                                                                     id="kyc_type_id" name="kyc_type_id" required>
                                                                     <option value=""></option>
                                                                     @foreach ($payloads as $payload)
