@@ -93,6 +93,14 @@ class PaymentController extends Controller
         }
     }
 
+    public function paymentDelete($id)
+    {
+        Payment::destroy($id);
+
+        toastr()->success('Success! Deleted Successfully.');
+        return redirect()->back();
+    }
+
     public function transferList()
     {
         $transfer = PaymentTransfer::latest()->get();
@@ -235,5 +243,27 @@ class PaymentController extends Controller
                 ]
             );
         }
+    }
+
+    public function changeWithdrawStatus()
+    {
+        $data = $this->validateWith([
+            'withdraw_id' => 'required|exists:withdraws,id',
+            'status' => 'required|string',
+        ]);
+
+        $withdraw = Withdraw::findOrFail($data['withdraw_id']);
+        $withdraw->update(['status' => $data['status']]);
+
+        toastr()->success('Success! Status Changed');
+        return redirect()->back();
+    }
+
+    public function withdrawDelete($id)
+    {
+        Withdraw::destroy($id);
+
+        toastr()->success('Success! Deleted Successfully');
+        return redirect()->back();
     }
 }

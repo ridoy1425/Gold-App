@@ -83,14 +83,26 @@ Route::middleware(['auth'])->group(
             function () {
                 Route::get('index', [PaymentController::class, 'index'])->name('payment-index');
                 Route::post('add-wallet', [PaymentController::class, 'addWalletAmount']);
+                Route::get('delete/{id}', [PaymentController::class, 'paymentDelete']);
                 Route::get('transfer', [PaymentController::class, 'transferList'])->name('transfer-list');
                 Route::get('withdraw', [PaymentController::class, 'withdrawList'])->name('withdraw-list');
             }
         );
-        Route::get('order', [OrderController::class, 'getOrderList'])->name('Order-index');
-        Route::get('order/profit-cancel/{id}', [OrderController::class, 'profitCancel']);
+        Route::get('withdraw-delete/{id}', [PaymentController::class, 'withdrawDelete']);
+        Route::post('withdraw-status', [PaymentController::class, 'changeWithdrawStatus']);
+
+        Route::prefix('order')->middleware("permission:orders")->group(
+            function () {
+                Route::get('/', [OrderController::class, 'getOrderList'])->name('Order-index');
+                Route::get('profit-cancel/{id}', [OrderController::class, 'profitCancel']);
+                Route::get('delete/{id}', [OrderController::class, 'orderDelete']);
+                Route::post('status-change', [OrderController::class, 'changeOrderStatus']);
+            }
+        );
+
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
-        Route::get('change-collection-request-status', [OrderController::class, 'changeCollectionStatus']);
+        Route::get('change-collection-status', [OrderController::class, 'changeCollectionStatus']);
+        Route::get('collection-delete/{id}', [OrderController::class, 'collectionDelete']);
         Route::post('change-profit-status', [OrderController::class, 'changeProfitStatus']);
 
         Route::prefix('message')->group(

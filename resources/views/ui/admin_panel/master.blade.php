@@ -203,7 +203,7 @@
                         @if (auth()->user()->hasPermission('manage-role'))
                             <li class="nav-item ">
                                 <a href="{{ route('role-list') }}"
-                                    class="nav-link {{ $route == 'role-list' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'role-list' || $route == 'role-create' ? ' active' : '' }}">
                                     <i class="fa-solid fa-person-circle-plus nav-icon"></i>
                                     <p>
                                         Manage Roles
