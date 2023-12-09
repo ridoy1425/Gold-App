@@ -82,6 +82,26 @@ class OrderController extends Controller
         ], 201);
     }
 
+    public function changeOrderStatus()
+    {
+        $data = $this->validateWith([
+            'order_id' => 'required|exists:orders,id',
+            'status' => 'required|string',
+        ]);
+
+        $collection = Order::findOrFail($data['order_id']);
+        $collection->update(['status' => $data['status']]);
+
+        toastr()->success('Success! Status Changed');
+        return redirect()->back();
+    }
+
+    public function orderDelete($id)
+    {
+        Order::destroy($id);
+
+        toastr()->success('Success! Deleted Successfully');
+    }
     public function changeProfitStatus(Request $request)
     {
         $profit = OrderProfit::findOrFail($request->profit_id);
@@ -159,14 +179,22 @@ class OrderController extends Controller
     public function changeCollectionStatus()
     {
         $data = $this->validateWith([
-            'request_id' => 'required|exists:collect_requests,id',
+            'collection_id' => 'required|exists:collect_requests,id',
             'status' => 'required|string',
         ]);
 
-        $request = CollectRequest::findOrFail($data['request_id']);
-        $request->update(['status' => $data['status']]);
+        $collection = CollectRequest::findOrFail($data['collection_id']);
+        $collection->update(['status' => $data['status']]);
 
         toastr()->success('Success! Status Changed');
+        return redirect()->back();
+    }
+
+    public function collectionDelete($id)
+    {
+        CollectRequest::destroy($id);
+
+        toastr()->success('Success! Deleted Successfully');
         return redirect()->back();
     }
 
