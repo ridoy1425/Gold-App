@@ -26,7 +26,7 @@
                                     <h3 class="title"> Message Box</h3>
                                     <div class="card-header-links">
                                         <a href="{{ route('template-index') }}"
-                                            class="card-header-link primary-btn btn">Back
+                                            class="card-header-link back_btn btn">Back
                                         </a>
                                     </div>
                                 </div>

@@ -48,9 +48,14 @@
                                     @endif
                                     <td>
                                         <div class="action_td">
-                                            <a class="send_message_arrow" href="#" data-bs-toggle="modal"
+                                            <!-- <a class="send_message_arrow" href="#" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}"
+                                                    alt="Send" class="action__icon">
+                                            </a> -->
+                                            <a href="" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                     alt="Send" class="action__icon">
                                             </a>
                                             <!-- Modal -->
