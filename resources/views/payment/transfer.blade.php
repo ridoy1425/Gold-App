@@ -49,7 +49,7 @@
                                     <td>
                                         <div class="action_td">
                                             <a href="" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#exampleModal{{ $row->id }}">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                     alt="Send" class="action__icon">
                                             </a>
@@ -59,8 +59,8 @@
                                                     alt="Delete" class="action__icon">
                                             </a>
                                             <!-- Modal -->
-                                            <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade action_modal" id="exampleModal{{ $row->id }}"
+                                                tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content site-table-modal">
                                                         <div class="modal-body popup-body">

@@ -61,17 +61,18 @@
                                     @endif
                                     <td>
                                         <div class="action_td">
-                                            <a href="button" data-bs-toggle="modal" data-bs-target="#edit_iconModal">
+                                            <a href="button" data-bs-toggle="modal"
+                                                data-bs-target="#edit_iconModal{{ $row->id }}">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
                                                     alt="Edit" class="action__icon">
                                             </a>
                                             <!--  <a class="send_message_arrow" href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal">
-                                                                    <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}" alt="Send"
-                                                                        class="action__icon">
-                                                                </a> -->
+                                                                            data-bs-target="#exampleModal">
+                                                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}" alt="Send"
+                                                                                class="action__icon">
+                                                                        </a> -->
                                             <a href="" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#exampleModal{{ $row->id }}">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                     alt="Message" class="action__icon">
                                             </a>
@@ -82,8 +83,8 @@
                                             </a>
                                             <!-- Modal -->
                                             <div class="payment__modal kyc__modal modal fade action_modal"
-                                                id="edit_iconModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                aria-hidden="true">
+                                                id="edit_iconModal{{ $row->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content site-table-modal">
                                                         <div class="modal-body popup-body">
@@ -115,8 +116,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade action_modal" id="exampleModal{{ $row->id }}"
+                                                tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content site-table-modal">
                                                         <div class="modal-body popup-body">
