@@ -49,7 +49,8 @@
                                                 <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
                                                     alt="Edit" class="action__icon">
                                             </a>
-                                            <a href="" onclick="return confirm('Are you sure?')">
+                                            <a href="{{ url('message/template/delete', $row->id) }}"
+                                                onclick="return confirm('Are you sure?')">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
                                                     alt="Delete" class="action__icon">
                                             </a>

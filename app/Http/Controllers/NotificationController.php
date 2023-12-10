@@ -113,6 +113,14 @@ class NotificationController extends Controller
         return redirect()->back();
     }
 
+    public function deleteTemplateData($id)
+    {
+        MessageTemplate::destroy($id);
+
+        toastr()->success('Success! Deleted Successfully!');
+        return redirect()->back();
+    }
+
     public function singleTemplateData(Request $request)
     {
         $template = MessageTemplate::findOrFail($request->id);

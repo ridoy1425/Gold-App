@@ -122,6 +122,7 @@ Route::middleware(['auth'])->group(
                         Route::get('edit/{id}', [NotificationController::class, 'editTemplateData']);
                         Route::post('update/{id}', [NotificationController::class, 'updateTemplateData']);
                         Route::post('single', [NotificationController::class, 'singleTemplateData']);
+                        Route::get('delete/{id}', [NotificationController::class, 'deleteTemplateData']);
                     }
                 );
             }
