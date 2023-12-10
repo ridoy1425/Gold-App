@@ -81,12 +81,12 @@
                                                                 aria-label="Close"></button>
                                                             <div class="popup-body-text" id="kyc-action-data">
                                                                 <h3 class="title mb-4">
-                                                                    Send Mail to {{ $user->name }}
+                                                                    Send Message
+
                                                                 </h3>
-                                                                <form action="{{ url('user/send-notification') }}"
-                                                                    method="post">
+                                                                <form action="{{ url('message/send') }}" method="post">
                                                                     @csrf
-                                                                    <input type="hidden" name="user_id"
+                                                                    <input type="hidden" name="receiver_id"
                                                                         value="{{ $user->id }}">
                                                                     <div class="site-input-groups">
                                                                         <label for=""
@@ -100,12 +100,11 @@
                                                                             Message</label>
                                                                         <textarea name="message" class="form-textarea mb-0"></textarea>
                                                                     </div>
-
                                                                     <div class="action-btns">
                                                                         <button type="submit"
                                                                             class="btn primary-btn centered me-2">
                                                                             <i class="fas fa-paper-plane"></i>
-                                                                            Send Email
+                                                                            Send Message
                                                                         </button>
                                                                     </div>
                                                                 </form>
