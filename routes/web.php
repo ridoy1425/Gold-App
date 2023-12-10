@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(
                 Route::get('delete/{id}', [UserController::class, 'userDelete']);
                 Route::post('send-notification', [UserController::class, 'mailNotification']);
                 Route::post('password-change/{id}', [UserController::class, 'passwordUpdate']);
+                Route::post('wallet', [UserController::class, 'addWallet']);
             }
         );
         //kyc

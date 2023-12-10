@@ -152,8 +152,8 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
                                                                     Role</label>
-                                                                <select class="form-select-md form-select box-input" id="role_id"
-                                                                    name="role_id">
+                                                                <select class="form-select-md form-select box-input"
+                                                                    id="role_id" name="role_id">
                                                                     @foreach ($roles as $role)
                                                                         <option value="{{ $role->id }}"
                                                                             @if (isset($user->role_id)) {{ $role->id == $user->role_id ? 'selected' : '' }} @endif>
@@ -175,8 +175,8 @@
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="-input-label">Status</label>
-                                                                <select class="form-select-md form-select box-input" id="status"
-                                                                    name="status">
+                                                                <select class="form-select-md form-select box-input"
+                                                                    id="status" name="status">
                                                                     <option value="pending"
                                                                         {{ $user->status == 'pending' ? 'selected' : '' }}>
                                                                         Pending</option>
@@ -205,6 +205,43 @@
                                     <div class="col-xl-12">
                                         <div class="site-card">
                                             <div class="site-card-header">
+                                                <h3 class="title">User Wallet</h3>
+                                            </div>
+                                            <div class="site-card-body">
+                                                <form action="{{ url('user/wallet') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $user->id }}" name="user_id"
+                                                        readonly>
+                                                    <div class="row">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="new_password" class="box-input-label">Add
+                                                                    Balance</label>
+                                                                <input type="text" name="balance" class="box-input">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Add
+                                                                    Gold</label>
+                                                                <input type="text" name="gold" class="box-input">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <button type="submit"
+                                                                class="site-btn-sm primary-btn w-100 centered">Add
+                                                                Wallet</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="site-card">
+                                            <div class="site-card-header">
                                                 <h3 class="title">User Details</h3>
                                             </div>
                                             <div class="site-card-body">
@@ -214,8 +251,8 @@
                                                             <div class="site-input-groups">
                                                                 <label for=""
                                                                     class="box-input-label">Gender</label>
-                                                                <select class="form-select-md form-select box-input" id="gender"
-                                                                    name="gender_id" required>
+                                                                <select class="form-select-md form-select box-input"
+                                                                    id="gender" name="gender_id" required>
                                                                     <option value=""></option>
                                                                     @foreach ($payloads as $payload)
                                                                         @if ($payload->type == 'gender')
@@ -398,6 +435,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="site-card">

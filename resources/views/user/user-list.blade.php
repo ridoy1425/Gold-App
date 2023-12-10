@@ -27,6 +27,7 @@
                                 <th scope="col">PHONE</th>
                                 <th scope="col">E-MAIL</th>
                                 <th scope="col">BALANCE</th>
+                                <th scope="col">GOLD</th>
                                 <th scope="col">KYC</th>
                                 <th scope="col">STATUS</th>
                                 <th scope="col">ACTION</th>
@@ -40,6 +41,7 @@
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ optional($user->wallet)->balance ?? '0.00' }}</td>
+                                    <td>{{ optional($user->wallet)->gold ?? '0.00' }}</td>
                                     @if (optional($user->kyc)->status == 'rejected')
                                         <td><span class="rejected">Rejected</span></td>
                                     @elseif(optional($user->kyc)->status == 'approved')

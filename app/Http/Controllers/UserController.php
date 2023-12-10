@@ -222,4 +222,34 @@ class UserController extends Controller
         toastr()->success('Success! Kyc Status Updated.');
         return redirect()->back();
     }
+
+    public function addWallet(Request $request)
+    {
+        try {
+            $this->validateWith([
+                'user_id' => 'required|exists:users,id',
+                'balance' => 'nullable|numeric',
+                'gold'    => 'nullable|numeric',
+            ]);
+
+            $user = User::findOrFail($request->user_id);
+
+            $balance = $request->balance ?? 0;;
+            $gold = $request->gold ?? 0;
+            $balance += $user->wallet->balance;
+            $gold += $user->wallet->gold;
+
+            $user->wallet->update([
+                'balance' => $balance,
+                'gold' => $gold,
+            ]);
+
+            // Display an error toast with no title
+            toastr()->success('Success! Wallet Updated!');
+            return redirect()->back();
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
+    }
 }
