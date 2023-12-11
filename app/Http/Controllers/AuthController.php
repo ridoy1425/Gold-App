@@ -31,21 +31,23 @@ class AuthController extends Controller
         ]);
         try {
             if (Auth::attempt($request->only(['name', 'password']))) {
-                $user = Auth::user();
-
-                if ($user->expire_date && now()->gt($user->expire_date)) {
+                $user = User::where('id', Auth::id())->where('status', 'active')->first();
+                if (!$user) {
                     Auth::logout();
-                    return back()->with([
-                        'error' => 'Your account has expired.',
-                    ])->onlyInput('user_name');
+                    toastr()->error('Error! Your account is not active');
+                    return redirect()->back();
+                }
+                if ($user->hasRole('user')) {
+                    Auth::logout();
+                    toastr()->error("Error! You doesn't have an admin role.");
+                    return redirect()->back();
                 }
                 $request->session()->regenerate();
                 return redirect()->intended('/');
             }
-
             return back()->with([
                 'error' => 'Credentials do not match.',
-            ])->onlyInput('user_name');
+            ])->onlyInput('name');
         } catch (\Exception $e) {
             return back()->withErrors([
                 'message' => false,
@@ -59,7 +61,6 @@ class AuthController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/login');
@@ -67,24 +68,26 @@ class AuthController extends Controller
 
     public function adminRegistration(Request $request)
     {
-        $this->validate($request, [
-            'full_name' => 'required|string',
-            'branch_id' => 'required|exists:branches,id',
-            'user_name' => 'required|unique:users,user_name',
+        $validate_data = [
+            'name'      => 'required|string',
+            'email'     => 'required|email|unique:users,email',
+            'phone'     => 'required|numeric',
             'password'  => 'required|confirmed|min:4',
-        ]);
+        ];
+        $validator = $request->validate($validate_data);
+        try {
+            $role = Role::where('slug', 'admin')->first();
+            $validator['password'] = Hash::make($request->password);
+            $validator['master_id'] = "admin" . rand(1000, 9999);
+            $validator['role_id'] = $role->id;
+            User::create($validator);
 
-        $role = Role::where('role_slug', 'employee')->first();
-        User::create([
-            'name'   => $request->name,
-            'master_id'   => Str::random(2) . rand(1000, 9999),
-            'email'   => $request->email,
-            'phone'   => $request->phone,
-            'password'    => Hash::make($request->password),
-            'role_id'     => $role->id,
-        ]);
-
-        return redirect()->back()->with('success', 'Registration Successful');
+            toastr()->success('Success! Registration successfully done. Please wait for super-admin activation.');
+            return redirect()->back();
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     public function userRegistration(Request $request)

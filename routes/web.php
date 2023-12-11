@@ -34,6 +34,7 @@ Route::middleware(['guest'])->group(
         Route::get('/login', [AuthController::class, 'adminLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'adminLoginData']);
         Route::post('/registration', [AuthController::class, 'userRegistration']);
+        Route::post('/admin-registration', [AuthController::class, 'adminRegistration']);
     }
 );
 
