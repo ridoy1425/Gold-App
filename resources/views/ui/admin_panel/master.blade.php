@@ -89,7 +89,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index.html" class="brand-link">
+            <a href="{{ url('/') }}" class="brand-link">
                 <img src="{{ asset('images/ywca.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text">World Shine</span>
@@ -233,6 +233,17 @@
                                 </a>
                             </li>
                         @endif
+                        {{-- @if (auth()->user()->hasPermission('message-to-users'))
+                            <li class="nav-item ">
+                                <a href="{{ route('sendbox-index') }}"
+                                    class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
+                                    <i class="fa-regular fa-comment-dots nav-icon "></i>
+                                    <p>
+                                        Sent Messages
+                                    </p>
+                                </a>
+                            </li>
+                        @endif --}}
                         @if (auth()->user()->hasPermission('support-message'))
                             <li class="nav-item ">
                                 <a href="{{ route('message-inbox') }}"

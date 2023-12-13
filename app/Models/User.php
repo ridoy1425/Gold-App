@@ -76,4 +76,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaymentTransfer::class, 'sender_id');
     }
+
+    public function withdraws()
+    {
+        return $this->hasMany(Withdraw::class, 'user_id');
+    }
 }
