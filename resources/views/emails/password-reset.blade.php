@@ -99,8 +99,8 @@
                             <a href="" target="_blank" style="display: inline-block;">
                                 {{-- <img src="" alt="Logo" border="0" width="48"
                                     style="display: block; width: 150px; max-width: 150px; min-width: 48px; height:50px;"> --}}
-                                <h3>Gold App</h3>
-                            </a>
+                                    <h3>World Shine</h3>
+                                </a>
                         </td>
                     </tr>
                 </table>
@@ -145,7 +145,7 @@
                     <tr>
                         <td align="left" bgcolor="#ffffff"
                             style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                            <p style="margin: 0;">Sincerly,<br> Gold App Team</p>
+                            <p style="margin: 0;">Sincerly,<br> World Shine Team</p>
                         </td>
                     </tr>
 
