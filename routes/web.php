@@ -33,6 +33,10 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware(['guest'])->group(
     function () {
         Route::get('/', [FrontendController::class, 'showLandingPage']);
+        Route::get('/privacy/policy', [FrontendController::class, 'privacyPage'])->name('privacy.Page');
+        Route::get('/refund/policy', [FrontendController::class, 'refund_policyPage'])->name('refund.policy.Page');
+        Route::get('/terms', [FrontendController::class, 'termsPage'])->name('terms.Page');
+
         Route::get('/login', [AuthController::class, 'adminLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'adminLoginData']);
         Route::post('/registration', [AuthController::class, 'userRegistration']);
