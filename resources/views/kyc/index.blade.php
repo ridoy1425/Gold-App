@@ -178,22 +178,20 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        @if ($label->status == 'pending')
-                                                                            <div class="action-btns">
-                                                                                <button type="submit" name="action"
-                                                                                    value="rejected"
-                                                                                    class="btn centered red-btn me-2">
-                                                                                    <i class="fa fa-close"></i>
-                                                                                    Reject
-                                                                                </button>
-                                                                                <button type="submit" name="action"
-                                                                                    value="approved"
-                                                                                    class="btn primary-btn centered">
-                                                                                    <i class="fas fa-check"></i>
-                                                                                    Approve
-                                                                                </button>
-                                                                            </div>
-                                                                            @endif
+                                                                        <div class="action-btns">
+                                                                            <button type="submit" name="action"
+                                                                                value="rejected"
+                                                                                class="btn centered red-btn me-2">
+                                                                                <i class="fa fa-close"></i>
+                                                                                Reject
+                                                                            </button>
+                                                                            <button type="submit" name="action"
+                                                                                value="approved"
+                                                                                class="btn primary-btn centered">
+                                                                                <i class="fas fa-check"></i>
+                                                                                Approve
+                                                                            </button>
+                                                                        </div>
                                                                     </form>
                                                                 </div>
                                                             </div>

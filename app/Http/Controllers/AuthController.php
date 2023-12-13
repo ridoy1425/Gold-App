@@ -96,7 +96,7 @@ class AuthController extends Controller
         $validate_data = [
             'name'      => 'required|string',
             'email'     => 'required|email|unique:users,email',
-            'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'phone'     => 'required|numeric',
             'password'  => 'required|confirmed|min:4',
         ];
         $validator = $request->validate($validate_data);

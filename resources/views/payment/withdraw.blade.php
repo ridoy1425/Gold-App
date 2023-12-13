@@ -55,6 +55,32 @@
                                     @endif
                                     <td>
                                         <div class="action_td">
+                                            <a href="" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal12{{ $row->id }}">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/eyes_icon.png') }}"
+                                                    alt="Edit" class="action__icon">
+                                            </a>
+                                            <!-- Modal -->
+                                            <div class="payment__modal kyc__modal modal fade action_modal"
+                                                id="exampleModal12{{ $row->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content site-table-modal">
+                                                        <div class="modal-body popup-body">
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                            <div class="kyc_container">
+                                                                <div class="popup-body-text" id="kyc-action-data">
+                                                                    <h3 class="title mb-3">
+                                                                        Withdrawal Reason
+                                                                    </h3>
+                                                                    <p>{{ $row->reason }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <a href="button" data-bs-toggle="modal"
                                                 data-bs-target="#edit_iconModal{{ $row->id }}">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}"
@@ -120,21 +146,38 @@
                                                                 <h3 class="title mb-4">
                                                                     Send Message to {{ $row->user->name }}
                                                                 </h3>
-                                                                <form action="" method="post">
-                                                                    <input type="hidden" name="user_id" value="">
+                                                                <form action="{{ url('message/send') }}" method="post">
+                                                                    @csrf
                                                                     <div class="site-input-groups">
                                                                         <label for=""
-                                                                            class="box-input-label">Subject:</label>
+                                                                            class="box-input-label">Message
+                                                                            Template</label>
+                                                                        <select
+                                                                            class="form-select-md form-select box-input"
+                                                                            id="template" name="template">
+                                                                            <option value="" selected></option>
+                                                                            @foreach ($template as $data)
+                                                                                <option value="{{ $data->id }}">
+                                                                                    {{ $data->subject }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="site-input-groups">
+                                                                        <label for=""
+                                                                            class="box-input-label">Subject</label>
                                                                         <input type="text" name="subject"
-                                                                            class="box-input mb-0" required>
+                                                                            id="subject" class="box-input mb-0"
+                                                                            required>
                                                                     </div>
                                                                     <div class="site-input-groups">
                                                                         <label for=""
                                                                             class="box-input-label">Details
                                                                             Message</label>
-                                                                        <textarea name="message" class="form-textarea mb-0"></textarea>
+                                                                        <textarea name="message" id="message" class="form-textarea mb-0"></textarea>
                                                                     </div>
-
+                                                                    <input type="hidden" name="receiver_id"
+                                                                        value="{{ $row->user_id }}">
                                                                     <div class="action-btns">
                                                                         <button type="submit"
                                                                             class="btn primary-btn centered me-2">
@@ -166,6 +209,24 @@
         $(document).ready(function() {
             $('#table_id').DataTable({
                 rowHeight: 20,
+            });
+
+            $('#template').on('change', function() {
+                var template_id = $(this).val();
+                $.ajax({
+                    url: "{{ url('message/template/single') }}",
+                    type: 'post',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        id: template_id,
+                    },
+                    success: function(data) {
+                        $("#subject").empty();
+                        $("#message").empty();
+                        $("#subject").val(data['subject']);
+                        $("textarea#message").val(data['message']);
+                    }
+                });
             });
         });
     </script>

@@ -108,7 +108,26 @@
                                                                                         </td>
                                                                                         <td>{{ $row->profit_amount }}
                                                                                         </td>
-                                                                                        <td>{{ $profit->status }}</td>
+                                                                                        @if ($profit->status == 'active')
+                                                                                            <td><span
+                                                                                                    class="success">Active</span>
+                                                                                            </td>
+                                                                                        @elseif($profit->status == 'in-process')
+                                                                                            <td><span class="in_process">In
+                                                                                                    Process</span></td>
+                                                                                        @elseif($profit->status == 'completed')
+                                                                                            <td><span
+                                                                                                    class="completed">Completed</span>
+                                                                                            </td>
+                                                                                        @elseif($profit->status == 'rejected')
+                                                                                            <td><span
+                                                                                                    class="rejected">Rejected</span>
+                                                                                            </td>
+                                                                                        @else
+                                                                                            <td><span
+                                                                                                    class="pending">Pending</span>
+                                                                                            </td>
+                                                                                        @endif
                                                                                     </tr>
                                                                                 @endforeach
                                                                             </tbody>

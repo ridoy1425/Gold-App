@@ -51,6 +51,7 @@ class NotificationController extends Controller
             'message' => 'required|string',
             'receiver_id' => 'nullable|exists:users,id',
         ]);
+
         $admin = User::whereHas('role', function ($role) {
             return $role->where('slug', 'super-admin');
         })->first();

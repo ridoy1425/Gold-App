@@ -22,8 +22,8 @@
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">SL</th>
                                 <th scope="col">USER NAME</th>
+                                <th scope="col">USER Id</th>
                                 <th scope="col">PHONE</th>
                                 <th scope="col">E-MAIL</th>
                                 <th scope="col">BALANCE</th>
@@ -36,8 +36,8 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->master_id }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ optional($user->wallet)->balance ?? '0.00' }}</td>

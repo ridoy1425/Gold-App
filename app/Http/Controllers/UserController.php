@@ -9,6 +9,7 @@ use App\Models\Payload;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\Wallet;
 use App\Traits\AttachmentTrait;
 use Exception;
 use Illuminate\Http\Request;
@@ -223,7 +224,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function addWallet(Request $request)
+    public function updateWallet(Request $request)
     {
         try {
             $this->validateWith([
@@ -234,15 +235,17 @@ class UserController extends Controller
 
             $user = User::findOrFail($request->user_id);
 
-            $balance = $request->balance ?? 0;;
-            $gold = $request->gold ?? 0;
-            $balance += $user->wallet->balance;
-            $gold += $user->wallet->gold;
-
-            $user->wallet->update([
-                'balance' => $balance,
-                'gold' => $gold,
-            ]);
+            $wallet = Wallet::where('user_id', $user->user_id)->first();
+            if ($wallet) {
+                $balance = $request->add_amount;
+                $wallet->update(['balance' => $balance]);
+            } else {
+                $balance = $request->add_amount;
+                $wallet = Wallet::create([
+                    'user_id' => $user->user_id,
+                    'balance' => $balance,
+                ]);
+            }
 
             // Display an error toast with no title
             toastr()->success('Success! Wallet Updated!');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MessageTemplate;
 use App\Models\Payload;
 use App\Models\Payment;
 use App\Models\PaymentTransfer;
@@ -105,7 +106,8 @@ class PaymentController extends Controller
     public function transferList()
     {
         $transfer = PaymentTransfer::latest()->get();
-        return view('payment.transfer', compact('transfer'));
+        $template = MessageTemplate::where('status', 'enable')->latest()->get();
+        return view('payment.transfer', compact('transfer', 'template'));
     }
 
     public function paymentTransfer(Request $request)
@@ -203,8 +205,9 @@ class PaymentController extends Controller
     public function withdrawList()
     {
         $withdraws = Withdraw::latest()->get();
+        $template = MessageTemplate::where('status', 'enable')->latest()->get();
         $statuses = Payload::where('type', 'status')->get();
-        return view('payment.withdraw', compact('withdraws', 'statuses'));
+        return view('payment.withdraw', compact('withdraws', 'statuses', 'template'));
     }
 
     public function withdrawRequest(Request $request)
@@ -229,6 +232,10 @@ class PaymentController extends Controller
                     500
                 );
             }
+
+            $balance = 0;
+            $balance = $senderWallet->balance - $request->amount;
+            $senderWallet->update(['balance' => $balance]);
 
             $withdraw = Withdraw::create([
                 'user_id' => $user->id,
@@ -264,6 +271,22 @@ class PaymentController extends Controller
 
         $withdraw = Withdraw::findOrFail($data['withdraw_id']);
         $withdraw->update(['status' => $data['status']]);
+
+        $admin = User::whereHas('role', function ($role) {
+            return $role->where('slug', 'super-admin');
+        })->first();
+        $user = User::findOrFail($withdraw->user_id);
+
+        if ($data['status'] == "rejected") {
+            $senderWallet = Wallet::where('user_id', $withdraw->user_id)->first();
+            $balance = 0;
+            $balance = $senderWallet->balance + $withdraw->amount;
+            $senderWallet->update(['balance' => $balance]);
+        }
+
+        $subject = "Withdraw status changed";
+        $message = "Your withdraw request for amount " . $withdraw->amount . " has been " . $data['status'];
+        $user->notify(new UserNotification($subject, $message, $admin->id));
 
         toastr()->success('Success! Status Changed');
         return redirect()->back();
