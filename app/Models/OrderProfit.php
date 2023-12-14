@@ -10,4 +10,9 @@ class OrderProfit extends Model
     use HasFactory;
 
     protected $fillable = ['order_id', 'date', 'status'];
+
+    public function order()
+    {
+        return $this->belongsTo(OrderProfit::class, "order_id");
+    }
 }

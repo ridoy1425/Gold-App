@@ -48,19 +48,19 @@
                                     @endif
                                     <td>
                                         <div class="action_td">
-                                            <!-- <a class="send_message_arrow" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}"
-                                                    alt="Send" class="action__icon">
-                                            </a> -->
                                             <a href="" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#exampleModal{{ $row->id }}">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
                                                     alt="Send" class="action__icon">
                                             </a>
+                                            <a href="{{ url('transfer-delete', $row->id) }}"
+                                                onclick="return confirm('Are you sure?')">
+                                                <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}"
+                                                    alt="Delete" class="action__icon">
+                                            </a>
                                             <!-- Modal -->
-                                            <div class="modal fade action_modal" id="exampleModal" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade action_modal" id="exampleModal{{ $row->id }}"
+                                                tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content site-table-modal">
                                                         <div class="modal-body popup-body">
@@ -73,18 +73,31 @@
                                                                 </h3>
                                                                 <form action="{{ url('message/send') }}" method="post">
                                                                     @csrf
-                                                                    <input type="hidden" name="user_id" value="dsfdsf">
                                                                     <div class="site-input-groups">
                                                                         <label for=""
-                                                                            class="box-input-label">Subject:</label>
-                                                                        <input type="text" name="subject"
+                                                                            class="box-input-label">Message
+                                                                            Template</label>
+                                                                        <select class="form-select-md form-select box-input"
+                                                                            id="template" name="template">
+                                                                            <option value="" selected></option>
+                                                                            @foreach ($template as $data)
+                                                                                <option value="{{ $data->id }}">
+                                                                                    {{ $data->subject }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="site-input-groups">
+                                                                        <label for=""
+                                                                            class="box-input-label">Subject</label>
+                                                                        <input type="text" name="subject" id="subject"
                                                                             class="box-input mb-0" required>
                                                                     </div>
                                                                     <div class="site-input-groups">
                                                                         <label for=""
                                                                             class="box-input-label">Details
                                                                             Message</label>
-                                                                        <textarea name="message" class="form-textarea mb-0"></textarea>
+                                                                        <textarea name="message" id="message" class="form-textarea mb-0"></textarea>
                                                                     </div>
                                                                     <input type="hidden" name="receiver_id"
                                                                         value="{{ $row->sender_id }}">
@@ -119,6 +132,25 @@
         $(document).ready(function() {
             $('#table_id').DataTable({
                 rowHeight: 20,
+            });
+
+            $('#template').on('change', function() {
+                var template_id = $(this).val();
+                $.ajax({
+                    url: "{{ url('message/template/single') }}",
+                    type: 'post',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        id: template_id,
+                    },
+                    success: function(data) {
+                        console.log(data['subject']);
+                        $("#subject").empty();
+                        $("#message").empty();
+                        $("#subject").val(data['subject']);
+                        $("textarea#message").val(data['message']);
+                    }
+                });
             });
         });
     </script>

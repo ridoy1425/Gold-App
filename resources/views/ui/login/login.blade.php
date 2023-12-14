@@ -20,29 +20,7 @@
 </head>
 
 <body>
-    <div class="alert_message">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul style="margin-bottom: 0rem;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if (Session::has('success'))
-            <div class="alert alert-success" role="success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
-        @if (Session::has('error'))
-            <div class="alert alert-danger" role="success">
-                {{ Session::get('error') }}
-            </div>
-        @endif
-    </div>
     <div class="login_page">
-
         <div class="login_form">
             <div class="login_title text-center">
                 <h3>World Shine</h3>
@@ -79,20 +57,24 @@
                 <span class="close">&times;</span>
             </div>
             <div>
-                <h4 class=" mb-3">Employee Registration</h4>
-                <form action="{{ url('registration') }}" method="post">
+                <h4 class=" mb-3">Admin Registration</h4>
+                <form action="{{ url('admin-registration') }}" method="post">
                     @csrf
                     <div class="mb-1">
-                        <label for="full_name" class="col-form-label col-form-label-sm">Full
-                            Name (English)</label>
-                        <input type="text" class="form-control form-control-sm" id="full_name" name="full_name"
+                        <label for="name" class="col-form-label col-form-label-sm">User name</label>
+                        <input type="text" class="form-control form-control-sm" id="name" name="name"
                             required>
                     </div>
 
                     <div class="mb-1">
-                        <label for="name" class="col-form-label col-form-label-sm">Login User
-                            Name (Nickname)</label>
-                        <input type="text" class="form-control form-control-sm" id="name" name="name"
+                        <label for="email" class="col-form-label col-form-label-sm">User Email</label>
+                        <input type="email" class="form-control form-control-sm" id="email" name="email"
+                            required>
+                    </div>
+
+                    <div class="mb-1">
+                        <label for="phone" class="col-form-label col-form-label-sm">User Phone</label>
+                        <input type="text" class="form-control form-control-sm" id="phone" name="phone"
                             required>
                     </div>
                     <div class="mb-1">

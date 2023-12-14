@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollectRequest;
+use App\Models\MessageTemplate;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderProfit;
+use App\Models\Payload;
+use App\Models\Payment;
 use App\Models\PaymentTransfer;
 use App\Models\ProfitPackage;
 use App\Models\Settings;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Withdraw;
+use App\Notifications\UserNotification;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -21,18 +25,18 @@ class OrderController extends Controller
     public function getOrderList()
     {
         $query = Order::with('user', 'orderProfit');
-
         $user = User::findOrFail(Auth::id());
 
         if ($user->hasRole('user')) {
-            $orders = $query->where('user_id', $user->id)->latest()->get();
+            $orders = $query->where('user_id', $user->id)->where('status', '!=', 'rejected')->latest()->get();
             return response()->json([
                 'orders' => $orders,
             ], 201);
         }
 
         $orders = $query->latest()->get();
-        return view('payment.order-list', compact('orders'));
+        $statuses = Payload::where('type', 'status')->get();
+        return view('payment.order-list', compact('orders', 'statuses'));
     }
 
     public function orderCreate(Request $request)
@@ -89,8 +93,17 @@ class OrderController extends Controller
             'status' => 'required|string',
         ]);
 
-        $collection = Order::findOrFail($data['order_id']);
-        $collection->update(['status' => $data['status']]);
+        $order = Order::findOrFail($data['order_id']);
+        $order->update(['status' => $data['status']]);
+
+        $admin = User::whereHas('role', function ($role) {
+            return $role->where('slug', 'super-admin');
+        })->first();
+        $user = User::findOrFail($order->user_id);
+
+        $subject = "Order status changed";
+        $message = "Your order request has been " . $data['status'];
+        $user->notify(new UserNotification($subject, $message, $admin->id));
 
         toastr()->success('Success! Status Changed');
         return redirect()->back();
@@ -101,6 +114,7 @@ class OrderController extends Controller
         Order::destroy($id);
 
         toastr()->success('Success! Deleted Successfully');
+        return redirect()->back();
     }
     public function changeProfitStatus(Request $request)
     {
@@ -141,13 +155,16 @@ class OrderController extends Controller
     public function getCollectRequestList()
     {
         $request = CollectRequest::latest()->get();
-        return view('payment.collect-request', compact('request'));
+        $statuses = Payload::where('type', 'status')->get();
+        $template = MessageTemplate::where('status', 'enable')->latest()->get();
+        return view('payment.collect-request', compact('request', 'statuses', 'template'));
     }
 
     public function collectRequest(Request $request)
     {
         $data = $this->validateWith([
             'order_id'        => 'required|exists:orders,id',
+            'profit_id'       => 'nullable|exists:order_profits,id',
             'collect_type'    => 'required|in:investment,profit',
             'payment_type'    => 'required|in:balance,gold',
             'amount'          => 'nullable|numeric',
@@ -160,10 +177,10 @@ class OrderController extends Controller
 
             if ($request->has('order_profit_id')) {
                 $profit = OrderProfit::findOrFail($request->order_profit_id);
-                $profit->update(['status', 'in-process']);
+                $profit->update(['status' => 'in-process']);
             } else {
                 $order = Order::findOrFail($request->order_id);
-                $order->update(['status', 'in-process']);
+                $order->update(['status' => 'in-process']);
             }
 
             return response()->json([
@@ -185,6 +202,24 @@ class OrderController extends Controller
 
         $collection = CollectRequest::findOrFail($data['collection_id']);
         $collection->update(['status' => $data['status']]);
+
+        if ($collection->collect_type == "profit") {
+            $profit = OrderProfit::findOrFail($collection->profit_id);
+            $profit->update(['status' => $data['status']]);
+            $user = User::findOrFail($profit->order->user_id);
+        } else {
+            $order = Order::findOrFail($collection->order_id);
+            $order->update(['status' => $data['status']]);
+            $user = User::findOrFail($order->user_id);
+        }
+
+        $admin = User::whereHas('role', function ($role) {
+            return $role->where('slug', 'super-admin');
+        })->first();
+
+        $subject = "Collection status changed";
+        $message = "Your collection request has been " . $data['status'];
+        $user->notify(new UserNotification($subject, $message, $admin->id));
 
         toastr()->success('Success! Status Changed');
         return redirect()->back();
@@ -214,11 +249,13 @@ class OrderController extends Controller
         $orders = Order::with('user', 'orderProfit')->where('user_id', $user->id)->latest()->get();
         $transfers = PaymentTransfer::with('sender', 'receiver')->where('sender_id', $user->id)->latest()->get();
         $withdraws = Withdraw::with('user')->where('user_id', $user->id)->latest()->get();
+        $payments = Payment::with('user')->where('user_id', $user->id)->latest()->get();
 
         return response()->json([
             'orders' => $orders,
             'transfers' => $transfers,
             'withdraws' => $withdraws,
+            'payments' => $payments,
         ], 201);
     }
 }

@@ -104,6 +104,13 @@
                                         <i class="fa-solid fa-money-bill-transfer"></i>
                                         Transfers</a>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <a href="" class="nav-link" id="pills-withdraw-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-withdraw" type="button" role="tab"
+                                        aria-controls="pills-withdraw" aria-selected="true">
+                                        <i class="fa-solid fa-landmark"></i>
+                                        Withdraws</a>
+                                </li>
                             </ul>
                             <div class="btn__small text-end">
                                 <a href="{{ route('user-list') }}" class="card-header-link primary-btn back_btn btn">Back
@@ -152,8 +159,8 @@
                                                             <div class="site-input-groups">
                                                                 <label for="" class="box-input-label">User
                                                                     Role</label>
-                                                                <select class="form-select-md form-select box-input" id="role_id"
-                                                                    name="role_id">
+                                                                <select class="form-select-md form-select box-input"
+                                                                    id="role_id" name="role_id">
                                                                     @foreach ($roles as $role)
                                                                         <option value="{{ $role->id }}"
                                                                             @if (isset($user->role_id)) {{ $role->id == $user->role_id ? 'selected' : '' }} @endif>
@@ -175,8 +182,8 @@
                                                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                                             <div class="site-input-groups">
                                                                 <label for="" class="-input-label">Status</label>
-                                                                <select class="form-select-md form-select box-input" id="status"
-                                                                    name="status">
+                                                                <select class="form-select-md form-select box-input"
+                                                                    id="status" name="status">
                                                                     <option value="pending"
                                                                         {{ $user->status == 'pending' ? 'selected' : '' }}>
                                                                         Pending</option>
@@ -205,6 +212,47 @@
                                     <div class="col-xl-12">
                                         <div class="site-card">
                                             <div class="site-card-header">
+                                                <h3 class="title">User Wallet</h3>
+                                            </div>
+                                            <div class="site-card-body">
+                                                <form action="{{ url('user/wallet') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $user->id }}" name="user_id"
+                                                        readonly>
+                                                    <div class="row">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="new_password" class="box-input-label">Update
+                                                                    Balance</label>
+                                                                <input type="text"
+                                                                    value={{ $user->wallet->balance ?? 0 }} name="balance"
+                                                                    class="box-input">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                            <div class="site-input-groups">
+                                                                <label for="" class="box-input-label">Update
+                                                                    Gold</label>
+                                                                <input type="text" name="gold"
+                                                                    value={{ $user->wallet->gold ?? 0 }}
+                                                                    class="box-input">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <button type="submit"
+                                                                class="site-btn-sm primary-btn w-100 centered">Update
+                                                                Wallet</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="site-card">
+                                            <div class="site-card-header">
                                                 <h3 class="title">User Details</h3>
                                             </div>
                                             <div class="site-card-body">
@@ -214,8 +262,8 @@
                                                             <div class="site-input-groups">
                                                                 <label for=""
                                                                     class="box-input-label">Gender</label>
-                                                                <select class="form-select-md form-select box-input" id="gender"
-                                                                    name="gender_id" required>
+                                                                <select class="form-select-md form-select box-input"
+                                                                    id="gender" name="gender_id" required>
                                                                     <option value=""></option>
                                                                     @foreach ($payloads as $payload)
                                                                         @if ($payload->type == 'gender')
@@ -398,6 +446,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="site-card">
@@ -688,6 +737,69 @@
                                                                                 @else
                                                                                     <td><span
                                                                                             class="rejected">Failed</span>
+                                                                                    </td>
+                                                                                @endif
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-withdraw" role="tabpanel"
+                                aria-labelledby="pills-withdraw-tab">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="site-card">
+                                            <div class="site-card-header">
+                                                <h4 class="title">Transfers</h4>
+                                            </div>
+                                            <div class="site-card-body table-responsive">
+                                                <div class="site-datatable">
+                                                    <div id="user-profit-dataTable_wrapper"
+                                                        class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table_id" id="table_id">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Date</th>
+                                                                            <th scope="col">Withdrawal Amount</th>
+                                                                            <th scope="col">METHOD</th>
+                                                                            <th scope="col">STATUS</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach ($user->withdraws as $row)
+                                                                            <tr>
+                                                                                <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
+                                                                                </td>
+                                                                                <td>{{ optional($row->user)->name }}</td>
+                                                                                <td>{{ $row->amount }}</td>
+                                                                                <td>To Bank Account</td>
+                                                                                @if ($row->status == 'active')
+                                                                                    <td><span class="success">Active</span>
+                                                                                    </td>
+                                                                                @elseif ($row->status == 'in-process')
+                                                                                    <td><span class="in_process">In
+                                                                                            Process</span></td>
+                                                                                @elseif ($row->status == 'completed')
+                                                                                    <td><span
+                                                                                            class="completed">Completed</span>
+                                                                                    </td>
+                                                                                @elseif ($row->status == 'rejected')
+                                                                                    <td><span
+                                                                                            class="rejected">Rejected</span>
+                                                                                    </td>
+                                                                                @else
+                                                                                    <td><span
+                                                                                            class="pending">Pending</span>
                                                                                     </td>
                                                                                 @endif
                                                                             </tr>

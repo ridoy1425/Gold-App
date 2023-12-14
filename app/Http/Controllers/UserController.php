@@ -9,6 +9,7 @@ use App\Models\Payload;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\Wallet;
 use App\Traits\AttachmentTrait;
 use Exception;
 use Illuminate\Http\Request;
@@ -221,5 +222,37 @@ class UserController extends Controller
 
         toastr()->success('Success! Kyc Status Updated.');
         return redirect()->back();
+    }
+
+    public function updateWallet(Request $request)
+    {
+        try {
+            $this->validateWith([
+                'user_id' => 'required|exists:users,id',
+                'balance' => 'nullable|numeric',
+                'gold'    => 'nullable|numeric',
+            ]);
+
+            $user = User::findOrFail($request->user_id);
+
+            $wallet = Wallet::where('user_id', $user->user_id)->first();
+            if ($wallet) {
+                $balance = $request->add_amount;
+                $wallet->update(['balance' => $balance]);
+            } else {
+                $balance = $request->add_amount;
+                $wallet = Wallet::create([
+                    'user_id' => $user->user_id,
+                    'balance' => $balance,
+                ]);
+            }
+
+            // Display an error toast with no title
+            toastr()->success('Success! Wallet Updated!');
+            return redirect()->back();
+        } catch (Exception $e) {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
     }
 }
