@@ -17,6 +17,10 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PrivacyController;
+use App\Http\Controllers\RefundController;
+use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -147,6 +151,49 @@ Route::middleware(['auth'])->group(
                 Route::get('delete/{id}', [RoleController::class, 'roleDelete']);
                 Route::get('permission', [RoleController::class, 'getPermissionList'])->name('permission-list');
                 Route::post('permission', [RoleController::class, 'setPermission']);
+            }
+        );
+
+        //Privacy Page
+        Route::prefix('privacy')->group(
+            function () {
+                Route::get('index', [PrivacyController::class, 'privacyIndex'])->name('privacy.Index');
+                Route::get('privacy/list', [PrivacyController::class, 'privacyList'])->name('privacy.List');
+                Route::post('privacy/create', [PrivacyController::class, 'privacyCreate'])->name('privacy.Create');
+            }
+        );
+
+        //Refund Policies Page
+        Route::prefix('refund')->group(
+            function () {
+                Route::get('index', [RefundController::class, 'refundIndex'])->name('refund.Index');
+                Route::get('refund/list', [RefundController::class, 'refundList'])->name('refund.List');
+                Route::get('refund/create', [RefundController::class, 'refundCreate'])->name('refund.Create');
+            }
+        );
+
+        //Terms Page
+        Route::prefix('terms')->group(
+            function () {
+                Route::get('index', [TermsController::class, 'termsIndex'])->name('terms.Index');
+                Route::get('terms/list', [TermsController::class, 'termsList'])->name('terms.List');
+                Route::post('terms/create', [TermsController::class, 'termsCreate'])->name('terms.Create');
+            }
+        );
+        //Home Page
+        Route::prefix('home')->group(
+            function () {
+                Route::get('about/index', [HomeController::class, 'aboutIndex'])->name('about.Index');
+                Route::get('about/list', [HomeController::class, 'aboutList'])->name('about.List');
+                Route::post('about/create', [HomeController::class, 'aboutCreate'])->name('about.Create');
+
+                Route::get('question/index', [HomeController::class, 'questionIndex'])->name('question.Index');
+                Route::get('question/list', [HomeController::class, 'questionList'])->name('question.List');
+                Route::post('question/create', [HomeController::class, 'questionCreate'])->name('question.Create');
+
+                Route::get('contact/index', [HomeController::class, 'contactIndex'])->name('contact.Index');
+                Route::get('contact/list', [HomeController::class, 'contactList'])->name('contact.List');
+                Route::post('contact/create', [HomeController::class, 'contactCreate'])->name('contact.Create');
             }
         );
     }

@@ -255,30 +255,72 @@
                                 </a>
                             </li>
                         @endif
+                        <hr>
                         <li class="nav-item {{ $route == 'role-create' ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Landing Page
+                                    Home Page
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('user-list') }}"
-                                        class="nav-link {{ $route == 'user-list' ? ' active' : '' }}">
+                                    <a href="{{ route('about.List') }}"
+                                        class="nav-link {{ $route == 'about.List' ? ' active' : '' }}">
                                         <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>Index page</p>
+                                        <p>About Section</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('question.List') }}"
+                                        class="nav-link {{ $route == 'question.List' ? 'active' : '' }}">
+                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                        <p>Question Section</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('contact.List') }}"
+                                        class="nav-link {{ $route == 'contact.List' ? 'active' : '' }}">
+                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                        <p>Contact Section</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('role-list') }}"
                                         class="nav-link {{ $route == 'role-list' ? 'active' : '' }}">
                                         <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>Privacy page</p>
+                                        <p>Tab Section</p>
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('privacy.List') }}"
+                                class="nav-link {{ $route == 'privacy.List' ? ' active' : '' }}">
+                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                <p>
+                                    Privacy Page
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('refund.List') }}"
+                                class="nav-link {{ $route == 'refund.List' ? ' active' : '' }}">
+                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                <p>
+                                    Refund Policies Page
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('terms.List') }}"
+                                class="nav-link {{ $route == 'terms.List' ? ' active' : '' }}">
+                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                <p>
+                                    Terms Page
+                                </p>
+                            </a>
                         </li>
                     </ul>
                 </nav>
