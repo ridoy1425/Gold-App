@@ -35,6 +35,7 @@
     {{-- datatable --}}
     {{-- <link rel="stylesheet" href="{{ asset('ui/login_assets/css/jquery.dataTables.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="{{ asset('ui/admin_assets/css/datepicker.min.css') }}">
     {{-- custom css --}}
     <link rel="stylesheet" href="{{ asset('ui/admin_assets/dist/css/style.css') }}">
     @yield('style')
@@ -393,7 +394,9 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script> --}}
     {{-- typeahead js --}}
     <script src="{{ asset('ui/admin_assets/js/bootstrap3-typeahead.min.js') }}"></script>
+    <script src="{{ asset('ui/admin_assets/js/bootstrap-datepicker.min.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script> --}}
+    <script src="{{ asset('ui/login_assets/js/custom.js') }}"></script>
     @yield('script')
 </body>
 

@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\Wallet;
 use App\Traits\AttachmentTrait;
+use App\Traits\FilterDataTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,18 +21,19 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    use AttachmentTrait;
+    use AttachmentTrait, FilterDataTrait;
 
     public function getUserList()
     {
-        $users = User::latest()->get();
+        $users = User::with('wallet', 'kyc')->latest()->get();
+        $filter_user = User::with('wallet', 'kyc')->latest()->get();
         $template = MessageTemplate::where('status', 'enable')->latest()->get();
-        return view('user.user-list', compact('users', 'template'));
+        return view('user.user-list', compact('users', 'template', 'filter_user'));
     }
 
     public function userEdit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('wallet', 'kyc', 'userDetails', 'nominee', 'bankInfo', 'role', 'orders', 'payments', 'transfers', 'withdraws')->findOrFail($id);
         $roles = Role::all();
         $payloads = Payload::all();
         return view('user.user-create', compact('user', 'roles', 'payloads'));
@@ -256,5 +258,10 @@ class UserController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function filterFormData(Request $request)
+    {
+        return $this->filterCommonData($request, 'user.user-list');
     }
 }

@@ -4,12 +4,6 @@ namespace App\Traits;
 
 use Exception;
 use Illuminate\Support\Facades\Storage;
-use Webp;
-
-use Intervention\Image\Facades\Image;
-use App\Models\Attachment;
-use App\Models\UserDetail;
-use Illuminate\Support\Str;
 
 trait AttachmentTrait
 {

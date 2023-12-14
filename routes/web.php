@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(
                 Route::post('send-notification', [UserController::class, 'mailNotification']);
                 Route::post('password-change/{id}', [UserController::class, 'passwordUpdate']);
                 Route::post('wallet', [UserController::class, 'updateWallet']);
+                Route::post('/filter', [UserController::class, 'filterFormData']);
             }
         );
         //kyc

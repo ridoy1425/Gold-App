@@ -194,11 +194,11 @@ table.dataTable thead {
 }
 
 .select2-container .select2-selection--single {
-    height: 30px !important;
+    height: 37px !important;
 }
 
 .select2-selection__arrow {
-    height: 30px !important;
+    height: 32px !important;
 }
 
 .modal-content h6 {
