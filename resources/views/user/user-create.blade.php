@@ -104,6 +104,13 @@
                                         <i class="fa-solid fa-money-bill-transfer"></i>
                                         Transfers</a>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <a href="" class="nav-link" id="pills-withdraw-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-withdraw" type="button" role="tab"
+                                        aria-controls="pills-withdraw" aria-selected="true">
+                                        <i class="fa-solid fa-landmark"></i>
+                                        Withdraws</a>
+                                </li>
                             </ul>
                             <div class="btn__small text-end">
                                 <a href="{{ route('user-list') }}" class="card-header-link primary-btn back_btn btn">Back
@@ -730,6 +737,69 @@
                                                                                 @else
                                                                                     <td><span
                                                                                             class="rejected">Failed</span>
+                                                                                    </td>
+                                                                                @endif
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-withdraw" role="tabpanel"
+                                aria-labelledby="pills-withdraw-tab">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="site-card">
+                                            <div class="site-card-header">
+                                                <h4 class="title">Transfers</h4>
+                                            </div>
+                                            <div class="site-card-body table-responsive">
+                                                <div class="site-datatable">
+                                                    <div id="user-profit-dataTable_wrapper"
+                                                        class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table_id" id="table_id">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Date</th>
+                                                                            <th scope="col">Withdrawal Amount</th>
+                                                                            <th scope="col">METHOD</th>
+                                                                            <th scope="col">STATUS</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach ($user->withdraws as $row)
+                                                                            <tr>
+                                                                                <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
+                                                                                </td>
+                                                                                <td>{{ optional($row->user)->name }}</td>
+                                                                                <td>{{ $row->amount }}</td>
+                                                                                <td>To Bank Account</td>
+                                                                                @if ($row->status == 'active')
+                                                                                    <td><span class="success">Active</span>
+                                                                                    </td>
+                                                                                @elseif ($row->status == 'in-process')
+                                                                                    <td><span class="in_process">In
+                                                                                            Process</span></td>
+                                                                                @elseif ($row->status == 'completed')
+                                                                                    <td><span
+                                                                                            class="completed">Completed</span>
+                                                                                    </td>
+                                                                                @elseif ($row->status == 'rejected')
+                                                                                    <td><span
+                                                                                            class="rejected">Rejected</span>
+                                                                                    </td>
+                                                                                @else
+                                                                                    <td><span
+                                                                                            class="pending">Pending</span>
                                                                                     </td>
                                                                                 @endif
                                                                             </tr>

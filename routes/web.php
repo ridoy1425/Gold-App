@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesignationInfoController;
 use App\Http\Controllers\DesignationLabelController;
 use App\Http\Controllers\EmployeeInfoController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
@@ -29,6 +30,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/', [FrontendController::class, 'showLandingPage']);
+Route::get('/privacy/policy', [FrontendController::class, 'privacyPage'])->name('privacy.Page');
+Route::get('/refund/policy', [FrontendController::class, 'refund_policyPage'])->name('refund.policy.Page');
+Route::get('/terms', [FrontendController::class, 'termsPage'])->name('terms.Page');
+
 Route::middleware(['guest'])->group(
     function () {
         Route::get('/login', [AuthController::class, 'adminLogin'])->name('login');
@@ -42,7 +48,7 @@ Route::middleware(['auth'])->group(
     function () {
         Route::get('/logout', [AuthController::class, 'logout']);
         // Dashboard page--
-        Route::get('/', [DashboardController::class, 'getDashboard'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
         //user
         Route::prefix('user')->middleware("permission:users")->group(
             function () {

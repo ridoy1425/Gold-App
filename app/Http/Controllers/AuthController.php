@@ -43,7 +43,7 @@ class AuthController extends Controller
                     return redirect()->back();
                 }
                 $request->session()->regenerate();
-                return redirect()->intended('/');
+                return redirect()->intended('/dashboard');
             }
             return back()->with([
                 'error' => 'Credentials do not match.',

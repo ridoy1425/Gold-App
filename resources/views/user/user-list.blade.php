@@ -45,14 +45,16 @@
                                     @if (optional($user->kyc)->status == 'rejected')
                                         <td><span class="rejected">Rejected</span></td>
                                     @elseif(optional($user->kyc)->status == 'approved')
-                                        <td><span class="success">Approved</span></td>
+                                        <td><span class="completed">Complete</span></td>
                                     @else
-                                        <td><span class="pending">Pending</span></td>
+                                        <td><span class="in_process">Incomplete</span></td>
                                     @endif
                                     @if ($user->status == 'pending')
                                         <td><span class="pending">Pending</span></td>
-                                    @else
+                                    @elseif($user->status == 'active')
                                         <td><span class="success">Active</span></td>
+                                    @else
+                                        <td><span class="rejected">Inactive</span></td>
                                     @endif
                                     <td>
                                         <div class="action_td">
