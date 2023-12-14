@@ -237,7 +237,7 @@
                             <li class="nav-item ">
                                 <a href="{{ route('sent-message') }}"
                                     class="nav-link {{ $route == 'sent-message' ? ' active' : '' }}">
-                                    <i class="fa-regular fa-comment-dots nav-icon "></i>
+                                    <i class="fa-regular fa-paper-plane nav-icon"></i>
                                     <p>
                                         Sent Messages
                                     </p>
@@ -258,7 +258,7 @@
                         <hr>
                         <li class="nav-item {{ $route == 'role-create' ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
+                                <i class="fa-solid fa-house nav-icon"></i>
                                 <p>
                                     Home Page
                                     <i class="right fas fa-angle-left"></i>
@@ -298,7 +298,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('privacy.List') }}"
                                 class="nav-link {{ $route == 'privacy.List' ? ' active' : '' }}">
-                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                <i class="fa-solid fa-user-lock nav-icon"></i>
                                 <p>
                                     Privacy Page
                                 </p>
@@ -307,7 +307,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('refund.List') }}"
                                 class="nav-link {{ $route == 'refund.List' ? ' active' : '' }}">
-                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
                                 <p>
                                     Refund Policies Page
                                 </p>
@@ -316,7 +316,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('terms.List') }}"
                                 class="nav-link {{ $route == 'terms.List' ? ' active' : '' }}">
-                                <i class="fa-solid fa-chalkboard-user nav-icon"></i>
+                                <i class="fa-regular fa-file-lines nav-icon"></i>
                                 <p>
                                     Terms Page
                                 </p>
