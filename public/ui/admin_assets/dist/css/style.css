@@ -928,6 +928,10 @@ img {
     margin-bottom: 0;
     font-weight: 600;
 }
+aside .sidebar nav {
+    height: calc(100vh - 65px);
+    overflow-y: auto;
+}
 @media only screen and (max-width: 767px) {
     .kyc_container {
         flex-direction: column;
