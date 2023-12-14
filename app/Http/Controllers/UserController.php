@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\NotificationMail;
 use App\Models\KycInfo;
+use App\Models\MessageTemplate;
 use App\Models\NomineeInfo;
 use App\Models\Payload;
 use App\Models\Role;
@@ -24,7 +25,8 @@ class UserController extends Controller
     public function getUserList()
     {
         $users = User::latest()->get();
-        return view('user.user-list', compact('users'));
+        $template = MessageTemplate::where('status', 'enable')->latest()->get();
+        return view('user.user-list', compact('users', 'template'));
     }
 
     public function userEdit($id)
