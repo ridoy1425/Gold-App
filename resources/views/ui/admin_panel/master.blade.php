@@ -233,6 +233,17 @@
                                 </a>
                             </li>
                         @endif
+                        @if (auth()->user()->hasPermission('message-to-users'))
+                            <li class="nav-item ">
+                                <a href="{{ route('sendbox-index') }}"
+                                    class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
+                                    <i class="fa-regular fa-comment-dots nav-icon "></i>
+                                    <p>
+                                        Sent Messages
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                         @if (auth()->user()->hasPermission('support-message'))
                             <li class="nav-item ">
                                 <a href="{{ route('message-inbox') }}"
@@ -244,6 +255,31 @@
                                 </a>
                             </li>
                         @endif
+                        <li class="nav-item {{ $route == 'role-create' ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    Landing Page
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('user-list') }}"
+                                        class="nav-link {{ $route == 'user-list' ? ' active' : '' }}">
+                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                        <p>Index page</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('role-list') }}"
+                                        class="nav-link {{ $route == 'role-list' ? 'active' : '' }}">
+                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                        <p>Privacy page</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
