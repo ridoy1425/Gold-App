@@ -28,6 +28,7 @@
                     <table class="table" id="table_id">
                         <thead>
                             <tr>
+                                <th scope="col">Date</th>
                                 <th scope="col">Subject</th>
                                 <th scope="col">Message</th>
                                 <th scope="col">ACTION</th>
@@ -39,6 +40,7 @@
                                     $data = json_decode($row->data, true);
                                 @endphp
                                 <tr>
+                                    <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
                                     <td>{{ $data['subject'] }}</td>
                                     <td>{{ $data['message'] }}</td>
                                     <td>

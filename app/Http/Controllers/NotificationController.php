@@ -158,4 +158,12 @@ class NotificationController extends Controller
             return redirect()->back();
         }
     }
+
+    public function sentMessageList()
+    {
+        $user = User::findOrFail(Auth::id());
+
+        $message = Notification::where('sender_id', $user->id)->latest()->get();
+        return view('message.inbox', compact('message'));
+    }
 }
