@@ -15,9 +15,7 @@
         <div class="container">
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
-                {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
-                <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
-        </div> --}}
+                @include('user.filter')
                 <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>

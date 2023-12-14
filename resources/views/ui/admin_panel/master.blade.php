@@ -235,8 +235,8 @@
                         @endif
                         @if (auth()->user()->hasPermission('message-to-users'))
                             <li class="nav-item ">
-                                <a href="{{ route('sendbox-index') }}"
-                                    class="nav-link {{ $route == 'sendbox-index' ? ' active' : '' }}">
+                                <a href="{{ route('sent-message') }}"
+                                    class="nav-link {{ $route == 'sent-message' ? ' active' : '' }}">
                                     <i class="fa-regular fa-comment-dots nav-icon "></i>
                                     <p>
                                         Sent Messages

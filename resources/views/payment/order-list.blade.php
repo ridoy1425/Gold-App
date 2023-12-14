@@ -104,7 +104,7 @@
                                                                             <tbody>
                                                                                 @foreach ($row->orderProfit as $profit)
                                                                                     <tr>
-                                                                                        <td>{{ date('d-M-Y', strtotime($profit->date)) }}
+                                                                                        <td>{{ date('d-M,Y', strtotime($profit->date)) }}
                                                                                         </td>
                                                                                         <td>{{ $row->profit_amount }}
                                                                                         </td>

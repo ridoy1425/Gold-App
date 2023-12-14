@@ -117,6 +117,7 @@ Route::middleware(['auth'])->group(
         Route::prefix('message')->group(
             function () {
                 Route::get('list', [NotificationController::class, 'index'])->name('message-inbox');
+                Route::get('sent-message', [NotificationController::class, 'sentMessageList'])->name('sent-message');
                 Route::get('mark-as-read', [NotificationController::class, 'markAsRead']);
                 Route::get('count', [NotificationController::class, 'messageCount']);
                 Route::post('send', [NotificationController::class, 'sendMessage']);
