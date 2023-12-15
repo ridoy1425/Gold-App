@@ -161,6 +161,8 @@ Route::middleware(['auth'])->group(
                 Route::get('index', [PrivacyController::class, 'privacyIndex'])->name('privacy.Index');
                 Route::get('privacy/list', [PrivacyController::class, 'privacyList'])->name('privacy.List');
                 Route::post('privacy/create', [PrivacyController::class, 'privacyCreate'])->name('privacy.Create');
+                Route::get('privacy/edit/{id}', [PrivacyController::class, 'privacyEdit'])->name('privacy.edit');
+                Route::post('privacy/update/{id}', [PrivacyController::class, 'privacyUpdate'])->name('privacy.update');
             }
         );
 

@@ -13,20 +13,34 @@
 
 <div class="row page-content">
     <div class="container">
-            <form action="#" method="post">
+    <form action="{{ route('privacy.update',$data->id) }}" method="post">
+
         @csrf
+        {{-- @method('put') --}}
         {{-- card-body start --}}
         <div class="card card-default">
             <div class="card-body">
                 <div class="propertyContent">
                     {{-- <h6>About us</h6> --}}
                     <div class="row">
+                        <div class="mb-1 row">
+                            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Page Type
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-select-md form-select box-input" id="template" name="template">
+                                    <option value="" selected></option>
+                                    <option value="1" {{ $data->page_type == 1 ? 'selected' : ''}}>Privacy Policies</option>
+                                    <option value="2" {{ $data->page_type == 2 ? 'selected' : ''}}>Refund Policies</option>
+                                    <option value="3" {{ $data->page_type == 3 ? 'selected' : ''}}>Terms and Conditions</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="mb-1 row">
                                 <label for="title" class="col-sm-4 col-form-label col-form-label-sm">Title<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control form-control-sm" id="title"
-                                        name="title" value="{{ old('title') }}">
+                                        name="title" value="{{ $data->title }}">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +49,7 @@
                                 <label for="sub_title" class="col-sm-4 col-form-label col-form-label-sm">Sub Title<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control form-control-sm" id="sub_title"
-                                        name="sub_title" value="{{ old('sub_title') }}">
+                                        name="sub_title" value="{{ $data->sub_title }}">
                                 </div>
                             </div>
                         </div>
@@ -44,7 +58,7 @@
                                 <label for="description" class="col-sm-4 col-form-label col-form-label-sm">Description<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <textarea type="text" class="form-control form-control-sm" id="description"
-                                        name="description" value="{{ old('description') }}"></textarea>
+                                        name="description" value="{{ old('description') }}">{{ $data->description }}</textarea>
                                 </div>
                             </div>
                         </div>

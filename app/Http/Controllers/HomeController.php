@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function aboutIndex()
     {
         return view('home.about.about_create');
-    }
+    }       
     public function aboutList()
     {
         return view('home.about.about_list');

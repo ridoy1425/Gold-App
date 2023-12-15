@@ -13,7 +13,7 @@
 
 <div class="row page-content">
     <div class="container">
-            <form action="#" method="post">
+        <form action="{{ route('privacy.Create') }}" method="post">
         @csrf
         {{-- card-body start --}}
         <div class="card card-default">
@@ -21,6 +21,18 @@
                 <div class="propertyContent">
                     {{-- <h6>About us</h6> --}}
                     <div class="row">
+                        <div class="mb-1 row">
+                            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Page Type
+                            </label>
+                            <div class="col-sm-8">
+                                <select name="page_type" class="form-select-md form-select box-input" id="template" name="template">
+                                    <option value="" selected></option>
+                                    <option value="1">Privacy Policies</option>
+                                    <option value="2">Refund Policies</option>
+                                    <option value="3">Terms and Conditions</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="mb-1 row">
                                 <label for="title" class="col-sm-4 col-form-label col-form-label-sm">Title<span class="important_field">*</span></label>
