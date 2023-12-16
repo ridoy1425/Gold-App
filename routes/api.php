@@ -7,9 +7,11 @@ use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankInfoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -88,5 +90,13 @@ Route::middleware('auth:sanctum')->group(
                 Route::post('send', [NotificationController::class, 'sendMessage']);
             }
         );
+
+        Route::prefix('home')->group(
+            function () {
+                Route::get('about/list', [HomeController::class, 'aboutList']);
+                Route::get('privacy/list', [PrivacyController::class, 'privacyList']);
+            }
+        );
     }
 );
+

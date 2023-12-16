@@ -15,7 +15,7 @@
     <div class="container">
 
         <div class="btn__small mb-2 mt-1 text-end">
-            <a href="{{ route('category.Index') }}" class="card-header-link primary-btn btn">Add New Role
+            <a href="{{ route('category.Index') }}" class="card-header-link primary-btn btn">Add New Data
             </a>
         </div>
 

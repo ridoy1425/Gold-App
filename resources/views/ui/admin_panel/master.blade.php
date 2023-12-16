@@ -261,7 +261,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fa-solid fa-house nav-icon"></i>
                                 <p>
-                                    Frontend Customization
+                                    Landing Page
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
