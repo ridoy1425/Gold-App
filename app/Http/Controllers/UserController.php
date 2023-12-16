@@ -26,9 +26,11 @@ class UserController extends Controller
     public function getUserList()
     {
         $users = User::with('wallet', 'kyc')->latest()->get();
-        $filter_user = User::with('wallet', 'kyc')->latest()->get();
+        $filter_user = User::latest()->get();
         $template = MessageTemplate::where('status', 'enable')->latest()->get();
-        return view('user.user-list', compact('users', 'template', 'filter_user'));
+        $statuses = Payload::where('type', 'status')->get();
+
+        return view('user.user-list', compact('users', 'template', 'filter_user', 'statuses'));
     }
 
     public function userEdit($id)
@@ -79,6 +81,21 @@ class UserController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
+    }
+
+
+    public function userCheck(Request $request)
+    {
+        $user = User::where('master_id', $request->master_id)->first();
+        if ($user) {
+            return response()->json([
+                'message' => 'success'
+            ], 200);
+        }
+        return
+            response()->json([
+                'error' => 'Not found'
+            ], 302);
     }
 
     public function userDelete($id)
@@ -234,19 +251,18 @@ class UserController extends Controller
             $this->validateWith([
                 'user_id' => 'required|exists:users,id',
                 'balance' => 'nullable|numeric',
-                'gold'    => 'nullable|numeric',
             ]);
 
             $user = User::findOrFail($request->user_id);
 
-            $wallet = Wallet::where('user_id', $user->user_id)->first();
+            $wallet = Wallet::where('user_id', $user->id)->first();
             if ($wallet) {
-                $balance = $request->add_amount;
+                $balance = $request->balance;
                 $wallet->update(['balance' => $balance]);
             } else {
-                $balance = $request->add_amount;
+                $balance = $request->balance;
                 $wallet = Wallet::create([
-                    'user_id' => $user->user_id,
+                    'user_id' => $user->id,
                     'balance' => $balance,
                 ]);
             }

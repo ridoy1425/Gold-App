@@ -16,16 +16,19 @@ use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Withdraw;
 use App\Notifications\UserNotification;
+use App\Traits\FilterDataTrait;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    use FilterDataTrait;
     public function getOrderList()
     {
         $query = Order::with('user', 'orderProfit');
         $user = User::findOrFail(Auth::id());
+        $filter_user = User::latest()->get();
 
         if ($user->hasRole('user')) {
             $orders = $query->where('user_id', $user->id)->where('status', '!=', 'rejected')->latest()->get();
@@ -36,7 +39,7 @@ class OrderController extends Controller
 
         $orders = $query->latest()->get();
         $statuses = Payload::where('type', 'status')->get();
-        return view('payment.order-list', compact('orders', 'statuses'));
+        return view('payment.order-list', compact('orders', 'statuses', 'filter_user'));
     }
 
     public function orderCreate(Request $request)
@@ -154,10 +157,12 @@ class OrderController extends Controller
 
     public function getCollectRequestList()
     {
-        $request = CollectRequest::latest()->get();
+        $request = CollectRequest::with('order', 'profit')->latest()->get();
         $statuses = Payload::where('type', 'status')->get();
         $template = MessageTemplate::where('status', 'enable')->latest()->get();
-        return view('payment.collect-request', compact('request', 'statuses', 'template'));
+        $filter_user = User::latest()->get();
+
+        return view('payment.collect-request', compact('request', 'statuses', 'template', 'filter_user'));
     }
 
     public function collectRequest(Request $request)
@@ -257,5 +262,15 @@ class OrderController extends Controller
             'withdraws' => $withdraws,
             'payments' => $payments,
         ], 201);
+    }
+
+    public function filterFormData(Request $request)
+    {
+        return $this->orderFilter($request, 'payment.order-list',);
+    }
+
+    public function filterCollectionData(Request $request)
+    {
+        return $this->collectionFilter($request, 'payment.collect-request',);
     }
 }

@@ -3,7 +3,7 @@
 @section('title', 'Payment List')
 
 @section('style')
-
+    @include('include_files.css_link')
 @endsection
 
 @section('content_title')
@@ -15,6 +15,13 @@
         <div class="container">
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
+                <div class="m-3">
+                    <h6>Filter</h6>
+                    <form method="POST" action="{{ url('payment/filter') }}" id="filter" autocomplete="off">
+                        @csrf
+                        @include('include_files.filter')
+                    </form>
+                </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>
@@ -123,11 +130,5 @@
 @endsection
 
 @section('script')
-    <script>
-        $(document).ready(function() {
-            $('#table_id').DataTable({
-                rowHeight: 20,
-            });
-        });
-    </script>
+    @include('include_files.js_link')
 @endsection

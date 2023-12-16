@@ -95,23 +95,42 @@ class AuthController extends Controller
 
         $validate_data = [
             'name'      => 'required|string',
-            'email'     => 'required|email|unique:users,email',
+            'email'     => 'required|email',
             'phone'     => 'required|numeric',
             'password'  => 'required|confirmed|min:4',
         ];
         $validator = $request->validate($validate_data);
+
         try {
+            $user = User::where('email', $request->email)->first();
+            $validator['email_verify_token'] = rand(1000, 9999);
+            if ($user) {
+                if ($user->email_verified_at == null) {
+                    $user->update(['email_verify_token' => $validator['email_verify_token']]);
+                    Mail::to($user->email)->send(new EmailVerify($validator['email_verify_token']));
+
+                    return response()->json([
+                        'user' => $user,
+                        'message' => "Verification Code Sent to your email address."
+                    ], 201);
+                }
+
+                return response()->json([
+                    'error' => "You have already an account"
+                ], 422);
+            }
+
             $role = Role::where('slug', 'user')->first();
             $validator['password'] = Hash::make($request->password);
             $validator['master_id'] = Str::lower(Str::random(2)) . rand(1000, 9999);
             $validator['role_id'] = $role->id;
-            $validator['email_verify_token'] = rand(1000, 9999);
             $user = User::create($validator);
 
             Mail::to($user->email)->send(new EmailVerify($user->email_verify_token));
 
             return response()->json([
                 'user' => $user,
+                'message' => "Verification Code Sent to your email address."
             ], 201);
         } catch (Exception $e) {
             return response()->json([
@@ -172,8 +191,8 @@ class AuthController extends Controller
         try {
             $user = User::withSum('orders', 'price')->with(['role' => function ($role) {
                 return $role->with('permissions');
-            }, 'userDetails', 'wallet', 'message', 'kyc', 'nominee', 'bankInfo', 'orders' => function ($order) {
-                return $order->with('orderProfit');
+            }, 'userDetails', 'wallet', 'message', 'kyc', 'nominee', 'bankInfo', 'mobileBanking', 'delivery', 'orders' => function ($order) {
+                return $order->with('orderProfit')->where('status', 'active');
             }])->findOrFail(Auth::id());
 
             return response()->json([

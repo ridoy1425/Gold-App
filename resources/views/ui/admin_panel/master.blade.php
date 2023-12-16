@@ -148,7 +148,7 @@
                         @if (auth()->user()->hasPermission('payments'))
                             <li class="nav-item ">
                                 <a href="{{ route('payment-index') }}"
-                                    class="nav-link {{ $route == 'payment-index' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'payment-index' || $route == 'payment-filter' ? ' active' : '' }}">
                                     <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
                                     <p>
                                         Payments
@@ -159,7 +159,7 @@
                         @if (auth()->user()->hasPermission('orders'))
                             <li class="nav-item ">
                                 <a href="{{ route('Order-index') }}"
-                                    class="nav-link {{ $route == 'Order-index' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'Order-index' || $route == 'order-filter' ? ' active' : '' }}">
                                     <!-- <i class="fa-solid fa-basket-shopping nav-icon"></i> -->
                                     <i class="fa-solid fa-cart-plus nav-icon"></i>
                                     <p>
@@ -171,7 +171,7 @@
                         @if (auth()->user()->hasPermission('collection-request'))
                             <li class="nav-item ">
                                 <a href="{{ route('collect-request') }}"
-                                    class="nav-link {{ $route == 'collect-request' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'collect-request' || $route == 'collect-filter' ? ' active' : '' }}">
                                     <i class="fa-regular fa-money-bill-1 nav-icon"></i>
                                     <p>
                                         Collect Request
@@ -182,7 +182,7 @@
                         @if (auth()->user()->hasPermission('withdraws'))
                             <li class="nav-item ">
                                 <a href="{{ route('withdraw-list') }}"
-                                    class="nav-link {{ $route == 'withdraw-list' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'withdraw-list' || $route == 'withdraw-filter' ? ' active' : '' }}">
                                     <i class="fa-solid fa-landmark nav-icon"></i>
                                     <p>
                                         Withdraws
@@ -193,7 +193,7 @@
                         @if (auth()->user()->hasPermission('transfers'))
                             <li class="nav-item ">
                                 <a href="{{ route('transfer-list') }}"
-                                    class="nav-link {{ $route == 'transfer-list' ? ' active' : '' }}">
+                                    class="nav-link {{ $route == 'transfer-list' || $route == 'transfer-filter' ? ' active' : '' }}">
                                     <i class="fa-solid fa-money-bill-transfer nav-icon"></i>
                                     <p>
                                         Transfer

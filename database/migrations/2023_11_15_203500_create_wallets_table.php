@@ -17,7 +17,6 @@ class CreateWalletsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->decimal('balance')->default(0);
-            $table->decimal('gold')->nullable();
             $table->timestamps();
         });
     }

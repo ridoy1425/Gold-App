@@ -3,7 +3,7 @@
 @section('title', 'Request List')
 
 @section('style')
-
+    @include('include_files.css_link')
 @endsection
 
 @section('content_title')
@@ -15,9 +15,13 @@
         <div class="container">
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
-                {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
-                <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
-        </div> --}}
+                <div class="m-3">
+                    <h6>Filter</h6>
+                    <form method="POST" action="{{ url('collect/filter') }}" id="filter" autocomplete="off">
+                        @csrf
+                        @include('include_files.filter')
+                    </form>
+                </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>
@@ -67,10 +71,10 @@
                                                     alt="Edit" class="action__icon">
                                             </a>
                                             <!--  <a class="send_message_arrow" href="#" data-bs-toggle="modal"
-                                                                                        data-bs-target="#exampleModal">
-                                                                                        <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}" alt="Send"
-                                                                                            class="action__icon">
-                                                                                    </a> -->
+                                                                                                            data-bs-target="#exampleModal">
+                                                                                                            <img src="{{ asset('ui/admin_assets/dist/img/send_message_arrow.png') }}" alt="Send"
+                                                                                                                class="action__icon">
+                                                                                                        </a> -->
                                             <a href="" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal{{ $row->id }}">
                                                 <img src="{{ asset('ui/admin_assets/dist/img/send_message.png') }}"
@@ -186,12 +190,9 @@
 @endsection
 
 @section('script')
+    @include('include_files.js_link')
     <script>
         $(document).ready(function() {
-            $('#table_id').DataTable({
-                rowHeight: 20,
-            });
-
             $('#template').on('change', function() {
                 var template_id = $(this).val();
                 $.ajax({

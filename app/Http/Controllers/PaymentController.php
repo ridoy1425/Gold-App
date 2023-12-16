@@ -12,17 +12,20 @@ use App\Models\Withdraw;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Traits\AttachmentTrait;
+use App\Traits\FilterDataTrait;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    use AttachmentTrait;
+    use AttachmentTrait, FilterDataTrait;
 
     public function index()
     {
-        $payments = Payment::latest()->get();
-        return view('payment.payment-list', compact('payments'));
+        $payments = Payment::with('user')->latest()->get();
+        $filter_user = User::latest()->get();
+        $statuses = Payload::where('type', 'status')->get();
+        return view('payment.payment-list', compact('payments', 'filter_user', 'statuses'));
     }
 
     public function paymentRequest(Request $request)
@@ -105,7 +108,7 @@ class PaymentController extends Controller
 
     public function transferList()
     {
-        $transfer = PaymentTransfer::latest()->get();
+        $transfer = PaymentTransfer::with('sender', 'receiver')->latest()->get();
         $template = MessageTemplate::where('status', 'enable')->latest()->get();
         return view('payment.transfer', compact('transfer', 'template'));
     }
@@ -298,5 +301,20 @@ class PaymentController extends Controller
 
         toastr()->success('Success! Deleted Successfully');
         return redirect()->back();
+    }
+
+    public function filterFormData(Request $request)
+    {
+        return $this->paymentFilter($request, 'payment.payment-list',);
+    }
+
+    public function filterWithdrawData(Request $request)
+    {
+        return $this->withdrawFilter($request, 'payment.withdraw',);
+    }
+
+    public function filterTransferData(Request $request)
+    {
+        return $this->transferFilter($request, 'payment.transfer',);
     }
 }

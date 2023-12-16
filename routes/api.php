@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum')->group(
                 Route::post('bank-info', [BankInfoController::class, 'storeBankInfo']);
                 Route::post('mobile-banking', [BankInfoController::class, 'storeMobileBankingInfo']);
                 Route::post('delivery-info', [BankInfoController::class, 'storeDeliveryInfo']);
+                Route::get('check', [UserController::class, 'userCheck']);
             }
         );
 
@@ -89,5 +90,3 @@ Route::middleware('auth:sanctum')->group(
         );
     }
 );
-
-Route::get('/auth/access-token', [LoginApiController::class, 'createToken']);

@@ -1,9 +1,8 @@
 @extends('ui.admin_panel.master')
 
 @section('title', 'Order List')
-
 @section('style')
-
+    @include('include_files.css_link')
 @endsection
 
 @section('content_title')
@@ -15,9 +14,13 @@
         <div class="container">
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
-                {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
-                <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
-        </div> --}}
+                <div class="m-3">
+                    <h6>Filter</h6>
+                    <form method="POST" action="{{ url('order/filter') }}" id="filter" autocomplete="off">
+                        @csrf
+                        @include('include_files.filter')
+                    </form>
+                </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>
@@ -42,7 +45,7 @@
                                     <td>{{ $row->gold_qty }}</td>
                                     <td>{{ $row->price }}</td>
                                     <td>{{ $row->profit_amount }}</td>
-                                    <td>{{ date('d-M-y', strtotime($row->delivery_date)) }}</td>
+                                    <td>{{ date('d-M,Y', strtotime($row->delivery_date)) }}</td>
                                     @if ($row->status == 'active')
                                         <td><span class="success">Active</span>
                                         </td>
@@ -186,11 +189,5 @@
 @endsection
 
 @section('script')
-    <script>
-        $(document).ready(function() {
-            $('#table_id').DataTable({
-                rowHeight: 20,
-            });
-        });
-    </script>
+    @include('include_files.js_link')
 @endsection

@@ -3,7 +3,7 @@
 @section('title', 'Message')
 
 @section('style')
-
+    @include('include_files.css_link')
 @endsection
 
 @section('content_title')
@@ -15,9 +15,13 @@
         <div class="container">
             {{-- card-body start --}}
             <div class="card card-default edit__inner__container">
-                {{-- <div class=" ml-auto mb-2 mt-2 mr-3">
-                <a class="btn btn-warning" href="{{ url('designation/label/create') }}">Add New Label</a>
-        </div> --}}
+                <div class="m-3">
+                    <h6>Filter</h6>
+                    <form method="POST" action="{{ url('withdraw/filter') }}" id="filter" autocomplete="off">
+                        @csrf
+                        @include('include_files.filter')
+                    </form>
+                </div>
                 <div class="card-body table-responsive">
                     <table class="table" id="table_id">
                         <thead>
@@ -140,8 +144,8 @@
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content site-table-modal">
                                                         <div class="modal-body popup-body">
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                             <div class="popup-body-text" id="kyc-action-data">
                                                                 <h3 class="title mb-4">
                                                                     Send Message to {{ $row->user->name }}
@@ -205,12 +209,9 @@
 @endsection
 
 @section('script')
+    @include('include_files.js_link')
     <script>
         $(document).ready(function() {
-            $('#table_id').DataTable({
-                rowHeight: 20,
-            });
-
             $('#template').on('change', function() {
                 var template_id = $(this).val();
                 $.ajax({

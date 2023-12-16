@@ -51,6 +51,16 @@ class User extends Authenticatable
         return $this->hasOne(BankInfo::class, 'user_id');
     }
 
+    public function mobileBanking()
+    {
+        return $this->hasOne(MobileBanking::class, 'user_id');
+    }
+
+    public function delivery()
+    {
+        return $this->hasOne(DeliveryInfo::class, 'user_id');
+    }
+
 
     public function role()
     {

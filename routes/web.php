@@ -99,11 +99,14 @@ Route::middleware(['auth'])->group(
                 Route::get('delete/{id}', [PaymentController::class, 'paymentDelete']);
                 Route::get('transfer', [PaymentController::class, 'transferList'])->name('transfer-list');
                 Route::get('withdraw', [PaymentController::class, 'withdrawList'])->name('withdraw-list');
+                Route::post('/filter', [PaymentController::class, 'filterFormData'])->name('payment-filter');
             }
         );
         Route::get('transfer-delete/{id}', [PaymentController::class, 'transferDelete']);
+        Route::post('transfer/filter', [PaymentController::class, 'filterTransferData'])->name('transfer-filter');
         Route::get('withdraw-delete/{id}', [PaymentController::class, 'withdrawDelete']);
         Route::post('withdraw-status', [PaymentController::class, 'changeWithdrawStatus']);
+        Route::post('withdraw/filter', [PaymentController::class, 'filterWithdrawData'])->name('withdraw-filter');
 
         Route::prefix('order')->middleware("permission:orders")->group(
             function () {
@@ -111,10 +114,12 @@ Route::middleware(['auth'])->group(
                 Route::get('profit-cancel/{id}', [OrderController::class, 'profitCancel']);
                 Route::get('delete/{id}', [OrderController::class, 'orderDelete']);
                 Route::post('status-change', [OrderController::class, 'changeOrderStatus']);
+                Route::post('/filter', [OrderController::class, 'filterFormData'])->name('order-filter');
             }
         );
 
         Route::get('collect-request', [OrderController::class, 'getCollectRequestList'])->name('collect-request');
+        Route::post('collect/filter', [OrderController::class, 'filterCollectionData'])->name('collect-filter');
         Route::post('change-collection-status', [OrderController::class, 'changeCollectionStatus']);
         Route::get('collection-delete/{id}', [OrderController::class, 'collectionDelete']);
         Route::post('change-profit-status', [OrderController::class, 'changeProfitStatus']);
