@@ -201,6 +201,9 @@ Route::middleware(['auth'])->group(
                 Route::get('contact/edit/{id}', [HomeController::class, 'contactEdit'])->name('contact.Edit');
                 Route::post('contact/update/{id}', [HomeController::class, 'contactUpdate'])->name('contact.update');
                 Route::post('contact/delete/{id}', [HomeController::class, 'contactDelete'])->name('contact.delete');
+                Route::post('message', [NotificationController::class, 'createWebsiteMessage']);
+                Route::get('message', [NotificationController::class, 'websiteMessage'])->name('home.message');
+                Route::get('message/delete/{id}', [NotificationController::class, 'deleteWebsiteMessage']);
             }
         );
     }

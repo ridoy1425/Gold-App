@@ -246,65 +246,86 @@
                             </li>
                         @endif
                         @if (auth()->user()->hasPermission('support-message'))
-                            <li class="nav-item ">
-                                <a href="{{ route('message-inbox') }}"
-                                    class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
+                            <li
+                                class="nav-item {{ $route == 'message-inbox' || $route == 'home.message' ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link">
                                     <i class="fa-solid fa-chalkboard-user nav-icon"></i>
                                     <p>
                                         Support Message
+                                        <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('message-inbox') }}"
+                                            class="nav-link {{ $route == 'message-inbox' ? ' active' : '' }}">
+                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                            <p>App Inbox</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('home/message') }}"
+                                            class="nav-link {{ $route == 'home.message' ? 'active' : '' }}">
+                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                            <p>Website Inbox</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         @endif
-                        <hr>
-                        <li class="nav-item {{ $route == 'role-create' ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link">
-                                <i class="fa-solid fa-house nav-icon"></i>
-                                <p>
-                                    Landing Page
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('about.List') }}"
-                                        class="nav-link {{ $route == 'about.List' ? ' active' : '' }}">
-                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>About Section</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('question.List') }}"
-                                        class="nav-link {{ $route == 'question.List' ? 'active' : '' }}">
-                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>Question Section</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('contact.List') }}"
-                                        class="nav-link {{ $route == 'contact.List' ? 'active' : '' }}">
-                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>Contact Section</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('category.List') }}"
-                                        class="nav-link {{ $route == 'category.List' ? 'active' : '' }}">
-                                        <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>Category Section</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a href="{{ route('privacy.List') }}"
-                                        class="nav-link {{ $route == 'privacy.List' ? ' active' : '' }}">
-                                        <i class="fa-solid fa-user-lock nav-icon"></i>
-                                        <p>
-                                            Common Page
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
+                        {{-- <hr> --}}
+                        @if (auth()->user()->hasPermission('landing-page'))
+                            <li
+                                class="nav-item {{ $route == 'about.List' || $route == 'question.List' || $route == 'contact.List' || $route == 'category.List' || $route == 'privacy.List' ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link">
+                                    <i class="fa-solid fa-house nav-icon"></i>
+                                    <p>
+                                        Landing Page
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('about.List') }}"
+                                            class="nav-link {{ $route == 'about.List' ? ' active' : '' }}">
+                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                            <p>About Section</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('question.List') }}"
+                                            class="nav-link {{ $route == 'question.List' ? 'active' : '' }}">
+                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                            <p>Question Section</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('contact.List') }}"
+                                            class="nav-link {{ $route == 'contact.List' ? 'active' : '' }}">
+                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                            <p>Contact Section</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('category.List') }}"
+                                            class="nav-link {{ $route == 'category.List' ? 'active' : '' }}">
+                                            <i class="fas fa-long-arrow-alt-right nav-icon"></i>
+                                            <p>Category Section</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="{{ route('privacy.List') }}"
+                                            class="nav-link {{ $route == 'privacy.List' ? ' active' : '' }}">
+                                            <i class="fa-solid fa-user-lock nav-icon"></i>
+                                            <p>
+                                                Common Page
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

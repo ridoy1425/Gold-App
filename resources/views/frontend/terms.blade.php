@@ -12,21 +12,19 @@
 @section('main-content')
     <section class="inner-page-banner">
         <div class="container text-center">
-            @foreach ($term as $termtitle)
-                <h1>{{ $termtitle->title ?? '' }}</h1>
-            @endforeach
+            <h1>{{ $term[0]->title ?? '' }}</h1>
         </div>
     </section>
 
     <section class="inner-page">
-        @foreach ($term as $termDescription)
-            <div class="container d-flex justify-content-center">
-                <div class="inner-page-content">
+        <div class="container d-flex justify-content-center">
+            <div class="inner-page-content">
+                @foreach ($term as $termDescription)
                     <h2>{{ $termDescription->sub_title ?? '' }}</h2>
                     <p>{{ $termDescription->description ?? '' }}</p>
-                </div>
+                @endforeach
             </div>
-        @endforeach
+        </div>
     </section>
 @endsection
 

@@ -290,58 +290,18 @@
             <div id="accordion" class="accordion">
                 <div class="card mb-0">
                     @foreach ($questionSection as $questionSections)
-                        <div class="card-header" data-toggle="collapse" href="#collapseOne">
+                        <div class="card-header" data-toggle="collapse" href="#collapse{{ $questionSections->id }}">
                             <a class="card-title">
                                 {{ $questionSections->title ?? '' }}
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div id="collapse{{ $questionSections->id }}" class="collapse" data-parent="#accordion">
                             <p>{{ $questionSections->description ?? '' }}</p>
                         </div>
                     @endforeach
-                    {{-- <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-			                <a class="card-title">
-			                  2. Frequently Asked Questions
-			                </a>
-			            </div>
-			            <div id="collapseTwo" class="collapse" data-parent="#accordion" >
-			                <p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. </p>
-			            </div>
-
-			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-			                <a class="card-title">
-			                  3. Frequently Asked Questions
-			                </a>
-			            </div>
-			            <div id="collapseThree" class="collapse" data-parent="#accordion" >
-			                <p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. </p>
-			            </div>
-
-			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-			                <a class="card-title">
-			                  4. Frequently Asked Questions
-			                </a>
-			            </div>
-			            <div id="collapseFour" class="collapse" data-parent="#accordion" >
-			                <p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. </p>
-			            </div>
-
-			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-			                <a class="card-title">
-			                  5. Frequently Asked Questions
-			                </a>
-			            </div>
-			            <div id="collapseFive" class="collapse" data-parent="#accordion" >
-			                <p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. </p>
-			            </div> --}}
-
                 </div>
-
-
-
             </div>
         </div>
-
     </section>
     <!-- FAQ section end -->
 
@@ -415,24 +375,25 @@
         </div>
         <div class="contact-form-section text-center">
             <h2 class="title">Contact with us</h2>
-            <form action="">
+            <form action="{{ url('home/message') }}" method="post">
+                @csrf
                 <div class="f-group">
-                    <input type="text" id="name" required class="" placeholder=" ">
+                    <input type="text" name="name" id="name" required class="" placeholder=" ">
                     <label for="name">Your Name</label>
                 </div>
 
                 <div class="f-group">
-                    <input type="email" id="email" placeholder=" ">
+                    <input type="email" name="email" id="email" required placeholder=" ">
                     <label for="email">Email</label>
                 </div>
 
                 <div class="f-group">
-                    <input type="text" id="adres" placeholder=" ">
+                    <input type="text" name="subject" id="adres" placeholder=" ">
                     <label for="adres">Subject</label>
                 </div>
 
                 <div class="f-group">
-                    <textarea id="mesge" placeholder=" "></textarea>
+                    <textarea id="mesge" name="message" placeholder=" "></textarea>
                     <label for="mesge">Write your message</label>
                 </div>
 

@@ -173,15 +173,13 @@ class OrderController extends Controller
             'collect_type'    => 'required|in:investment,profit',
             'payment_type'    => 'required|in:balance,gold',
             'amount'          => 'nullable|numeric',
-            'gold'            => 'nullable|integer',
+            'gold'            => 'nullable|numeric',
             'payment_method'  => 'required|string',
-            'order_profit_id' => 'nullable|exists:order_profits,id',
         ]);
         try {
             $collectRequest = CollectRequest::create($data);
-
-            if ($request->has('order_profit_id')) {
-                $profit = OrderProfit::findOrFail($request->order_profit_id);
+            if ($request->has('profit_id')) {
+                $profit = OrderProfit::findOrFail($request->profit_id);
                 $profit->update(['status' => 'in-process']);
             } else {
                 $order = Order::findOrFail($request->order_id);

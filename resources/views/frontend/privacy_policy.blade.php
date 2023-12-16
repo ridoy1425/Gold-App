@@ -12,22 +12,20 @@
 @section('main-content')
     <section class="inner-page-banner">
         <div class="container text-center">
-            @foreach ($privacy as $privacytitle)
-                <h1>{{ $privacytitle->title ?? '' }}</h1>
-            @endforeach
+            <h1>{{ $privacy[0]->title ?? '' }}</h1>
         </div>
     </section>
 
 
     <section class="inner-page">
-        @foreach ($privacy as $privacys)
-            <div class="container d-flex justify-content-center">
-                <div class="inner-page-content">
+        <div class="container d-flex justify-content-center">
+            <div class="inner-page-content">
+                @foreach ($privacy as $privacys)
                     <h2>{{ $privacys->sub_title ?? '' }}</h2>
                     <p>{{ $privacys->description ?? '' }}</p>
-                </div>
+                @endforeach
             </div>
-        @endforeach
+        </div>
     </section>
 @endsection
 

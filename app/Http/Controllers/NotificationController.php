@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MessageTemplate;
 use App\Models\Notification;
+use App\Models\SupportMessage;
 use App\Models\User;
 use App\Notifications\UserNotification;
 use Exception;
@@ -165,5 +166,33 @@ class NotificationController extends Controller
 
         $message = Notification::where('sender_id', $user->id)->latest()->get();
         return view('message.inbox', compact('message'));
+    }
+
+    public function websiteMessage()
+    {
+        $message = SupportMessage::latest()->get();
+        return view('message.website-inbox', compact('message'));
+    }
+
+    public function createWebsiteMessage()
+    {
+        $validate_data =  $this->validateWith([
+            'subject' => 'nullable|string',
+            'message' => 'nullable|string',
+            'name'    => 'required|string',
+            'email'   => 'required|email',
+        ]);
+
+        SupportMessage::create($validate_data);
+
+        toastr()->success("Success! Sents Successfully");
+        return redirect()->back();
+    }
+
+    public function deleteWebsiteMessage($id)
+    {
+        SupportMessage::destroy($id);
+        toastr()->success("Success! Deleted Successfully");
+        return redirect()->back();
     }
 }

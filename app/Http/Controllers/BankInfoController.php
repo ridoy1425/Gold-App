@@ -92,10 +92,10 @@ class BankInfoController extends Controller
     {
         $data = $request->validate([
             'address'         => 'required|string',
-            'postal_code'     => 'sometimes|string',
+            'postal_code'     => 'nullable|string',
             'recipient_name'  => 'required|string',
             'phone_number'    => 'sometimes|string',
-            'additional_info' => 'sometimes|string',
+            'additional_info' => 'nullable|string',
         ]);
 
         $user = User::findOrFail(Auth::id());

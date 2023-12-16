@@ -220,21 +220,12 @@
                                                     <input type="hidden" value="{{ $user->id }}" name="user_id"
                                                         readonly>
                                                     <div class="row">
-                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                             <div class="site-input-groups">
                                                                 <label for="new_password" class="box-input-label">Update
                                                                     Balance</label>
                                                                 <input type="text"
                                                                     value={{ $user->wallet->balance ?? 0 }} name="balance"
-                                                                    class="box-input">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                            <div class="site-input-groups">
-                                                                <label for="" class="box-input-label">Update
-                                                                    Gold</label>
-                                                                <input type="text" name="gold"
-                                                                    value={{ $user->wallet->gold ?? 0 }}
                                                                     class="box-input">
                                                             </div>
                                                         </div>
