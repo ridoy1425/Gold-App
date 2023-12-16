@@ -14,7 +14,6 @@
 <div class="row page-content">
     <div class="container">
     <form action="{{ route('privacy.update',$data->id) }}" method="post">
-
         @csrf
         {{-- @method('put') --}}
         {{-- card-body start --}}
@@ -27,7 +26,7 @@
                             <label for="" class="col-sm-4 col-form-label col-form-label-sm">Page Type
                             </label>
                             <div class="col-sm-8">
-                                <select class="form-select-md form-select box-input" id="template" name="template">
+                                <select name="page_type" class="form-select-md form-select box-input" id="template" name="template">
                                     <option value="" selected></option>
                                     <option value="1" {{ $data->page_type == 1 ? 'selected' : ''}}>Privacy Policies</option>
                                     <option value="2" {{ $data->page_type == 2 ? 'selected' : ''}}>Refund Policies</option>

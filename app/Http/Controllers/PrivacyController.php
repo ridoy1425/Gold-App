@@ -55,12 +55,12 @@ class PrivacyController extends Controller
     public function privacyUpdate(Request $request,$id)
     {
 
-        $data = $request->validate([
-            'page_type'    => 'required|integer',
-            'title'        => 'required|string',
-            'sub_title'    => 'required|string',
-            'description'  => 'required|string',
-        ]);
+        // $data = $request->validate([
+        //     'page_type'    => 'required|integer',
+        //     'title'        => 'required|string',
+        //     'sub_title'    => 'required|string',
+        //     'description'  => 'required|string',
+        // ]);
         try {
 
         $data =PrivacyPolicy::find($id);
@@ -77,10 +77,18 @@ class PrivacyController extends Controller
             }
 
         } catch (Exception $e) {
-            // dd($e);
+            dd($e);
             toastr()->error($e->getMessage());
 
         }
-        return redirect()->back()->route('privacy.List');
+        return redirect()->route('privacy.List');
+    }
+
+    public function privacyDelete($id)
+    {
+        $privacyDestroy=PrivacyPolicy::find($id);
+        $privacyDestroy->delete();
+
+        return redirect()->back();
     }
 }

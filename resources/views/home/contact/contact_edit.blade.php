@@ -13,7 +13,7 @@
 
 <div class="row page-content">
     <div class="container">
-            <form action="#" method="post">
+    <form action="{{ route('contact.update',$contactEdit->id) }}" method="post">
         @csrf
         {{-- card-body start --}}
         <div class="card card-default">
@@ -26,7 +26,7 @@
                                 <label for="phone" class="col-sm-4 col-form-label col-form-label-sm">Phone Number<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control form-control-sm" id="phone"
-                                        name="phone" value="{{ old('phone') }}">
+                                        name="phone" value="{{ $contactEdit->phone }}">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <label for="address" class="col-sm-4 col-form-label col-form-label-sm">Address<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <textarea type="text" class="form-control form-control-sm" id="address"
-                                        name="address" value="{{ old('address') }}"></textarea>
+                                        name="address" value="{{ old('address') }}">{{ $contactEdit->address }}</textarea>
                                 </div>
                             </div>
                         </div>

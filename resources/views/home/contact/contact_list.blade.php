@@ -32,24 +32,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($roles as $role) --}}
+                        @foreach ($contact as $key=>$contacts)
                         <tr>
-                            <td>1</td>
-                            <td>one</td>
-                            <td>text</td>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $contacts->phone }}</td>
+                            <td>{{ $contacts->address }}</td>
                             <td>
-                                <a href="{{ URL('/role/edit') }}">
+                                <a href="{{ route('contact.Edit',$contacts->id) }}">
                                     <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
                                         class="action__icon">
                                 </a>
-                                <a href="{{ URL('/role/delete') }}"
+                                <a href="{{ route('contact.delete',$contacts->id) }}"
                                     onclick="return confirm('Are you sure?')">
                                     <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete"
                                         class="action__icon">
                                 </a>
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

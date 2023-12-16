@@ -163,40 +163,39 @@ Route::middleware(['auth'])->group(
                 Route::post('privacy/create', [PrivacyController::class, 'privacyCreate'])->name('privacy.Create');
                 Route::get('privacy/edit/{id}', [PrivacyController::class, 'privacyEdit'])->name('privacy.edit');
                 Route::post('privacy/update/{id}', [PrivacyController::class, 'privacyUpdate'])->name('privacy.update');
-            }
-        );
-
-        //Refund Policies Page
-        Route::prefix('refund')->group(
-            function () {
-                Route::get('index', [RefundController::class, 'refundIndex'])->name('refund.Index');
-                Route::get('refund/list', [RefundController::class, 'refundList'])->name('refund.List');
-                Route::get('refund/create', [RefundController::class, 'refundCreate'])->name('refund.Create');
-            }
-        );
-
-        //Terms Page
-        Route::prefix('terms')->group(
-            function () {
-                Route::get('index', [TermsController::class, 'termsIndex'])->name('terms.Index');
-                Route::get('terms/list', [TermsController::class, 'termsList'])->name('terms.List');
-                Route::post('terms/create', [TermsController::class, 'termsCreate'])->name('terms.Create');
+                Route::get('privacy/delete/{id}', [PrivacyController::class, 'privacyDelete'])->name('privacy.delete');
             }
         );
         //Home Page
         Route::prefix('home')->group(
             function () {
+                Route::get('category/index', [HomeController::class, 'categoryIndex'])->name('category.Index');
+                Route::get('category/list', [HomeController::class, 'categoryList'])->name('category.List');
+                Route::post('category/create', [HomeController::class, 'categoryCreate'])->name('category.Create');
+                Route::get('category/edit/{id}', [HomeController::class, 'categoryEdit'])->name('category.Edit');
+                Route::post('category/update/{id}', [HomeController::class, 'categoryUpdate'])->name('category.update');
+                Route::get('category/delete/{id}', [HomeController::class, 'categoryDelete'])->name('category.delete');
+
                 Route::get('about/index', [HomeController::class, 'aboutIndex'])->name('about.Index');
                 Route::get('about/list', [HomeController::class, 'aboutList'])->name('about.List');
                 Route::post('about/create', [HomeController::class, 'aboutCreate'])->name('about.Create');
+                Route::get('about/edit/{id}', [HomeController::class, 'aboutEdit'])->name('about.Edit');
+                Route::post('about/update/{id}', [HomeController::class, 'aboutUpdate'])->name('about.update');
+                Route::get('about/delete/{id}', [HomeController::class, 'aboutDelete'])->name('about.delete');
 
                 Route::get('question/index', [HomeController::class, 'questionIndex'])->name('question.Index');
                 Route::get('question/list', [HomeController::class, 'questionList'])->name('question.List');
                 Route::post('question/create', [HomeController::class, 'questionCreate'])->name('question.Create');
+                Route::get('question/edit/{id}', [HomeController::class, 'questionEdit'])->name('question.Edit');
+                Route::post('question/update/{id}', [HomeController::class, 'questionUpdate'])->name('question.update');
+                Route::get('question/delete/{id}', [HomeController::class, 'questionDelete'])->name('question.delete');
 
                 Route::get('contact/index', [HomeController::class, 'contactIndex'])->name('contact.Index');
                 Route::get('contact/list', [HomeController::class, 'contactList'])->name('contact.List');
                 Route::post('contact/create', [HomeController::class, 'contactCreate'])->name('contact.Create');
+                Route::get('contact/edit/{id}', [HomeController::class, 'contactEdit'])->name('contact.Edit');
+                Route::post('contact/update/{id}', [HomeController::class, 'contactUpdate'])->name('contact.update');
+                Route::post('contact/delete/{id}', [HomeController::class, 'contactDelete'])->name('contact.delete');
             }
         );
     }

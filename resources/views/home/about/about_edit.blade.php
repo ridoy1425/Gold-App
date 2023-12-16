@@ -13,7 +13,7 @@
 
 <div class="row page-content">
     <div class="container">
-            <form action="#" method="post">
+    <form action="{{ route('about.update',$aboutEdit->id) }}" method="post">
         @csrf
         {{-- card-body start --}}
         <div class="card card-default">
@@ -26,7 +26,7 @@
                                 <label for="title" class="col-sm-4 col-form-label col-form-label-sm">Title<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control form-control-sm" id="title"
-                                        name="title" value="{{ old('title') }}">
+                                        name="title" value="{{ $aboutEdit->title }}">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <label for="description" class="col-sm-4 col-form-label col-form-label-sm">Description<span class="important_field">*</span></label>
                                 <div class="col-sm-8">
                                     <textarea type="text" class="form-control form-control-sm" id="description"
-                                        name="description" value="{{ old('description') }}"></textarea>
+                                        name="description" value="{{ old('description') }}">{{ $aboutEdit->description }}</textarea>
                                 </div>
                             </div>
                         </div>

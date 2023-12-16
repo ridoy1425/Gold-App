@@ -46,7 +46,7 @@
                                     <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
                                         class="action__icon">
                                 </a>
-                                <a href="{{ URL('/role/delete') }}"
+                                <a href="{{ route('privacy.delete',$datas->id) }}"
                                     onclick="return confirm('Are you sure?')">
                                     <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete"
                                         class="action__icon">

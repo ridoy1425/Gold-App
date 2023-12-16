@@ -13,7 +13,7 @@
 
 <div class="row page-content">
     <div class="container">
-            <form action="#" method="post">
+    <form action="{{ route('contact.Create') }}" method="post">
         @csrf
         {{-- card-body start --}}
         <div class="card card-default">
