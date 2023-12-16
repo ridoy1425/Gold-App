@@ -26,30 +26,34 @@
                     <thead>
                         <tr>
                             <th scope="col">SL</th>
+                            <th scope="col">Page Type</th>
                             <th scope="col">Title</th>
+                            <th scope="col">Sub Title</th>
                             <th scope="col">Description</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($roles as $role) --}}
+                        @foreach ($data as $key=>$datas)
                         <tr>
-                            <td>1</td>
-                            <td>one</td>
-                            <td>text</td>
+                            <td>{{ $key ++ }}</td>
+                            <td>{{ $datas->page_type }}</td>
+                            <td>{{ $datas->title }}</td>
+                            <td>{{ $datas->sub_title }}</td>
+                            <td>{{ $datas->description }}</td>
                             <td>
-                                <a href="{{ URL('/role/edit') }}">
+                                <a href="{{ route('privacy.edit',$datas->id) }}">
                                     <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
                                         class="action__icon">
                                 </a>
-                                <a href="{{ URL('/role/delete') }}"
+                                <a href="{{ route('privacy.delete',$datas->id) }}"
                                     onclick="return confirm('Are you sure?')">
                                     <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete"
                                         class="action__icon">
                                 </a>
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -32,24 +32,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($roles as $role) --}}
+                        @foreach ($about as $key=>$abouts)
                         <tr>
-                            <td>1</td>
-                            <td>one</td>
-                            <td>text</td>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $abouts->title }}</td>
+                            <td>{{ $abouts->description }}</td>
                             <td>
-                                <a href="{{ URL('/role/edit') }}">
+                                <a href="{{ route('about.Edit',$abouts->id) }}">
                                     <img src="{{ asset('ui/admin_assets/dist/img/edit_icon.png') }}" alt="Edit"
                                         class="action__icon">
                                 </a>
-                                <a href="{{ URL('/role/delete') }}"
+                                <a href="{{ route('about.delete',$abouts->id) }}"
                                     onclick="return confirm('Are you sure?')">
                                     <img src="{{ asset('ui/admin_assets/dist/img/delete_icon.png') }}" alt="Delete"
                                         class="action__icon">
                                 </a>
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

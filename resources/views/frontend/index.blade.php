@@ -47,7 +47,7 @@
 									<path d="M22.5 22.5V12.5H27.5V22.5H37.5V27.5H27.5V37.5H22.5V27.5H12.5V22.5H22.5ZM25 50C11.1929 50 0 38.807 0 25C0 11.1929 11.1929 0 25 0C38.807 0 50 11.1929 50 25C50 38.807 38.807 50 25 50ZM25 45C36.0457 45 45 36.0457 45 25C45 13.9543 36.0457 5 25 5C13.9543 5 5 13.9543 5 25C5 36.0457 13.9543 45 25 45Z" fill="#CE9856"/>
 								</svg>
 							</span>
-							<span>Add Fund & Order</span>
+							<span>{{ $category1->tab_title }}</span>
 						</a>
 						<a class="nav-link" id="nav-two-tab" data-toggle="tab" href="#nav-two" role="tab" aria-controls="nav-two" aria-selected="false">
 							<span class="icon">
@@ -61,7 +61,7 @@
 									</defs>
 								</svg>
 							</span>
-							<span>Collect Profit or Gold</span>
+							<span>{{ $category2->tab_title }}</span>
 						</a>
 						<a class="nav-link" id="nav-three-tab" data-toggle="tab" href="#nav-three" role="tab" aria-controls="nav-three" aria-selected="false">
 							<span class="icon">
@@ -75,7 +75,7 @@
 									</defs>
 								</svg>
 							</span>
-							<span>Transfer Balance</span>
+							<span>{{ $category3->tab_title }}</span>
 						</a>
 						<a class="nav-link" id="nav-four-tab" data-toggle="tab" href="#nav-four" role="tab" aria-controls="nav-four" aria-selected="false">
 							<span class="icon">
@@ -89,7 +89,7 @@
 									</defs>
 								</svg>
 							</span>
-							<span>Withdraw Balance</span>
+							<span>{{ $category4->tab_title }}</span>
 						</a>
 						<a class="nav-link" id="nav-five-tab" data-toggle="tab" href="#nav-five" role="tab" aria-controls="nav-five" aria-selected="false">
 							<span class="icon">
@@ -103,7 +103,7 @@
 									</defs>
 								</svg>
 							</span>
-							<span>Best Support</span>
+							<span>{{ $category5->tab_title }}</span>
 						</a>
 					</div>
 				</nav>
@@ -114,8 +114,8 @@
 							<div class="row">
 								<div class="col-lg-7 d-flex flex-column justify-content-between">
 									<div class="tab-con-box">
-										<h2 class="title">Add Fund & Order</h2>
-										<p>Deposit the payment into our company account first, then Upload the payment receipt and add the balance to your wallet.</p>
+										<h2 class="title">{{ $category1->sub_title }}</h2>
+										<p>{{ $category1->description }}</p>
 									</div>
 									<div class="btn-set wh-bg">
 										<a class="btn no-style"><img src="{{ url('ui/frontend_assets') }}/img/btn/playstore.png"></a>
@@ -137,8 +137,8 @@
 							<div class="row">
 								<div class="col-lg-7 d-flex flex-column justify-content-between">
 									<div class="tab-con-box">
-										<h2 class="title">Collect Profit or Gold</h2>
-										<p>Deposit the payment into our company account first, then Upload the payment receipt and add the balance to your wallet.</p>
+										<h2 class="title">{{ $category2->sub_title }}</h2>
+										<p>{{ $category2->description }}</p>
 									</div>
 									<div class="btn-set wh-bg">
 										<a class="btn no-style"><img src="{{ url('ui/frontend_assets') }}/img/btn/playstore.png"></a>
@@ -160,8 +160,8 @@
 							<div class="row">
 								<div class="col-lg-7 d-flex flex-column justify-content-between">
 									<div class="tab-con-box">
-										<h2 class="title">Transfer Balance</h2>
-										<p>Deposit the payment into our company account first, then Upload the payment receipt and add the balance to your wallet.</p>
+										<h2 class="title">{{ $category3->sub_title }}</h2>
+										<p>{{ $category3->description }}</p>
 									</div>
 									<div class="btn-set wh-bg">
 										<a class="btn no-style"><img src="{{ url('ui/frontend_assets') }}/img/btn/playstore.png"></a>
@@ -183,8 +183,8 @@
 							<div class="row">
 								<div class="col-lg-7 d-flex flex-column justify-content-between">
 									<div class="tab-con-box">
-										<h2 class="title">Withdraw Balance</h2>
-										<p>Deposit the payment into our company account first, then Upload the payment receipt and add the balance to your wallet.</p>
+										<h2 class="title">{{ $category4->sub_title }}</h2>
+										<p>{{ $category4->description }}</p>
 									</div>
 									<div class="btn-set wh-bg">
 										<a class="btn no-style"><img src="{{ url('ui/frontend_assets') }}/img/btn/playstore.png"></a>
@@ -206,8 +206,8 @@
 							<div class="row">
 								<div class="col-lg-7 d-flex flex-column justify-content-between">
 									<div class="tab-con-box">
-										<h2 class="title">Best Support</h2>
-										<p>Deposit the payment into our company account first, then Upload the payment receipt and add the balance to your wallet.</p>
+										<h2 class="title">{{ $category5->sub_title }}</h2>
+										<p>{{ $category5->description }}</p>
 									</div>
 									<div class="btn-set wh-bg">
 										<a class="btn no-style"><img src="{{ url('ui/frontend_assets') }}/img/btn/playstore.png"></a>
@@ -256,17 +256,17 @@
 
 			    <div id="accordion" class="accordion">
 			        <div class="card mb-0">
-
-			            <div class="card-header" data-toggle="collapse" href="#collapseOne">
+                        @foreach ($questionSection as $questionSections)
+                        <div class="card-header" data-toggle="collapse" href="#collapseOne">
 			                <a class="card-title">
-			                    1. Frequently Asked Questions
+			                    {{ $questionSections->title }}
 			                </a>
 			            </div>
 			            <div id="collapseOne" class="collapse show" data-parent="#accordion" >
-			                <p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. </p>
+			                <p>{{ $questionSections->description }}</p>
 			            </div>
-
-			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        @endforeach
+			            {{-- <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
 			                <a class="card-title">
 			                  2. Frequently Asked Questions
 			                </a>
@@ -300,7 +300,7 @@
 			            </div>
 			            <div id="collapseFive" class="collapse" data-parent="#accordion" >
 			                <p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. </p>
-			            </div>
+			            </div> --}}
 
 			        </div>
 
@@ -319,11 +319,11 @@
 				<div class="title-section">
 					<img src="{{ url('ui/frontend_assets') }}/img/about/about-title-img.png">
 					<div class="title-box">
-						<h2>About <br> WORLD SHINE</h2>
+						<h2>{{ $aboutSection->title }}</h2>
 					</div>
 				</div>
 				<div class="about-content">
-					<p>Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow,  dense, soft, malleable, and ductile metal.  Gold is a chemical element; it has symbol Au and atomic number 79. In pure form, it is a bright, slightly orange-yellow, dense, soft, malleable, and ductile metal. Chemically, gold is a transition metal, a group 11 element, and one of the noble metals. </p>
+					<p>{{ $aboutSection->description }}</p>
 				</div>
 			</div>
 		</section>

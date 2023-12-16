@@ -15,7 +15,8 @@ class CreatePrivacyPoliciesTable extends Migration
     {
         Schema::create('privacy_policies', function (Blueprint $table) {
             $table->id();
-            $table->string('title',150);
+            $table->bigInteger('page_type')->comment('privacy=>1,refund=>2,terms=>3');
+            $table->string('title',150)->nullable();
             $table->string('sub_title',150);
             $table->text('description');
             $table->timestamps();

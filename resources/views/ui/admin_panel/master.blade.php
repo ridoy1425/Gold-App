@@ -261,7 +261,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fa-solid fa-house nav-icon"></i>
                                 <p>
-                                    Home Page
+                                    Frontend Customization
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -288,40 +288,22 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('role-list') }}"
-                                        class="nav-link {{ $route == 'role-list' ? 'active' : '' }}">
+                                    <a href="{{ route('category.List') }}"
+                                        class="nav-link {{ $route == 'category.List' ? 'active' : '' }}">
                                         <i class="fas fa-long-arrow-alt-right nav-icon"></i>
-                                        <p>Tab Section</p>
+                                        <p>Category Section</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="{{ route('privacy.List') }}"
+                                        class="nav-link {{ $route == 'privacy.List' ? ' active' : '' }}">
+                                        <i class="fa-solid fa-user-lock nav-icon"></i>
+                                        <p>
+                                            Common Page
+                                        </p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('privacy.List') }}"
-                                class="nav-link {{ $route == 'privacy.List' ? ' active' : '' }}">
-                                <i class="fa-solid fa-user-lock nav-icon"></i>
-                                <p>
-                                    Privacy Page
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('refund.List') }}"
-                                class="nav-link {{ $route == 'refund.List' ? ' active' : '' }}">
-                                <i class="fa-solid fa-hand-holding-dollar nav-icon"></i>
-                                <p>
-                                    Refund Policies Page
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="{{ route('terms.List') }}"
-                                class="nav-link {{ $route == 'terms.List' ? ' active' : '' }}">
-                                <i class="fa-regular fa-file-lines nav-icon"></i>
-                                <p>
-                                    Terms Page
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </nav>
