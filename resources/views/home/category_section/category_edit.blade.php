@@ -22,8 +22,9 @@
                 <div class="propertyContent">
                     {{-- <h6>About us</h6> --}}
                     <div class="row">
-                        <div class="mb-1 row">
-                            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Tab Type
+                        <div class="col-md-12">
+                            <div class="mb-1 row">
+                                <label for="" class="col-sm-4 col-form-label col-form-label-sm">Tab Type
                             </label>
                             <div class="col-sm-8">
                                 <select name="tab_type" class="form-select-md form-select box-input" id="template" name="template">
@@ -34,6 +35,7 @@
                                     <option value="3" {{ $data->tab_type == 4 ? 'selected' : ''}}>Withdraw Balance</option>
                                     <option value="3" {{ $data->tab_type == 5 ? 'selected' : ''}}>Best Support</option>
                                 </select>
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-12">

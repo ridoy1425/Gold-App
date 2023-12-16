@@ -22,8 +22,9 @@
                 <div class="propertyContent">
                     {{-- <h6>About us</h6> --}}
                     <div class="row">
-                        <div class="mb-1 row">
-                            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Page Type
+                        <div class="col-md-12">
+                            <div class="mb-1 row">
+                                <label for="" class="col-sm-4 col-form-label col-form-label-sm">Page Type
                             </label>
                             <div class="col-sm-8">
                                 <select name="page_type" class="form-select-md form-select box-input" id="template" name="template">
@@ -32,6 +33,7 @@
                                     <option value="2" {{ $data->page_type == 2 ? 'selected' : ''}}>Refund Policies</option>
                                     <option value="3" {{ $data->page_type == 3 ? 'selected' : ''}}>Terms and Conditions</option>
                                 </select>
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-12">

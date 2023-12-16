@@ -21,6 +21,7 @@
                 <div class="propertyContent">
                     {{-- <h6>About us</h6> --}}
                     <div class="row">
+                        <div class="col-md-12">
                         <div class="mb-1 row">
                             <label for="" class="col-sm-4 col-form-label col-form-label-sm">Page Type
                             </label>
@@ -32,6 +33,7 @@
                                     <option value="3">Terms and Conditions</option>
                                 </select>
                             </div>
+                        </div>
                         </div>
                         <div class="col-md-12">
                             <div class="mb-1 row">
