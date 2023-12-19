@@ -178,7 +178,7 @@ class OrderController extends Controller
         ]);
         try {
             $collectRequest = CollectRequest::create($data);
-            if ($request->has('profit_id')) {
+            if ($request->profit_id) {
                 $profit = OrderProfit::findOrFail($request->profit_id);
                 $profit->update(['status' => 'in-process']);
             } else {
