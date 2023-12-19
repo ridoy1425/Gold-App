@@ -45,7 +45,12 @@
                                     <td>{{ $row->gold_qty }}</td>
                                     <td>{{ $row->price }}</td>
                                     <td>{{ $row->profit_amount }}</td>
-                                    <td>{{ date('d-M,Y', strtotime($row->delivery_date)) }}</td>
+                                    @php
+                                        $currentDate = \Carbon\Carbon::now();
+                                        $deliveryDate = \Carbon\Carbon::parse($row->delivery_date);
+                                        $monthsDifference = $currentDate->diffInMonths($deliveryDate);
+                                    @endphp
+                                    <td>{{ $monthsDifference }} months</td>
                                     @if ($row->status == 'active')
                                         <td><span class="success">Active</span>
                                         </td>

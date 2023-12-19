@@ -42,9 +42,9 @@
                             <button type="submit" class="btn btn-block btn-warning">Login</button>
                         </div>
                     </form>
-                    {{-- <div id="signUp" class=" mt-4 signUp d-flex justify-content-center">
+                    <div id="signUp" class=" mt-4 signUp d-flex justify-content-center">
                         <p>Create New Account</p>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>

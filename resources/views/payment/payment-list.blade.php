@@ -79,6 +79,7 @@
                                                                         <img src="{{ asset('storage/' . $row->receipt_image) }}"
                                                                             alt="">
                                                                     </div>
+                                                                    @if ($row->status != 'approved')
                                                                     <form action="{{ url('payment/add-wallet') }}"
                                                                         method="post">
                                                                         @csrf
@@ -110,6 +111,7 @@
                                                                             </button>
                                                                         </div>
                                                                     </form>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>

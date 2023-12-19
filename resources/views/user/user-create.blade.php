@@ -771,7 +771,6 @@
                                                                             <tr>
                                                                                 <td>{{ date('d-M, Y', strtotime($row->created_at)) }}
                                                                                 </td>
-                                                                                <td>{{ optional($row->user)->name }}</td>
                                                                                 <td>{{ $row->amount }}</td>
                                                                                 <td>To Bank Account</td>
                                                                                 @if ($row->status == 'active')

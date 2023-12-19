@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function getUserList()
     {
-        $users = User::with('wallet', 'kyc')->orderByDesc('id')->get();
+        $users = User::with('wallet', 'kyc')->latest()->get();
         $filter_user = User::latest()->get();
         $template = MessageTemplate::where('status', 'enable')->latest()->get();
         $statuses = Payload::where('type', 'status')->get();

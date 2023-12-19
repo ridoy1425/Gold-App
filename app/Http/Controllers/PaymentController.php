@@ -44,7 +44,7 @@ class PaymentController extends Controller
             $this->imageHandle($payment, $request->receipt_image, 'receipt_image');
         }
 
-        $subject = "Your Payment Request Successfully done";
+        $subject = "Payment Request";
         $message = "Your Payment Request Successfully done";
         $user = User::findOrFail(Auth::id());
         $user->notify(new UserNotification($subject, $message, 1));
@@ -273,19 +273,18 @@ class PaymentController extends Controller
         ]);
 
         $withdraw = Withdraw::findOrFail($data['withdraw_id']);
+        if ($data['status'] == "rejected" && $withdraw->status != "rejected") {
+            $senderWallet = Wallet::where('user_id', $withdraw->user_id)->first();
+            $balance = 0;
+            $balance = $senderWallet->balance + $withdraw->amount;
+            $senderWallet->update(['balance' => $balance]);
+        }
         $withdraw->update(['status' => $data['status']]);
 
         $admin = User::whereHas('role', function ($role) {
             return $role->where('slug', 'super-admin');
         })->first();
         $user = User::findOrFail($withdraw->user_id);
-
-        if ($data['status'] == "rejected") {
-            $senderWallet = Wallet::where('user_id', $withdraw->user_id)->first();
-            $balance = 0;
-            $balance = $senderWallet->balance + $withdraw->amount;
-            $senderWallet->update(['balance' => $balance]);
-        }
 
         $subject = "Withdraw status changed";
         $message = "Your withdraw request for amount " . $withdraw->amount . " has been " . $data['status'];

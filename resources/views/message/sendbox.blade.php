@@ -90,9 +90,7 @@
 @section('script')
 <script>
 $(document).ready(function() {
-    $("#user_data").select2({
-        maximumSelectionLength: 2
-    });
+    $("#user_data").select2();
 
     $('#template').on('change', function() {
         var template_id = $(this).val();

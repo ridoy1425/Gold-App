@@ -16,7 +16,7 @@ class CreateMessageTemplatesTable extends Migration
         Schema::create('message_templates', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->string('message');
+            $table->text('message');
             $table->string('status');
             $table->timestamps();
         });

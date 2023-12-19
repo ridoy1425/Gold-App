@@ -29,13 +29,13 @@
 
             <div class="navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav mr-auto">
-                    <li class="active"><a href="index.html#hiw-section">HOW IT WORKS</a></li>
+                    <li class="active"><a href="#hiw-section">HOW IT WORKS</a></li>
                     <li><a href="#faq-section">FAQ</a></li>
                     <li><a href="#about-section">ABOUT US</a></li>
                     <li><a href="#trading-section">TRADING</a></li>
                 </ul>
 
-                <a class="btn gold-btn" href="index.html#contact-section">CONTACT US</a>
+                <a class="btn gold-btn" href="#contact-section">CONTACT US</a>
             </div>
 
             <div class="menu-toggle">
@@ -49,7 +49,7 @@
 
     <div class="mobile-menu" id="mobile-menu">
         <ul>
-            <li class="active"><a href="index.html#hiw-section">HOW IT WORKS</a></li>
+            <li class="active"><a href="#hiw-section">HOW IT WORKS</a></li>
             <li><a href="#faq-section">FAQ</a></li>
             <li><a href="#about-section">ABOUT US</a></li>
             <li><a href="#trading-section">TRADING</a></li>

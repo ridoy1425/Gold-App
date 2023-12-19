@@ -205,8 +205,9 @@ class OrderController extends Controller
 
         $collection = CollectRequest::findOrFail($data['collection_id']);
         $collection->update(['status' => $data['status']]);
-
+        
         if ($collection->collect_type == "profit") {
+
             $profit = OrderProfit::findOrFail($collection->profit_id);
             $profit->update(['status' => $data['status']]);
             $user = User::findOrFail($profit->order->user_id);
